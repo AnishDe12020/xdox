@@ -33,7 +33,7 @@ const FormGroup = ({
         className="px-4 py-2 rounded-lg bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60 border-2 border-gray-700 hover:border-opacity-60 transition duration-200"
       />
       {errors[name] && (
-        <p className="rounded-lg bg-red-500 px-3 py-2 text-xs italic w-full">
+        <p className="rounded-lg bg-red-600 px-3 py-2 text-xs italic w-full">
           {errors[name].message}
         </p>
       )}
