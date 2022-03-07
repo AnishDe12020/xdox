@@ -11,10 +11,14 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^2.11.10",
+    "@hookform/resolvers": "^2.8.8",
+    "@tailwindcss/forms": "^0.5.0",
     "classnames": "^2.3.1",
     "next": "12.1.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-hook-form": "^7.27.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",

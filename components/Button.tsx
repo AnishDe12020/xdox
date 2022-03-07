@@ -1,9 +1,8 @@
 import classNames from "classnames";
-import { HTMLAttributes, ReactNode } from "react";
-import Loading from "./Loading";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import Spinner from "./Spinner";
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   className?: string;
   loading?: boolean;
