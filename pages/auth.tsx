@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Button from "../components/Button";
 import Divider from "../components/Divider";
+import FormGroup from "../components/FormGroup";
 
 const EmailSchema = yup.object().shape({
   email: yup
@@ -38,16 +39,12 @@ const AuthPage: NextPage = () => {
         onSubmit={onEmailSubmit}
         className="flex flex-col space-y-4 justify-center items-center"
       >
-        <input
-          {...register("email")}
-          placeholder="john.doe@example.com"
-          className="px-4 py-2 rounded-lg bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60 border-2 border-gray-700 hover:border-opacity-60 transition duration-200"
+        <FormGroup
+          register={register}
+          errors={errors}
+          name="email"
+          placeholder="johndoe@example.com"
         />
-        {errors.email && (
-          <p className="rounded-lg bg-red-500 px-3 py-2 text-xs italic">
-            {errors.email.message}
-          </p>
-        )}
         <Button type="submit" className="bg-secondary text-white">
           Login with Email
         </Button>
