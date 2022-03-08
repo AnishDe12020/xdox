@@ -1,12 +1,12 @@
 import { NextPage } from "next";
 import { SignUp } from "@clerk/nextjs";
+import AuthLayout from "../../layouts/AuthLayout";
 
 const SignUpPage: NextPage = () => {
   return (
-    <div className="flex justify-center items-center mt-64 flex-col">
-      <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl">Sign Up</h1>
+    <AuthLayout title="Sign Up">
       <SignUp routing="path" path="/sign-up" />
-    </div>
+    </AuthLayout>
   );
 };
 
