@@ -1,6 +1,5 @@
 import { NextPage } from "next";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
-import SignIn from "../components/SignIn";
+import { SignedIn, SignedOut, SignUp } from "@clerk/nextjs";
 import SignOut from "../components/SignOut";
 
 const AuthPage: NextPage = () => {
@@ -14,7 +13,7 @@ const AuthPage: NextPage = () => {
         Authentication
       </h1>
       <SignedOut>
-        <SignIn />
+        <SignUp />
       </SignedOut>
       <SignedIn>
         <SignOut />

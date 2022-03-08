@@ -24,3 +24,21 @@ a {
     @apply bg-primary text-white;
   }
 }
+
+.cl-component input {
+  @apply px-4 py-2 rounded-lg bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60 border-2 border-gray-700 hover:border-opacity-60 transition duration-200;
+}
+
+.cl-component button {
+  @apply hover:!opacity-60 transition duration-200;
+}
+
+.cl-oauth-button {
+  @apply !bg-secondary !text-white !border-secondary !border-2;
+}
+
+.cl-component {
+  --clerk-primary: #0e64c4;
+  --clerk-background-color: bg-primary;
+  --clerk-font-color: #ffffff;
+}
