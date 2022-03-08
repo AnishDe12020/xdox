@@ -9,9 +9,9 @@ const Divider = ({ children, ...otherProps }: IDividierProps): JSX.Element => {
   return (
     <div
       className={classNames(
-        "align-center flex w-96 items-center whitespace-nowrap my-4",
-        "before:border-secondary before:border-b-2 before:top-1/2 before:relative before:w-1/2 before:inline-block",
-        "after:border-secondary after:border-b-2 after:top-1/2 after:relative after:w-1/2 after:inline-block"
+        "align-center my-4 flex w-96 items-center whitespace-nowrap",
+        "before:relative before:top-1/2 before:inline-block before:w-1/2 before:border-b-2 before:border-secondary",
+        "after:relative after:top-1/2 after:inline-block after:w-1/2 after:border-b-2 after:border-secondary"
       )}
       {...otherProps}
     >

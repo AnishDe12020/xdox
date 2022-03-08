@@ -20,7 +20,7 @@ const SignIn = (): JSX.Element => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(EmailSchema) });
 
-  const onEmailSubmit = handleSubmit((data) => console.log(data));
+  const onEmailSubmit = handleSubmit(data => console.log(data));
 
   const { authenticateWithRedirect } = useSignIn();
 
@@ -34,7 +34,7 @@ const SignIn = (): JSX.Element => {
   return (
     <>
       <Button
-        className="bg-secondary text-white mt-16"
+        className="mt-16 bg-secondary text-white"
         onClick={signInWithGoogle}
       >
         Login with Google
@@ -42,7 +42,7 @@ const SignIn = (): JSX.Element => {
       <Divider>or continue with</Divider>
       <form
         onSubmit={onEmailSubmit}
-        className="flex flex-col space-y-4 justify-center items-center"
+        className="flex flex-col items-center justify-center space-y-4"
       >
         <FormGroup
           register={register}

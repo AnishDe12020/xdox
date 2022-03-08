@@ -26,15 +26,15 @@ a {
 }
 
 .cl-component input {
-  @apply px-4 py-2 rounded-lg bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60 border-2 border-gray-700 hover:border-opacity-60 transition duration-200;
+  @apply rounded-lg border-2 border-gray-700 bg-secondary px-4 py-2 transition duration-200 hover:border-opacity-60 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60;
 }
 
 .cl-component button {
-  @apply hover:!opacity-60 transition duration-200;
+  @apply transition duration-200 hover:!opacity-60;
 }
 
 .cl-oauth-button {
-  @apply !bg-secondary !text-white !border-secondary !border-2;
+  @apply !border-2 !border-secondary !bg-secondary !text-white;
 }
 
 .cl-component {

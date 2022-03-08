@@ -30,10 +30,10 @@ const FormGroup = ({
         {...register(name)}
         id={id || name}
         placeholder={placeholder}
-        className="px-4 py-2 rounded-lg bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60 border-2 border-gray-700 hover:border-opacity-60 transition duration-200"
+        className="rounded-lg border-2 border-gray-700 bg-secondary px-4 py-2 transition duration-200 hover:border-opacity-60 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60"
       />
       {errors[name] && (
-        <p className="rounded-lg bg-red-600 px-3 py-2 text-xs italic w-full">
+        <p className="w-full rounded-lg bg-red-600 px-3 py-2 text-xs italic">
           {errors[name].message}
         </p>
       )}
