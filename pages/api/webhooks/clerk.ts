@@ -59,17 +59,29 @@ const handler = async (
   }
 
   const eventType: EventType = event.type;
-  if (eventType === "user.created" || event.type === "user.updated") {
-    const userObject = {
-      id: event.data.id,
-      email: event.data.email_addresses.find(
-        email => email.id === event?.data.primary_email_address_id
-      )?.email_address,
-      first_name: event.data.first_name,
-      last_name: event.data.last_name,
-      username: event.data.username,
-    };
-    console.log(userObject);
+  if (
+    eventType === "user.created" ||
+    event.type === "user.updated" ||
+    event.type === "user.deleted"
+  ) {
+    let userObject
+    
+    if (eventType === "user.deleted") {
+      userObject = {
+        id: event.data.id
+      }
+    } else {
+      userObject = {
+        id: event.data.id,
+        email: event.data.email_addresses.find(
+          email => email.id === event?.data.primary_email_address_id
+        )?.email_address,
+        first_name: event.data.first_name,
+        last_name: event.data.last_name,
+        username: event.data.username,
+      };
+      console.log(userObject);
+    }
 
     const INSERT_USER = `
 mutation ($user: users_insert_input!) {
@@ -87,16 +99,40 @@ mutation ($id: String!, $user: users_set_input!) {
 }
   `;
 
-    const mutation = eventType === "user.created" ? INSERT_USER : UPDATE_USER;
-    const variables =
-      eventType === "user.created"
-        ? {
-            user: userObject,
-          }
-        : {
-            user: userObject,
-            id: userObject.id,
-          };
+    const DELETE_USER = `
+mutation ($id: String!) {
+  delete_users_by_pk(id: $id) {
+    id
+  }
+}
+  `;
+
+    let mutation;
+    let variables;
+
+    switch (eventType) {
+      case "user.created":
+        mutation = INSERT_USER;
+        variables = {
+          user: userObject,
+        };
+        break;
+
+      case "user.updated":
+        mutation = UPDATE_USER;
+        variables = {
+          user: userObject,
+          id: userObject.id,
+        };
+        break;
+
+      case "user.deleted":
+        mutation = DELETE_USER;
+        variables = {
+          id: userObject.id,
+        };
+        break;
+    }
 
     const { data } = await axios.post(
       HASURA_GRAPHQL_API as string,
