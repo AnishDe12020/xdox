@@ -7,6 +7,7 @@ import {
   SignedOut,
 } from "@clerk/nextjs";
 import { useRouter } from "next/router";
+import Header from "../components/Header";
 
 const publicPages = ["/", "/sign-in/[[...index]]", "/sign-up/[[...index]]"];
 
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ClerkProvider>
+      <Header />
       {isPublicPage ? (
         <Component {...pageProps} />
       ) : (
