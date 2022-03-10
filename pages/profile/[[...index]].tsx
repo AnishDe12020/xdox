@@ -1,33 +1,57 @@
-import { UserProfile } from "@clerk/nextjs";
+import { UserProfile, useUser } from "@clerk/nextjs";
+
 import { NextPage } from "next";
+import { useForm } from "react-hook-form";
+import Button from "../../components/Button";
+import FormGroup from "../../components/FormGroup";
 
 const ProfilePage: NextPage = () => {
+  const user = useUser();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      username: user.username,
+    },
+  });
+
+  console.log(user);
   return (
-    <>
-      <UserProfile path="/profile" routing="path" />
-      <style global jsx>
-        {`
-          .cl-active {
-            background-color: #333333 !important;
-            color: #fff !important;
-          }
+    <div className="mx-8 flex flex-col items-center justify-center md:mx-16 lg:mx-32">
+      <img src={user.profileImageUrl} className="h-32 w-32 rounded-full" />
+      <div className="mt-16 flex flex-col space-y-8 rounded-lg p-4">
+        <FormGroup
+          register={register}
+          errors={errors}
+          name="firstName"
+          placeholder="First Name"
+          label="First Name"
+        />
 
-          .cl-navbar-link {
-            border-left-color: #333333 !important;
-          }
+        <FormGroup
+          register={register}
+          errors={errors}
+          name="lastName"
+          placeholder="Last Name"
+          label="Last Name"
+        />
 
-          .cl-navbar-link:hover {
-            transition: opacity 0.2s;
-            opacity: 0.6;
-          }
+        <FormGroup
+          register={register}
+          errors={errors}
+          name="username"
+          placeholder="Username"
+          label="Username"
+        />
 
-          .cl-list-item:hover {
-            background-color: #000000 !important;
-            color: #fff !important;
-          }
-        `}
-      </style>
-    </>
+        <Button type="submit">Update</Button>
+      </div>
+    </div>
   );
 };
 

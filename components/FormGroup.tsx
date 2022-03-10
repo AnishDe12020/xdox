@@ -1,7 +1,7 @@
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface IFormGroupProps {
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<any>;
   errors: {
     [x: string]: any;
   };
