@@ -8,6 +8,8 @@ import {
 } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
+import { ApolloProviderWrapper } from "../lib/apolloClient";
+import { Toaster } from "react-hot-toast";
 
 const publicPages = ["/", "/sign-in/[[...index]]", "/sign-up/[[...index]]"];
 
@@ -18,13 +20,25 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ClerkProvider>
+      <Toaster
+        toastOptions={{
+          style: {
+            backgroundColor: "#333333",
+            color: "#ffffff",
+            minWidth: "250px",
+          },
+          position: "top-right",
+        }}
+      />
       <Header />
       {isPublicPage ? (
         <Component {...pageProps} />
       ) : (
         <>
           <SignedIn>
-            <Component {...pageProps} />
+            <ApolloProviderWrapper>
+              <Component {...pageProps} />
+            </ApolloProviderWrapper>
           </SignedIn>
           <SignedOut>
             <RedirectToSignIn />
