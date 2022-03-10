@@ -30,6 +30,11 @@ interface IEventData {
   username: string;
   profile_image_url: string;
   primary_email_address_id: string;
+  unsafe_metadata: {
+    twitter_username: string;
+    github_username: string;
+    website_url: string;
+  };
 }
 
 interface IEmailAddress {
@@ -64,12 +69,12 @@ const handler = async (
     event.type === "user.updated" ||
     event.type === "user.deleted"
   ) {
-    let userObject
-    
+    let userObject;
+
     if (eventType === "user.deleted") {
       userObject = {
-        id: event.data.id
-      }
+        id: event.data.id,
+      };
     } else {
       userObject = {
         id: event.data.id,
@@ -79,6 +84,10 @@ const handler = async (
         first_name: event.data.first_name,
         last_name: event.data.last_name,
         username: event.data.username,
+        profile_image_url: event.data.profile_image_url,
+        twitter_username: event.data.unsafe_metadata.twitter_username,
+        github_username: event.data.unsafe_metadata.github_username,
+        website_url: event.data.unsafe_metadata.website_url,
       };
       console.log(userObject);
     }
