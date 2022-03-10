@@ -9,7 +9,7 @@ const Spinner = ({
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    className={classNames("h-5 w-5 animate-spin text-white", className)}
+    className={classNames("h-5 w-5 animate-spin", className)}
     {...otherProps}
   >
     <circle

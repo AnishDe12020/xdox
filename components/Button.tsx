@@ -16,14 +16,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={classNames(
-          "rounded-lg bg-white px-3 py-2 text-black transition duration-200 hover:opacity-60",
+          "flex items-center justify-center rounded-lg bg-white px-3 py-2 text-black transition duration-200 hover:opacity-60",
           className
         )}
         {...otherProps}
         ref={ref}
       >
         {loading ? (
-          <Spinner className="text-gray-900" />
+          <Spinner />
         ) : (
           <div className="relative inset-0 z-10 inline-flex">{children}</div>
         )}
