@@ -5,14 +5,20 @@ import { useForm } from "react-hook-form";
 import Button from "../../components/Button";
 import FormGroup from "../../components/FormGroup";
 
+type FormData = {
+  firstName?: string | null;
+  lastName?: string | null;
+  username?: string | null;
+};
+
 const ProfilePage: NextPage = () => {
   const user = useUser();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({
+    formState: { errors, isDirty },
+  } = useForm<FormData>({
     defaultValues: {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -20,15 +26,23 @@ const ProfilePage: NextPage = () => {
     },
   });
 
+  const onProfileUpdate = (data: FormData) => {
+    console.log(data);
+  };
+
   console.log(user);
   return (
     <div className="mx-8 flex flex-col items-center justify-center md:mx-16 lg:mx-32">
       <img
         src={user.profileImageUrl}
         className="h-32 w-32 rounded-full"
-        alt={user.username}
+        alt={user.username as string}
       />
-      <div className="mt-16 flex flex-col space-y-8 rounded-lg p-4">
+
+      <form
+        className="mt-16 flex flex-col space-y-8 rounded-lg p-4"
+        onSubmit={handleSubmit(onProfileUpdate)}
+      >
         <FormGroup
           register={register}
           errors={errors}
@@ -53,8 +67,10 @@ const ProfilePage: NextPage = () => {
           label="Username"
         />
 
-        <Button type="submit">Update</Button>
-      </div>
+        <Button disabled={!isDirty} type="submit">
+          Update
+        </Button>
+      </form>
     </div>
   );
 };
