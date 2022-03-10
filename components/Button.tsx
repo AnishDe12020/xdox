@@ -22,11 +22,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...otherProps}
         ref={ref}
       >
-        {loading ? (
-          <Spinner className="my-0.5" />
-        ) : (
-          <div className="relative inset-0 z-10 inline-flex">{children}</div>
-        )}
+        {loading ? <Spinner className="my-0.5" /> : children}
       </button>
     );
   }
