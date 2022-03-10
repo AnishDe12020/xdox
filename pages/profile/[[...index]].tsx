@@ -1,9 +1,12 @@
-import { UserProfile, useUser } from "@clerk/nextjs";
-
+import { useUser } from "@clerk/nextjs";
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
+import { AnimatePresence, motion } from "framer-motion";
+
 import Button from "../../components/Button";
 import FormGroup from "../../components/FormGroup";
+
+const AnimatedButton = motion(Button);
 
 type FormData = {
   firstName?: string | null;
@@ -67,9 +70,19 @@ const ProfilePage: NextPage = () => {
           label="Username"
         />
 
-        <Button disabled={!isDirty} type="submit">
-          Update
-        </Button>
+        <AnimatePresence>
+          {isDirty && (
+            <AnimatedButton
+              type="submit"
+              initial={{ opacity: 0.2, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.05 }}
+            >
+              Update
+            </AnimatedButton>
+          )}
+        </AnimatePresence>
       </form>
     </div>
   );

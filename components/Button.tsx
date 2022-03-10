@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react";
 import Spinner from "./Spinner";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,27 +8,30 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
 }
 
-const Button = ({
-  children,
-  className,
-  loading,
-  ...otherProps
-}: ButtonProps): JSX.Element => {
-  return (
-    <button
-      className={classNames(
-        "rounded-lg bg-white px-3 py-2 text-black transition duration-200 hover:opacity-60",
-        className
-      )}
-      {...otherProps}
-    >
-      {loading ? (
-        <Spinner className="text-gray-900" />
-      ) : (
-        <div className="relative inset-0 z-10 inline-flex">{children}</div>
-      )}
-    </button>
-  );
-};
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    { children, className, loading, ...otherProps }: ButtonProps,
+    ref
+  ): JSX.Element => {
+    return (
+      <button
+        className={classNames(
+          "rounded-lg bg-white px-3 py-2 text-black transition duration-200 hover:opacity-60",
+          className
+        )}
+        {...otherProps}
+        ref={ref}
+      >
+        {loading ? (
+          <Spinner className="text-gray-900" />
+        ) : (
+          <div className="relative inset-0 z-10 inline-flex">{children}</div>
+        )}
+      </button>
+    );
+  }
+);
+
+Button.displayName = "Button";
 
 export default Button;
