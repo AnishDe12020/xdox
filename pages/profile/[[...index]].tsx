@@ -23,7 +23,11 @@ const ProfilePage: NextPage = () => {
   console.log(user);
   return (
     <div className="mx-8 flex flex-col items-center justify-center md:mx-16 lg:mx-32">
-      <img src={user.profileImageUrl} className="h-32 w-32 rounded-full" />
+      <img
+        src={user.profileImageUrl}
+        className="h-32 w-32 rounded-full"
+        alt={user.username}
+      />
       <div className="mt-16 flex flex-col space-y-8 rounded-lg p-4">
         <FormGroup
           register={register}
