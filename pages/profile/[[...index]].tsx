@@ -13,6 +13,10 @@ type FormData = {
   firstName?: string | null;
   lastName?: string | null;
   username?: string | null;
+  twitterUsername?: string | null;
+  githubUsername?: string | null;
+  bio?: string | null;
+  websiteUrl?: string | null;
 };
 
 const ProfileSchema = yup
@@ -20,6 +24,10 @@ const ProfileSchema = yup
     firstName: yup.string().required(),
     lastName: yup.string().required(),
     username: yup.string().required(),
+    twitterUsername: yup.string(),
+    githubUsername: yup.string(),
+    bio: yup.string(),
+    websiteUrl: yup.string(),
   })
   .required();
 
@@ -35,6 +43,10 @@ const ProfilePage: NextPage = () => {
       firstName: user.firstName,
       lastName: user.lastName,
       username: user.username,
+      twitterUsername: user.unsafeMetadata.twitterUsername as string | null,
+      githubUsername: user.unsafeMetadata.githubUsername as string | null,
+      bio: user.unsafeMetadata.bio as string | null,
+      websiteUrl: user.unsafeMetadata.websiteUrl as string | null,
     },
     resolver: yupResolver(ProfileSchema),
   });
@@ -46,6 +58,12 @@ const ProfilePage: NextPage = () => {
         firstName: data.firstName as string,
         lastName: data.lastName as string,
         username: data.username as string,
+        unsafeMetadata: {
+          twitterUsername: data.twitterUsername as string | null,
+          githubUsername: data.githubUsername as string | null,
+          bio: data.bio as string | null,
+          websiteUrl: data.websiteUrl as string | null,
+        },
       });
 
       toast.success("Profile updated successfully");
@@ -90,6 +108,40 @@ const ProfilePage: NextPage = () => {
           placeholder="Username"
           label="Username"
         />
+
+        <FormGroup
+          register={register}
+          errors={errors}
+          name="bio"
+          placeholder="Bio"
+          label="Bio"
+          textarea
+        />
+
+        <FormGroup
+          register={register}
+          errors={errors}
+          name="twitterUsername"
+          placeholder="Twitter Username"
+          label="Twitter Username"
+        />
+
+        <FormGroup
+          register={register}
+          errors={errors}
+          name="githubUsername"
+          placeholder="Github Username"
+          label="Github Username"
+        />
+
+        <FormGroup
+          register={register}
+          errors={errors}
+          name="websiteUrl"
+          placeholder="Website URL"
+          label="Website URL"
+        />
+
         <Transition
           show={isDirty}
           enter="transition duration-200"
