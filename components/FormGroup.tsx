@@ -33,14 +33,14 @@ const FormGroup = ({
           {...register(name)}
           id={id || name}
           placeholder={placeholder}
-          className="h-24 resize-y rounded-lg border-2 border-gray-700 bg-secondary px-4 py-2 transition duration-200 hover:border-opacity-60 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60"
+          className="h-24 resize-y rounded-lg border-2 border-gray-700 bg-secondary px-4 py-2 transition duration-200 hover:border-opacity-60 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-60"
         />
       ) : (
         <input
           {...register(name)}
           id={id || name}
           placeholder={placeholder}
-          className="rounded-lg border-2 border-gray-700 bg-secondary px-4 py-2 transition duration-200 hover:border-opacity-60 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60"
+          className="rounded-lg border-2 border-gray-700 bg-secondary px-4 py-2 transition duration-200 hover:border-opacity-60 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-60"
         />
       )}
       {errors[name] && (
