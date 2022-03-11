@@ -39,7 +39,9 @@ a {
 
 .cl-component {
   --clerk-primary: #0e64c4;
-  --clerk-background-color: #000000;
+  --clerk-background-color: #111827;
   --clerk-font-color: #f0f0f0;
   --clerk-accounts-background-color: #000000 !important;
+  --clerk-box-shadow: 0px 12px 48px 4px rgba(12, 6, 28, 0.8);
+  --clerk-border-radius: 0.5rem;
 }

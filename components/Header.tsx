@@ -7,8 +7,11 @@ const Header = (): JSX.Element => {
       <style global jsx>
         {`
           .cl-accounts-manager-button:hover {
-            background-color: #000000 !important;
-            color: #ffffff !important;
+            background-color: #111827 !important;
+          }
+
+          .cl-component {
+            box-shadow: 0px 12px 48px 4px rgba(12, 6, 28, 0.8) !important;
           }
         `}
       </style>
