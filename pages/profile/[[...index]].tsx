@@ -90,10 +90,10 @@ const ProfilePage: NextPage = () => {
       />
 
       <form
-        className="mt-16 flex flex-col space-y-8 rounded-lg p-4"
+        className="my-16 flex flex-col space-y-8 rounded-lg p-4"
         onSubmit={onProfileUpdate}
       >
-        <div className="flex space-x-4">
+        <div className="flex flex-col space-y-8 md:flex-row md:space-y-0 md:space-x-4">
           <FormGroup
             register={register}
             errors={errors}
@@ -128,7 +128,7 @@ const ProfilePage: NextPage = () => {
           textarea
         />
 
-        <div className="flex space-x-4">
+        <div className="flex flex-col space-y-8 md:flex-row md:space-y-0 md:space-x-4">
           <FormGroup
             register={register}
             errors={errors}
