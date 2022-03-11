@@ -34,19 +34,21 @@ const ProfileSchema = yup
 const ProfilePage: NextPage = () => {
   const user = useUser();
 
+  console.log(user);
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty, isSubmitting },
+    formState: { errors, isDirty, isSubmitting, dirtyFields },
   } = useForm<FormData>({
     defaultValues: {
       firstName: user.firstName,
       lastName: user.lastName,
       username: user.username,
-      twitterUsername: user.unsafeMetadata.twitterUsername as string | null,
-      githubUsername: user.unsafeMetadata.githubUsername as string | null,
+      twitterUsername: user.unsafeMetadata.twitter_username as string | null,
+      githubUsername: user.unsafeMetadata.github_username as string | null,
       bio: user.unsafeMetadata.bio as string | null,
-      websiteUrl: user.unsafeMetadata.websiteUrl as string | null,
+      websiteUrl: user.unsafeMetadata.website_url as string | null,
     },
     resolver: yupResolver(ProfileSchema),
   });
@@ -55,14 +57,20 @@ const ProfilePage: NextPage = () => {
     async (data: FormData) => {
       console.log(data);
       await user.update({
-        firstName: data.firstName as string,
-        lastName: data.lastName as string,
-        username: data.username as string,
+        firstName: dirtyFields.firstName
+          ? (data.firstName as string | undefined)
+          : undefined,
+        lastName: dirtyFields.lastName
+          ? (data.lastName as string | undefined)
+          : undefined,
+        username: dirtyFields.username
+          ? (data.username as string | undefined)
+          : undefined,
         unsafeMetadata: {
-          twitterUsername: data.twitterUsername as string | null,
-          githubUsername: data.githubUsername as string | null,
-          bio: data.bio as string | null,
-          websiteUrl: data.websiteUrl as string | null,
+          twitterUsername: data.twitterUsername,
+          githubUsername: data.githubUsername,
+          bio: data.bio,
+          websiteUrl: data.websiteUrl,
         },
       });
 
