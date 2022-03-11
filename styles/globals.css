@@ -21,7 +21,7 @@ a {
 
 @layer base {
   body {
-    @apply bg-primary text-white;
+    @apply bg-primary text-accent;
   }
 }
 
@@ -34,12 +34,12 @@ a {
 }
 
 .cl-oauth-button {
-  @apply !border-2 !border-secondary !bg-secondary !text-white;
+  @apply !border-2 !border-secondary !bg-secondary !text-accent;
 }
 
 .cl-component {
   --clerk-primary: #0e64c4;
   --clerk-background-color: #000000;
-  --clerk-font-color: #ffffff;
+  --clerk-font-color: #f0f0f0;
   --clerk-accounts-background-color: #000000 !important;
 }

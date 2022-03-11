@@ -93,21 +93,23 @@ const ProfilePage: NextPage = () => {
         className="mt-16 flex flex-col space-y-8 rounded-lg p-4"
         onSubmit={onProfileUpdate}
       >
-        <FormGroup
-          register={register}
-          errors={errors}
-          name="firstName"
-          placeholder="First Name"
-          label="First Name"
-        />
+        <div className="flex space-x-4">
+          <FormGroup
+            register={register}
+            errors={errors}
+            name="firstName"
+            placeholder="First Name"
+            label="First Name"
+          />
 
-        <FormGroup
-          register={register}
-          errors={errors}
-          name="lastName"
-          placeholder="Last Name"
-          label="Last Name"
-        />
+          <FormGroup
+            register={register}
+            errors={errors}
+            name="lastName"
+            placeholder="Last Name"
+            label="Last Name"
+          />
+        </div>
 
         <FormGroup
           register={register}
@@ -126,22 +128,23 @@ const ProfilePage: NextPage = () => {
           textarea
         />
 
-        <FormGroup
-          register={register}
-          errors={errors}
-          name="twitterUsername"
-          placeholder="Twitter Username"
-          label="Twitter Username"
-        />
+        <div className="flex space-x-4">
+          <FormGroup
+            register={register}
+            errors={errors}
+            name="twitterUsername"
+            placeholder="Twitter Username"
+            label="Twitter Username"
+          />
 
-        <FormGroup
-          register={register}
-          errors={errors}
-          name="githubUsername"
-          placeholder="Github Username"
-          label="Github Username"
-        />
-
+          <FormGroup
+            register={register}
+            errors={errors}
+            name="githubUsername"
+            placeholder="Github Username"
+            label="Github Username"
+          />
+        </div>
         <FormGroup
           register={register}
           errors={errors}

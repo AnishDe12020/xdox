@@ -16,7 +16,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={classNames(
-          "flex items-center justify-center rounded-lg bg-white px-3 py-2 text-black transition duration-200 hover:opacity-60",
+          "flex items-center justify-center rounded-lg bg-accent px-3 py-2 text-black transition duration-200 hover:opacity-60",
           className
         )}
         {...otherProps}
