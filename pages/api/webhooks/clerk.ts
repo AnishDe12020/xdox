@@ -34,6 +34,7 @@ interface IEventData {
     twitter_username: string;
     github_username: string;
     website_url: string;
+    bio: string;
   };
 }
 
@@ -88,6 +89,7 @@ const handler = async (
         twitter_username: event.data.unsafe_metadata.twitter_username,
         github_username: event.data.unsafe_metadata.github_username,
         website_url: event.data.unsafe_metadata.website_url,
+        bio: event.data.unsafe_metadata.bio,
       };
       console.log(userObject);
     }
