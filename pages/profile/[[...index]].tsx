@@ -8,6 +8,7 @@ import * as yup from "yup";
 import Button from "../../components/Button";
 import FormGroup from "../../components/FormGroup";
 import toast from "react-hot-toast";
+import ExternalLink from "../../components/ExternalLink";
 
 type FormData = {
   firstName?: string | null;
@@ -82,7 +83,7 @@ const ProfilePage: NextPage = () => {
   );
 
   return (
-    <div className="mx-8 flex flex-col items-center justify-center md:mx-16 lg:mx-32">
+    <div className="mx-8 mb-8 flex flex-col items-center justify-center md:mx-16 lg:mx-32">
       <img
         src={user.profileImageUrl}
         className="h-32 w-32 rounded-full"
@@ -168,6 +169,19 @@ const ProfilePage: NextPage = () => {
           </Button>
         </Transition>
       </form>
+
+      <p className="text-lg md:text-xl lg:text-2xl">
+        Looking for something else?
+      </p>
+      <ExternalLink
+        href={`https://${process.env.NEXT_PUBLIC_CLERK_FRONTEND_API?.replace(
+          "clerk",
+          "accounts"
+        )}/user`}
+        className="mt-4"
+      >
+        Go to the Clerk Profile Dashboard
+      </ExternalLink>
     </div>
   );
 };
