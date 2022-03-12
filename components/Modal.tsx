@@ -24,39 +24,40 @@ const Modal = ({ title, children, closable, trigger }: IModalProps) => {
       <DialogPrimitive.Trigger asChild>
         {typeof trigger === "string" ? <Button>{trigger}</Button> : trigger}
       </DialogPrimitive.Trigger>
+
       <Transition.Root show={isOpen}>
         <Transition.Child
           as={Fragment}
-          enter="ease-out durtation-1000"
+          enter="ease-out duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"
-          leave="ease-in durtation-1000"
+          leave="ease-in duration-200"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
           <DialogPrimitive.Overlay
             forceMount
-            className="fixed inset-0 z-20 bg-primary/40"
+            className="fixed inset-0 z-20 bg-gray-800/40"
           />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
-          enter="ease-out durtation-1000"
-          enterFrom="opacity-0 scale-90"
+          enter="ease-out duration-300"
+          enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
-          leave="ease-in durtation-1000"
+          leave="ease-in duration-200"
           leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-80"
+          leaveTo="opacity-0 scale-95"
         >
           <DialogPrimitive.Content
-            forceMount
             className={classNames(
-              "fixed z-50 w-[90vw] max-w-md rounded-lg p-4 md:w-full",
+              "fixed z-40 bg-primary shadow-xl shadow-primary",
+              "w-[95vw] max-w-md rounded-xl p-8 md:w-full",
               "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-              "bg-primary focus:outline-none focus-visible:ring-8 focus-visible:ring-blue-500 focus-visible:ring-opacity-60"
+              "focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-60"
             )}
           >
-            <DialogPrimitive.Title className="text-lg font-semibold text-accent">
+            <DialogPrimitive.Title className="mb-4 text-lg font-semibold text-accent">
               {title}
             </DialogPrimitive.Title>
             {children}
@@ -64,7 +65,7 @@ const Modal = ({ title, children, closable, trigger }: IModalProps) => {
               <DialogPrimitive.Close
                 className={classNames(
                   "absolute top-4 right-4 inline-flex items-center justify-center rounded-full p-1",
-                  "focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 focus-visible:ring-opacity-60"
+                  "focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-60"
                 )}
               >
                 <Cross1Icon className="h-4 w-4 text-gray-500 hover:opacity-60" />
