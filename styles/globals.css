@@ -45,3 +45,13 @@ a {
   --clerk-box-shadow: 0px 12px 48px 4px rgba(12, 6, 28, 0.8);
   --clerk-border-radius: 0.5rem;
 }
+
+:root {
+  --rsbs-backdrop-bg: rgba(0, 0, 0, 0.6);
+  --rsbs-bg: #111827;
+  --rsbs-handle-bg: #243252;
+  --rsbs-max-w: auto;
+  --rsbs-ml: 0em;
+  --rsbs-mr: 0em;
+  --rsbs-overlay-rounded: 8rem;
+}

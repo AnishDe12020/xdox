@@ -3,7 +3,11 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import classNames from "classnames";
 import { Fragment, ReactNode, useEffect, useState } from "react";
+import { BottomSheet } from "react-spring-bottom-sheet";
+import useBreakpoint from "../utils/useBreakpoint";
 import Button from "./Button";
+
+import "react-spring-bottom-sheet/dist/style.css";
 
 interface IModalProps {
   title?: string;
@@ -13,13 +17,17 @@ interface IModalProps {
 }
 
 const Modal = ({ title, children, closable, trigger }: IModalProps) => {
-  // useEffect(() => {
-  //   window.dispatchEvent(new Event("resize"));
-  // }, []);
+  useEffect(() => {
+    window.dispatchEvent(new Event("resize"));
+  }, []);
 
   const [isOpen, toggleOpen] = useState<boolean>(false);
 
-  return (
+  const isDesktop = useBreakpoint("md");
+
+  console.log(isDesktop);
+
+  return isDesktop ? (
     <DialogPrimitive.Root open={isOpen} onOpenChange={toggleOpen}>
       <DialogPrimitive.Trigger asChild>
         {typeof trigger === "string" ? <Button>{trigger}</Button> : trigger}
@@ -75,6 +83,31 @@ const Modal = ({ title, children, closable, trigger }: IModalProps) => {
         </Transition.Child>
       </Transition.Root>
     </DialogPrimitive.Root>
+  ) : (
+    <>
+      {typeof trigger === "string" ? (
+        <Button onClick={() => toggleOpen(!isOpen)}>{trigger}</Button>
+      ) : (
+        <button onClick={() => toggleOpen(!isOpen)}>{trigger}</button>
+      )}
+      <BottomSheet
+        open={isOpen}
+        onDismiss={() => toggleOpen(false)}
+        defaultSnap={({ snapPoints }) => snapPoints[0]}
+        snapPoints={({ maxHeight }) => [
+          maxHeight - maxHeight / 5,
+          maxHeight * 0.4,
+        ]}
+        header={
+          <h1 className="flex items-center justify-center text-xl font-bold text-accent">
+            Sticky!
+          </h1>
+        }
+        footer={<Button className="w-full">Done</Button>}
+      >
+        {children}
+      </BottomSheet>
+    </>
   );
 };
 
