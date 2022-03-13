@@ -75,7 +75,7 @@ const Modal = ({
         >
           <DialogPrimitive.Content
             className={classNames(
-              "fixed z-40 bg-primary shadow-xl shadow-primary",
+              "fixed z-40 bg-primary shadow-md shadow-black",
               "w-[95vw] max-w-md rounded-xl p-8 md:w-full",
               "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
               "focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-60"
