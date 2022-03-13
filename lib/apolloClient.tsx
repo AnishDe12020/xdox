@@ -6,7 +6,7 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { useUser } from "@clerk/clerk-react";
+import { useSession } from "@clerk/clerk-react";
 import { ReactNode } from "react";
 
 const hasuraGraphqlApi = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_API;
@@ -18,9 +18,9 @@ interface IApolloProviderWrapperProps {
 export const ApolloProviderWrapper = ({
   children,
 }: IApolloProviderWrapperProps) => {
-  const user = useUser();
+  const { getToken } = useSession();
   const authMiddleware = setContext(async (_, { headers }) => {
-    const token = await user.getToken("hasura");
+    const token = await getToken({ template: "hasura" });
     return {
       headers: {
         ...headers,
