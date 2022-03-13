@@ -14,21 +14,37 @@ interface IModalProps {
   children: ReactNode;
   closable?: boolean;
   trigger: string | ReactNode;
+  onDone?: () => void;
+  isSubmitting?: boolean;
+  doneText?: string;
 }
 
-const Modal = ({ title, children, closable, trigger }: IModalProps) => {
+const Modal = ({
+  title,
+  children,
+  closable,
+  trigger,
+  onDone,
+  isSubmitting,
+  doneText,
+}: IModalProps) => {
   useEffect(() => {
     window.dispatchEvent(new Event("resize"));
   }, []);
 
-  const [isOpen, toggleOpen] = useState<boolean>(false);
-
   const isDesktop = useBreakpoint("md");
 
-  console.log(isDesktop);
+  const [isOpen, setOpen] = useState(false);
+
+  const handleDone = async () => {
+    if (onDone) {
+      await onDone();
+    }
+    setOpen(false);
+  };
 
   return isDesktop ? (
-    <DialogPrimitive.Root open={isOpen} onOpenChange={toggleOpen}>
+    <DialogPrimitive.Root open={isOpen} onOpenChange={setOpen}>
       <DialogPrimitive.Trigger asChild>
         {typeof trigger === "string" ? <Button>{trigger}</Button> : trigger}
       </DialogPrimitive.Trigger>
@@ -69,6 +85,15 @@ const Modal = ({ title, children, closable, trigger }: IModalProps) => {
               {title}
             </DialogPrimitive.Title>
             {children}
+            <div className="mt-4 flex items-center justify-end">
+              <Button
+                onClick={handleDone}
+                loading={isSubmitting}
+                className="w-24"
+              >
+                {doneText || "Close"}
+              </Button>
+            </div>
             {closable && (
               <DialogPrimitive.Close
                 className={classNames(
@@ -86,13 +111,13 @@ const Modal = ({ title, children, closable, trigger }: IModalProps) => {
   ) : (
     <>
       {typeof trigger === "string" ? (
-        <Button onClick={() => toggleOpen(!isOpen)}>{trigger}</Button>
+        <Button onClick={() => setOpen(!isOpen)}>{trigger}</Button>
       ) : (
-        <button onClick={() => toggleOpen(!isOpen)}>{trigger}</button>
+        <button onClick={() => setOpen(!isOpen)}>{trigger}</button>
       )}
       <BottomSheet
         open={isOpen}
-        onDismiss={() => toggleOpen(false)}
+        onDismiss={() => setOpen(false)}
         defaultSnap={({ snapPoints }) => snapPoints[0]}
         snapPoints={({ maxHeight }) => [
           maxHeight - maxHeight / 5,
@@ -103,7 +128,15 @@ const Modal = ({ title, children, closable, trigger }: IModalProps) => {
             Sticky!
           </h1>
         }
-        footer={<Button className="w-full">Done</Button>}
+        footer={
+          <Button
+            onClick={handleDone}
+            loading={isSubmitting}
+            className="w-full"
+          >
+            {doneText || "Close"}
+          </Button>
+        }
       >
         {children}
       </BottomSheet>
