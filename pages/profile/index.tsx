@@ -101,6 +101,7 @@ const ProfilePage: NextPage = () => {
             name="firstName"
             placeholder="First Name"
             label="First Name"
+            required
           />
 
           <FormGroup
@@ -109,6 +110,7 @@ const ProfilePage: NextPage = () => {
             name="lastName"
             placeholder="Last Name"
             label="Last Name"
+            required
           />
         </div>
 
@@ -118,6 +120,7 @@ const ProfilePage: NextPage = () => {
           name="username"
           placeholder="Username"
           label="Username"
+          required
         />
 
         <FormGroup
