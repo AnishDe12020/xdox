@@ -1,13 +1,11 @@
-import { UseFormRegister } from "react-hook-form";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 import classNames from "classnames";
 import { HTMLInputTypeAttribute } from "react";
 
 interface IFormGroupProps {
   register: UseFormRegister<any>;
-  errors: {
-    [x: string]: any;
-  };
+  errors: FieldErrors<any>;
   name: string;
   placeholder?: string;
   label?: string;
