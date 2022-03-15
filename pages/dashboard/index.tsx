@@ -6,8 +6,8 @@ import Modal from "../../components/Modal";
 import { CREATE_CHALLENGE } from "../../graphql/mutations";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useUser } from "@clerk/nextjs";
 import toast from "react-hot-toast";
+import { GET_CHALLENGES } from "../../graphql/queries";
 
 type CreateChallengeData = {
   numberOfDays: number;
@@ -36,13 +36,26 @@ const DashboardPage: NextPage = () => {
     resolver: yupResolver(CreateChallengeSchema),
   });
 
-  const user = useUser();
+  const updateCache = (cache, { data }) => {
+    const existingChallenges = cache.readQuery({ query: GET_CHALLENGES });
+
+    console.log(existingChallenges);
+
+    console.log(data);
+
+    const newChallenge = data.insert_challenges_one;
+
+    cache.writeQuery({
+      query: GET_CHALLENGES,
+      data: { challenges: [newChallenge, ...existingChallenges.challenges] },
+    });
+  };
 
   const [
     mutateFunction,
-    { data: apolloResponseData, _, error: apolloResponseError },
+    { data: apolloResponseData, loading, error: apolloResponseError },
   ] = useMutation(CREATE_CHALLENGE, {
-    errorPolicy: "ignore",
+    update: updateCache,
   });
 
   const onSubmit = handleSubmit(

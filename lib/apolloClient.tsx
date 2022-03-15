@@ -21,6 +21,7 @@ export const ApolloProviderWrapper = ({
   const { getToken } = useSession();
   const authMiddleware = setContext(async (_, { headers }) => {
     const token = await getToken({ template: "hasura" });
+
     return {
       headers: {
         ...headers,
