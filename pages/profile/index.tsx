@@ -9,6 +9,7 @@ import Button from "../../components/Button";
 import FormGroup from "../../components/FormGroup";
 import toast from "react-hot-toast";
 import ExternalLink from "../../components/ExternalLink";
+import { UploadIcon } from "@radix-ui/react-icons";
 
 type FormData = {
   firstName?: string | null;
@@ -94,12 +95,21 @@ const ProfilePage: NextPage = () => {
   return (
     <div className="mx-8 mb-8 flex flex-col items-center justify-center md:mx-16 lg:mx-32">
       <div>
-        <label htmlFor="update-pfp">
+        <label
+          htmlFor="update-pfp"
+          className="group relative hover:cursor-pointer"
+        >
           <img
             src={user.profileImageUrl}
             className="h-32 w-32 rounded-full"
             alt={user.username as string}
           />
+          <div className="absolute top-0 bottom-0 flex h-32 w-32 flex-col items-center justify-center rounded-full bg-gray-500 opacity-0 transition duration-200 group-hover:opacity-100">
+            <UploadIcon className="h-8 w-8" />
+            <span className="text-md mt-4 break-words text-center">
+              Update Profile Image
+            </span>
+          </div>
         </label>
         <input
           className="absolute hidden"
