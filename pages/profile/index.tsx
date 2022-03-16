@@ -82,13 +82,39 @@ const ProfilePage: NextPage = () => {
     }
   );
 
+  const uploadAvatar = async (files: FileList) => {
+    const profileImage = files[0];
+    toast.promise(user.setProfileImage(profileImage), {
+      loading: "Uploading profile image...",
+      success: "Profile image uploaded successfully!",
+      error: "Something went wrong!",
+    });
+  };
+
   return (
     <div className="mx-8 mb-8 flex flex-col items-center justify-center md:mx-16 lg:mx-32">
-      <img
-        src={user.profileImageUrl}
-        className="h-32 w-32 rounded-full"
-        alt={user.username as string}
-      />
+      <div>
+        <label htmlFor="update-pfp">
+          <img
+            src={user.profileImageUrl}
+            className="h-32 w-32 rounded-full"
+            alt={user.username as string}
+          />
+        </label>
+        <input
+          className="absolute hidden"
+          type="file"
+          accept="image/*"
+          id="update-pfp"
+          onChange={e => {
+            if (!e.target.files || e.target.files.length === 0) {
+              toast.error("No file selected");
+              return;
+            }
+            uploadAvatar(e.target.files);
+          }}
+        />
+      </div>
 
       <form
         className="my-16 flex flex-col space-y-8 rounded-lg p-4"
