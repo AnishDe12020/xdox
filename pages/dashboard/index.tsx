@@ -1,4 +1,9 @@
-import { useMutation, useQuery } from "@apollo/client";
+import {
+  ApolloCache,
+  OperationVariables,
+  useMutation,
+  useQuery,
+} from "@apollo/client";
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
 import FormGroup from "../../components/FormGroup";
@@ -36,12 +41,11 @@ const DashboardPage: NextPage = () => {
     resolver: yupResolver(CreateChallengeSchema),
   });
 
-  const updateCache = (cache, { data }) => {
-    const existingChallenges = cache.readQuery({ query: GET_CHALLENGES });
-
-    console.log(existingChallenges);
-
-    console.log(data);
+  const updateCache = (
+    cache: ApolloCache<any>,
+    { data }: OperationVariables
+  ) => {
+    const existingChallenges: any = cache.readQuery({ query: GET_CHALLENGES });
 
     const newChallenge = data.insert_challenges_one;
 
@@ -53,12 +57,12 @@ const DashboardPage: NextPage = () => {
 
   const [
     mutateFunction,
-    { data: apolloResponseData, loading, error: apolloResponseError },
+    { data: apolloResponseData, error: apolloResponseError },
   ] = useMutation(CREATE_CHALLENGE, {
     update: updateCache,
   });
 
-  const { data, error } = useQuery(GET_CHALLENGES);
+  const { data } = useQuery(GET_CHALLENGES);
   console.log(data);
 
   const onSubmit = handleSubmit(
