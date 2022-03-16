@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
 import FormGroup from "../../components/FormGroup";
@@ -57,6 +57,9 @@ const DashboardPage: NextPage = () => {
   ] = useMutation(CREATE_CHALLENGE, {
     update: updateCache,
   });
+
+  const { data, error } = useQuery(GET_CHALLENGES);
+  console.log(data);
 
   const onSubmit = handleSubmit(
     async data => {
