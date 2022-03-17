@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { GET_CHALLENGES } from "../../graphql/queries";
 import CreateChallenge from "../../components/CreateChallenge";
 import DashboardLayout from "../../layouts/DashboardLayout";
+import Tag from "../../components/Tag";
 
 const DashboardPage: NextPage = () => {
   const { data, error } = useQuery(GET_CHALLENGES);
@@ -19,6 +20,7 @@ const DashboardPage: NextPage = () => {
             className="flex flex-col rounded-lg bg-secondary p-4"
           >
             {challenge.days}DaysOf{challenge.topic}
+            {challenge.isPublic ? <Tag>Public</Tag> : <Tag>Private</Tag>}
           </div>
         ))}
       </div>
