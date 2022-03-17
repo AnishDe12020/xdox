@@ -25,6 +25,7 @@ const CreateChallenge = (): JSX.Element => {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<CreateChallengeData>({
     defaultValues: {
@@ -119,6 +120,7 @@ const CreateChallenge = (): JSX.Element => {
           label="Public?"
           isSwitch
           checked
+          control={control}
         />
       </form>
     </Modal>
