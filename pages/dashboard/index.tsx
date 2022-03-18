@@ -41,8 +41,8 @@ const DashboardPage: NextPage = () => {
               <div className="h-6 w-16 animate-pulse rounded-lg bg-gray-500" />
             </div>
           </>
-        ) : data?.challenges.length > 0 ? (
-          data?.challenges?.map(challenge => (
+        ) : data && data.challenges.length > 0 ? (
+          data.challenges.map(challenge => (
             <div
               key={challenge.id}
               className="flex h-32 w-48 flex-col space-y-2 rounded-lg bg-secondary p-4"
