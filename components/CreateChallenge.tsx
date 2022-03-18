@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
 import { GET_CHALLENGES } from "../graphql/queries";
 import type { Challenge, CreateChallengeInput } from "../types/Challenges";
+import Button from "./Button";
 
 const CreateChallengeSchema = yup.object({
   days: yup.number().required(),
@@ -83,7 +84,7 @@ const CreateChallenge = (): JSX.Element => {
     <Modal
       title="Create Challenge"
       closable
-      trigger="Create Challenge"
+      trigger={<Button className="w-full">Create Challenge</Button>}
       onDone={onSubmit}
       isSubmitting={isSubmitting}
       doneText="Submit"
