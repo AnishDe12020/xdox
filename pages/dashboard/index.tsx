@@ -5,11 +5,14 @@ import CreateChallenge from "../../components/CreateChallenge";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import Tag from "../../components/Tag";
 import type { ChallengeData } from "../../types/Challenges";
+import toast from "react-hot-toast";
 
 const DashboardPage: NextPage = () => {
   const { data, error, loading } = useQuery<ChallengeData>(GET_CHALLENGES);
 
-  console.log(data);
+  if (error) {
+    toast.error("Error loading challenges");
+  }
 
   return (
     <DashboardLayout>
