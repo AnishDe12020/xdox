@@ -17,9 +17,14 @@ const DashboardPage: NextPage = () => {
         {data?.challenges?.map(challenge => (
           <div
             key={challenge.id}
-            className="flex flex-col rounded-lg bg-secondary p-4"
+            className="flex h-32 w-48 flex-col space-y-2 rounded-lg bg-secondary p-4"
           >
-            {challenge.days}DaysOf{challenge.topic}
+            <p className="text-lg font-semibold">
+              <span className="mr-1 bg-gradient-to-br from-pink-400 from-blue-500 to-blue-400 to-green-500 bg-clip-text text-transparent">
+                {challenge.days}
+              </span>
+              DaysOf<span>{challenge.topic}</span>
+            </p>
             {challenge.isPublic ? <Tag>Public</Tag> : <Tag>Private</Tag>}
           </div>
         ))}
