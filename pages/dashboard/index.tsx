@@ -44,7 +44,7 @@ const DashboardPage: NextPage = () => {
               className="flex h-32 w-48 flex-col space-y-2 rounded-lg bg-secondary p-4"
             >
               <p className="text-lg font-semibold">
-                <span className="mr-1 bg-gradient-to-br from-pink-400 from-blue-500 to-blue-400 to-green-500 bg-clip-text text-transparent">
+                <span className="mr-1 bg-gradient-to-br from-pink-400 to-blue-400 bg-clip-text text-transparent">
                   {challenge.days}
                 </span>
                 DaysOf<span>{challenge.topic}</span>
