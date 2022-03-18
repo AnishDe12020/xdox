@@ -13,4 +13,10 @@ interface ChallengeData {
   challenges: Challenge[];
 }
 
-export type { Challenge, ChallengeData };
+interface CreateChallengeInput {
+  days: number;
+  isPublic: boolean;
+  topic: string;
+}
+
+export type { Challenge, ChallengeData, CreateChallengeInput };
