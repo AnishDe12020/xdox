@@ -7,15 +7,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
 import { GET_CHALLENGES } from "../graphql/queries";
-
-type CreateChallengeData = {
-  numberOfDays: number;
-  topic: string;
-  isPublic: boolean;
-};
+import type { Challenge, CreateChallengeInput } from "../types/Challenges";
 
 const CreateChallengeSchema = yup.object({
-  numberOfDays: yup.number().required(),
+  days: yup.number().required(),
   topic: yup.string().required(),
   isPublic: yup.boolean().required(),
 });
@@ -27,9 +22,9 @@ const CreateChallenge = (): JSX.Element => {
     watch,
     control,
     formState: { errors, isSubmitting },
-  } = useForm<CreateChallengeData>({
+  } = useForm<CreateChallengeInput>({
     defaultValues: {
-      numberOfDays: undefined,
+      days: undefined,
       topic: "",
       isPublic: true,
     },
@@ -51,19 +46,22 @@ const CreateChallenge = (): JSX.Element => {
   };
 
   const [
-    mutateFunction,
+    createChallenge,
     { data: apolloResponseData, error: apolloResponseError },
-  ] = useMutation(CREATE_CHALLENGE, {
+  ] = useMutation<
+    { createChallenge: Challenge },
+    { challenge: CreateChallengeInput }
+  >(CREATE_CHALLENGE, {
     update: updateCache,
   });
 
   const onSubmit = handleSubmit(
     async data => {
       console.log(data);
-      await mutateFunction({
+      await createChallenge({
         variables: {
           challenge: {
-            days: data.numberOfDays,
+            days: data.days,
             topic: data.topic,
             isPublic: data.isPublic,
           },
@@ -94,7 +92,7 @@ const CreateChallenge = (): JSX.Element => {
         <FormGroup
           register={register}
           errors={errors}
-          name="numberOfDays"
+          name="days"
           label="Number of Days"
           placeholder="100"
           type="number"
@@ -111,7 +109,7 @@ const CreateChallenge = (): JSX.Element => {
 
         <p className="text-lg md:text-xl">
           Preview:{"  "}
-          {watch("numberOfDays") || "100"}DaysOf{watch("topic") || "Code"}
+          {watch("days") || "100"}DaysOf{watch("topic") || "Code"}
         </p>
         <FormGroup
           register={register}
