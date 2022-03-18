@@ -2,7 +2,7 @@ import create from "zustand";
 import { DateState } from "../types/Date";
 import { DateTime } from "luxon";
 
-const useDate = create<DateState>(set => ({
+const useDate = create<DateState>((set, get) => ({
   date: DateTime.now().toISODate(),
   setDate: date => set(state => ({ ...state, date })),
   setDayTo: (days: number) =>
@@ -19,6 +19,7 @@ const useDate = create<DateState>(set => ({
     }
     return week;
   },
+  getCurrentWeek: () => get().getWeek(get().date),
 }));
 
 export default useDate;

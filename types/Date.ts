@@ -3,6 +3,7 @@ interface DateState {
   setDate: (date: string) => void;
   setDayTo: (day: number) => void;
   getWeek: (date: string) => string[];
+  getCurrentWeek: () => string[];
 }
 
 export type { DateState };
