@@ -20,6 +20,7 @@ const useDate = create<DateState>((set, get) => ({
     return week;
   },
   getCurrentWeek: () => get().getWeek(get().date),
+  formatDate: (date, format) => DateTime.fromISO(date).toFormat(format),
 }));
 
 export default useDate;
