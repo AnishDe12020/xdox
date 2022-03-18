@@ -41,7 +41,7 @@ const DashboardPage: NextPage = () => {
               <div className="h-6 w-16 animate-pulse rounded-lg bg-gray-500" />
             </div>
           </>
-        ) : (
+        ) : data?.challenges.length > 0 ? (
           data?.challenges?.map(challenge => (
             <div
               key={challenge.id}
@@ -56,6 +56,8 @@ const DashboardPage: NextPage = () => {
               {challenge.isPublic ? <Tag>Public</Tag> : <Tag>Private</Tag>}
             </div>
           ))
+        ) : (
+          <p className="text-semibold text-center text-lg">No Challenges yet</p>
         )}
       </div>
     </DashboardLayout>
