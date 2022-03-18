@@ -1,18 +1,16 @@
 import classNames from "classnames";
-import React, { ReactNode } from "react";
+import React from "react";
+import useDate from "../hooks/useDate";
 import Button from "./Button";
 
 interface IDayButtonProps {
-  children: ReactNode;
-  weekDay: string;
   active?: boolean;
+  date: string;
 }
 
-function DayButton({
-  children,
-  weekDay,
-  active,
-}: IDayButtonProps): JSX.Element {
+function DayButton({ active, date }: IDayButtonProps): JSX.Element {
+  const { formatDate } = useDate();
+
   return (
     <Button
       className={classNames(
@@ -25,7 +23,7 @@ function DayButton({
           active && "text-blue-500 !opacity-100"
         )}
       >
-        {weekDay}
+        {formatDate(date, "EEE")}
       </span>
       <span
         className={classNames(
@@ -33,7 +31,7 @@ function DayButton({
           active && "border-4 border-blue-500"
         )}
       >
-        {children}
+        {formatDate(date, "d")}
       </span>
     </Button>
   );

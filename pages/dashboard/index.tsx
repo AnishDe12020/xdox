@@ -1,19 +1,26 @@
 import { NextPage } from "next";
 import Challenges from "../../components/Challenges";
+import DayButton from "../../components/DayButton";
+import useDate from "../../hooks/useDate";
 import DashboardLayout from "../../layouts/DashboardLayout";
 
 const DashboardPage: NextPage = () => {
+  const { getCurrentWeek, date } = useDate();
+
+  console.log(getCurrentWeek());
+
   return (
     <DashboardLayout>
       <Challenges />
       <div className="flex w-full flex-col">
         <div className="flex space-x-4">
-          <div className="inline-flex flex-col">
-            <span className="opacity-60">Monday</span>
-            <span className="inline-flex h-12 w-12 cursor-pointer items-center justify-center self-center rounded-full text-center hover:bg-blue-500">
-              29
-            </span>
-          </div>
+          {getCurrentWeek().map(dateOfWeek => (
+            <DayButton
+              date={dateOfWeek}
+              active={date === dateOfWeek}
+              key={dateOfWeek}
+            />
+          ))}
         </div>
       </div>
     </DashboardLayout>
