@@ -15,9 +15,9 @@ const DashboardPage: NextPage = () => {
       <Challenges />
       <div className="flex w-full flex-col">
         <div className="ml-2 flex items-center space-x-2">
-          <ChevronLeftIcon />
+          <ChevronLeftIcon className="h-5 w-5" />
           <span>Week {formatDate(date, "WW")}</span>
-          <ChevronRightIcon />
+          <ChevronRightIcon className="h-5 w-5" />
         </div>
         <div className="flex space-x-4">
           {getCurrentWeek().map(dateOfWeek => (
