@@ -5,7 +5,7 @@ import useDate from "../../hooks/useDate";
 import DashboardLayout from "../../layouts/DashboardLayout";
 
 const DashboardPage: NextPage = () => {
-  const { getCurrentWeek, date } = useDate();
+  const { getCurrentWeek, date, setDate } = useDate();
 
   console.log(getCurrentWeek());
 
@@ -19,6 +19,7 @@ const DashboardPage: NextPage = () => {
               date={dateOfWeek}
               active={date === dateOfWeek}
               key={dateOfWeek}
+              onClick={setDate}
             />
           ))}
         </div>

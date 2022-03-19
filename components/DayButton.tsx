@@ -6,9 +6,10 @@ import Button from "./Button";
 interface IDayButtonProps {
   active?: boolean;
   date: string;
+  onClick: (date: string) => void;
 }
 
-function DayButton({ active, date }: IDayButtonProps): JSX.Element {
+function DayButton({ active, date, onClick }: IDayButtonProps): JSX.Element {
   const { formatDate } = useDate();
 
   return (
@@ -16,6 +17,9 @@ function DayButton({ active, date }: IDayButtonProps): JSX.Element {
       className={classNames(
         "group inline-flex flex-col bg-transparent text-accent hover:opacity-100"
       )}
+      onClick={() => {
+        onClick(date);
+      }}
     >
       <span
         className={classNames(
