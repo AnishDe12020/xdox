@@ -1,3 +1,4 @@
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { NextPage } from "next";
 import Challenges from "../../components/Challenges";
 import DayButton from "../../components/DayButton";
@@ -5,7 +6,7 @@ import useDate from "../../hooks/useDate";
 import DashboardLayout from "../../layouts/DashboardLayout";
 
 const DashboardPage: NextPage = () => {
-  const { getCurrentWeek, date, setDate } = useDate();
+  const { getCurrentWeek, date, setDate, formatDate } = useDate();
 
   console.log(getCurrentWeek());
 
@@ -13,6 +14,11 @@ const DashboardPage: NextPage = () => {
     <DashboardLayout>
       <Challenges />
       <div className="flex w-full flex-col">
+        <div className="ml-2 flex items-center space-x-2">
+          <ChevronLeftIcon />
+          <span>Week {formatDate(date, "WW")}</span>
+          <ChevronRightIcon />
+        </div>
         <div className="flex space-x-4">
           {getCurrentWeek().map(dateOfWeek => (
             <DayButton
