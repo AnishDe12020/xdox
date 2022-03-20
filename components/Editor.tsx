@@ -12,7 +12,7 @@ const Editor = ({ content, onChange }: IEditorProps) => {
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl px-4 py-2 focus:outline-none text-accent prose-default bg-secondary rounded-lg m-6",
+          "prose prose-sm sm:prose lg:prose-lg px-4 py-2 focus:outline-none text-accent prose-default bg-secondary rounded-lg m-6",
       },
     },
     content,
