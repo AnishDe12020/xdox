@@ -24,6 +24,7 @@
     "@radix-ui/react-switch": "^0.1.5",
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.2",
+    "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.68",
     "@tiptap/react": "^2.0.0-beta.108",
     "@tiptap/starter-kit": "^2.0.0-beta.183",
     "@types/luxon": "^2.3.0",
