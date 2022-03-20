@@ -10,7 +10,19 @@ module.exports = {
         secondary: "#374151",
         accent: "#f0f0f0",
       },
+      typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            "--tw-prose-body": theme("colors.accent"),
+            "--tw-prose-headings": theme("colors.accent"),
+          },
+        },
+      }),
     },
   },
-  plugins: [require("@tailwindcss/forms"), require("tailwindcss-radix")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("tailwindcss-radix"),
+    require("@tailwindcss/typography"),
+  ],
 };
