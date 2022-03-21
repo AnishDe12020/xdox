@@ -1,0 +1,68 @@
+import { useForm } from "react-hook-form";
+import FormGroup from "../FormGroup";
+import Modal from "../Modal";
+import Button from "../Button";
+import { Editor } from "@tiptap/react";
+import { ImageIcon } from "@radix-ui/react-icons";
+import classNames from "classnames";
+import { useCallback } from "react";
+
+interface IImageModalProps {
+  editor: Editor;
+}
+
+const ImageModal = ({ editor }: IImageModalProps): JSX.Element => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: {
+      url: "",
+    },
+  });
+
+  const setImage = useCallback(
+    url => {
+      editor.chain().focus().setImage({ src: url }).run();
+    },
+    [editor]
+  );
+
+  const onSubmit = handleSubmit(async data => {
+    console.log(data);
+    setImage(data.url);
+  });
+  return (
+    <Modal
+      title="Add Image"
+      closable
+      trigger={
+        <Button
+          className={classNames(
+            "transition-100 rounded-md bg-secondary px-2 py-2 text-accent hover:bg-primary hover:opacity-100"
+          )}
+          aria-label="Add Image"
+          title="Add Image"
+        >
+          <ImageIcon className="h-4 w-4 text-accent" />
+        </Button>
+      }
+      onDone={onSubmit}
+      isSubmitting={isSubmitting}
+      doneText="Submit"
+    >
+      <form onSubmit={onSubmit} className="flex flex-col space-y-8">
+        <FormGroup
+          register={register}
+          errors={errors}
+          name="url"
+          label="Image URL"
+          placeholder="https://example.com/cool.png"
+        />
+      </form>
+    </Modal>
+  );
+};
+
+export default ImageModal;

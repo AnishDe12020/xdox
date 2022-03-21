@@ -17,6 +17,7 @@ import classNames from "classnames";
 import { cloneElement } from "react";
 import Button from "../Button";
 import { Heading1, Heading2, OrderedList, TaskList } from "../Icons";
+import ImageModal from "./ImageModal";
 import LinkModal from "./LinkModal";
 
 interface IMenuBarProps {
@@ -111,8 +112,15 @@ const MenuBar = ({ editor }: IMenuBarProps): JSX.Element => {
       action: () => editor.chain().focus().clearNodes().unsetAllMarks(),
     },
     {
+      type: "separator",
+    },
+    {
       type: "modal",
       modal: <LinkModal editor={editor} />,
+    },
+    {
+      type: "modal",
+      modal: <ImageModal editor={editor} />,
     },
     {
       type: "separator",
