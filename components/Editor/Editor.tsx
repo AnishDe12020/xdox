@@ -5,6 +5,8 @@ import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import lowlight from "lowlight";
 import "highlight.js/styles/monokai.css";
 import MenuBar from "./MenuBar";
+import TaskList from "@tiptap/extension-task-list";
+import TaskItem from "@tiptap/extension-task-item";
 
 interface IEditorProps {
   content?: Content;
@@ -16,6 +18,8 @@ const Editor = ({ content, onChange }: IEditorProps) => {
     extensions: [
       StarterKit,
       CodeBlockLowlight.configure({ lowlight, defaultLanguage: "javascript" }),
+      TaskList,
+      TaskItem.configure({ nested: true }),
     ],
     editorProps: {
       attributes: {
