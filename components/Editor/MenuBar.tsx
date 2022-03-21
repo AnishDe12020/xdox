@@ -1,11 +1,18 @@
 import {
   CodeIcon,
+  DividerHorizontalIcon,
   FontBoldIcon,
   FontItalicIcon,
   HeadingIcon,
+  LinkBreak1Icon,
+  LinkBreak2Icon,
   ListBulletIcon,
   PilcrowIcon,
+  QuoteIcon,
   StrikethroughIcon,
+  TextNoneIcon,
+  ThickArrowLeftIcon,
+  ThickArrowRightIcon,
 } from "@radix-ui/react-icons";
 import type { Editor } from "@tiptap/react";
 import classNames from "classnames";
@@ -79,6 +86,43 @@ const MenuBar = ({ editor }: IMenuBarProps): JSX.Element => {
       title: "Task List",
       action: () => editor.chain().focus().toggleTaskList().run(),
       isActive: editor.isActive("taskList"),
+    },
+    {
+      icon: <QuoteIcon />,
+      title: "Quote",
+      action: () => editor.chain().focus().toggleBlockquote().run(),
+      isActive: editor.isActive("blockquote"),
+    },
+    {
+      type: "separator",
+    },
+    {
+      icon: <DividerHorizontalIcon />,
+      title: "Divider",
+      action: () => editor.chain().focus().setHorizontalRule().run(),
+    },
+    {
+      icon: <LinkBreak2Icon />,
+      title: "Hard Break",
+      action: () => editor.chain().focus().setHardBreak().run(),
+    },
+    {
+      icon: <TextNoneIcon />,
+      title: "Clear Formatting",
+      action: () => editor.chain().focus().clearNodes().unsetAllMarks(),
+    },
+    {
+      type: "separator",
+    },
+    {
+      icon: <ThickArrowLeftIcon />,
+      title: "Undo",
+      action: () => editor.chain().focus().undo().run(),
+    },
+    {
+      icon: <ThickArrowRightIcon />,
+      title: "Redo",
+      action: () => editor.chain().focus().redo().run(),
     },
   ];
   return (
