@@ -3,8 +3,6 @@ import {
   DividerHorizontalIcon,
   FontBoldIcon,
   FontItalicIcon,
-  HeadingIcon,
-  LinkBreak1Icon,
   LinkBreak2Icon,
   ListBulletIcon,
   PilcrowIcon,
