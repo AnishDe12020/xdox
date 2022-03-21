@@ -883,6 +883,11 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-text/-/extension-text-2.0.0-beta.15.tgz#f08cff1b78f1c6996464dfba1fef8ec1e107617f"
   integrity sha512-S3j2+HyV2gsXZP8Wg/HA+YVXQsZ3nrXgBM9HmGAxB0ESOO50l7LWfip0f3qcw1oRlh5H3iLPkA6/f7clD2/TFA==
 
+"@tiptap/extension-typography@^2.0.0-beta.20":
+  version "2.0.0-beta.20"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-typography/-/extension-typography-2.0.0-beta.20.tgz#6a721d5222e250aff6d4996acd0f6bc0e183eecc"
+  integrity sha512-rDgl5ssuM/UKTZHHN1QgF5lZTqNI/q7hxpsk7SZhGjuTSbo2mJ38shaKWEsLmofer/xE6+lWtYo8IVkuv998QA==
+
 "@tiptap/react@^2.0.0-beta.108":
   version "2.0.0-beta.108"
   resolved "https://registry.yarnpkg.com/@tiptap/react/-/react-2.0.0-beta.108.tgz#65beeb4dfb99bc75e4a370cb24b2cbbd42ae13a7"

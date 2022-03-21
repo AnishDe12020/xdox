@@ -10,6 +10,7 @@ import TaskItem from "@tiptap/extension-task-item";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import CustomBubbleMenu from "./CustomBubbleMenu";
+import Typography from "@tiptap/extension-typography";
 
 interface IEditorProps {
   content?: Content;
@@ -25,6 +26,7 @@ const Editor = ({ content, onChange }: IEditorProps) => {
       TaskItem.configure({ nested: true }),
       Link,
       Image,
+      Typography
     ],
     editorProps: {
       attributes: {

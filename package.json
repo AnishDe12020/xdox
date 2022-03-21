@@ -29,6 +29,7 @@
     "@tiptap/extension-link": "^2.0.0-beta.36",
     "@tiptap/extension-task-item": "^2.0.0-beta.31",
     "@tiptap/extension-task-list": "^2.0.0-beta.26",
+    "@tiptap/extension-typography": "^2.0.0-beta.20",
     "@tiptap/react": "^2.0.0-beta.108",
     "@tiptap/starter-kit": "^2.0.0-beta.183",
     "@types/luxon": "^2.3.0",
