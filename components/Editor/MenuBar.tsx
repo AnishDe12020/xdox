@@ -30,7 +30,7 @@ const MenuBar = ({ editor }: IMenuBarProps): JSX.Element => {
         type === "separator" ? (
           <div
             key={index}
-            className="mx-2 h-6 w-[2px] rounded-sm bg-primary opacity-60"
+            className="!mx-4 h-5 w-[2px] rounded-sm bg-gray-500 opacity-80"
           />
         ) : (
           <Button
