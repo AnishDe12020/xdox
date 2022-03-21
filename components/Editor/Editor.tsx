@@ -8,6 +8,7 @@ import MenuBar from "./MenuBar";
 import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
 import Link from "@tiptap/extension-link";
+import Image from "@tiptap/extension-image";
 
 interface IEditorProps {
   content?: Content;
@@ -21,7 +22,8 @@ const Editor = ({ content, onChange }: IEditorProps) => {
       CodeBlockLowlight.configure({ lowlight, defaultLanguage: "javascript" }),
       TaskList,
       TaskItem.configure({ nested: true }),
-      Link
+      Link,
+      Image,
     ],
     editorProps: {
       attributes: {
