@@ -15,6 +15,9 @@ module.exports = {
           css: {
             "--tw-prose-body": theme("colors.accent"),
             "--tw-prose-headings": theme("colors.accent"),
+            "--tw-prose-code": theme("colors.red[300]"),
+            "--tw-prose-bold": theme("colors.accent"),
+            "--tw-prose-quotes": theme("colors.accent"),
           },
         },
       }),
