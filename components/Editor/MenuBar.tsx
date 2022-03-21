@@ -17,6 +17,7 @@ import classNames from "classnames";
 import { cloneElement } from "react";
 import Button from "../Button";
 import { Heading1, Heading2, OrderedList, TaskList } from "../Icons";
+import LinkModal from "./LinkModal";
 
 interface IMenuBarProps {
   editor: Editor;
@@ -110,6 +111,10 @@ const MenuBar = ({ editor }: IMenuBarProps): JSX.Element => {
       action: () => editor.chain().focus().clearNodes().unsetAllMarks(),
     },
     {
+      type: "modal",
+      modal: <LinkModal editor={editor} />,
+    },
+    {
       type: "separator",
     },
     {
@@ -125,12 +130,14 @@ const MenuBar = ({ editor }: IMenuBarProps): JSX.Element => {
   ];
   return (
     <div className="mx-4 flex items-center space-x-2 rounded-lg bg-secondary px-4 py-2">
-      {items.map(({ icon, title, action, isActive, type }, index) =>
+      {items.map(({ icon, title, action, isActive, type, modal }, index) =>
         type === "separator" ? (
           <div
             key={index}
             className="!mx-4 h-5 w-[2px] rounded-sm bg-gray-500 opacity-80"
           />
+        ) : type === "modal" ? (
+          modal
         ) : (
           <Button
             key={index}
