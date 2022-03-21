@@ -25,10 +25,13 @@ const MenuBar = ({ editor }: IMenuBarProps): JSX.Element => {
     { type: "separator" },
   ];
   return (
-    <div className="mx-4 flex space-x-2 rounded-lg bg-secondary px-4 py-2">
+    <div className="mx-4 flex items-center space-x-2 rounded-lg bg-secondary px-4 py-2">
       {items.map(({ icon, title, action, isActive, type }, index) =>
         type === "separator" ? (
-          <div key={index} className="separator" />
+          <div
+            key={index}
+            className="mx-2 h-6 w-[2px] rounded-sm bg-primary opacity-60"
+          />
         ) : (
           <Button
             key={index}
