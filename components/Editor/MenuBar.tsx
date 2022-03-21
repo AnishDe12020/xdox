@@ -14,7 +14,7 @@ import {
 } from "@radix-ui/react-icons";
 import type { Editor } from "@tiptap/react";
 import classNames from "classnames";
-import { cloneElement } from "react";
+import { cloneElement, Fragment } from "react";
 import Button from "../Button";
 import { Heading1, Heading2, OrderedList, TaskList } from "../Icons";
 import ImageModal from "./ImageModal";
@@ -145,7 +145,7 @@ const MenuBar = ({ editor }: IMenuBarProps): JSX.Element => {
             className="!mx-4 h-5 w-[2px] rounded-sm bg-gray-500 opacity-80"
           />
         ) : type === "modal" ? (
-          modal
+          <Fragment key={index}>{modal}</Fragment>
         ) : (
           <Button
             key={index}
