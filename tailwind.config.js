@@ -18,6 +18,7 @@ module.exports = {
             "--tw-prose-code": theme("colors.red[300]"),
             "--tw-prose-bold": theme("colors.accent"),
             "--tw-prose-quotes": theme("colors.accent"),
+            "--tw-prose-links": theme("colors.blue[500]"),
           },
         },
       }),
