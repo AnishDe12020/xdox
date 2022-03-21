@@ -4,6 +4,7 @@ import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 
 import lowlight from "lowlight";
 import "highlight.js/styles/monokai.css";
+import MenuBar from "./MenuBar";
 
 interface IEditorProps {
   content?: Content;
@@ -32,6 +33,7 @@ const Editor = ({ content, onChange }: IEditorProps) => {
 
   return (
     <>
+      {editor && <MenuBar editor={editor} />}
       <EditorContent editor={editor} />
     </>
   );
