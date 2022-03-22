@@ -138,7 +138,7 @@ const Modal = ({
           </Button>
         }
       >
-        {children}
+        <div className="mx-8 my-2">{children}</div>
       </BottomSheet>
     </>
   );
