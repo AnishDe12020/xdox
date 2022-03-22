@@ -1,20 +1,44 @@
 import { useQuery } from "@apollo/client";
+import classNames from "classnames";
+import Link from "next/link";
 import toast from "react-hot-toast";
 import { GET_CHALLENGES } from "../graphql/queries";
 import { ChallengeData } from "../types/Challenges";
 import CreateChallenge from "./CreateChallenge";
 import Tag from "./Tag";
 
-const Challenges = (): JSX.Element => {
+interface IChallengesProps {
+  variant?: "grid" | "list";
+}
+const Challenges = ({ variant }: IChallengesProps): JSX.Element => {
+  if (!variant) {
+    variant = "list";
+  }
+
   const { data, error, loading } = useQuery<ChallengeData>(GET_CHALLENGES);
 
   if (error) {
     toast.error("Error loading challenges");
   }
   return (
-    <div className="flex w-80 flex-col items-start justify-end space-y-8">
-      <CreateChallenge />
-      <div className="flex w-full flex-col items-start justify-end space-y-8">
+    <div
+      className={classNames(
+        "flex flex-col space-y-8",
+        variant === "list" ? "w-80 items-start justify-end" : "w-full"
+      )}
+    >
+      <CreateChallenge className={variant === "grid" ? "w-fit self-end" : ""} />
+      <div
+        className={classNames(
+          variant === "list"
+            ? "flex w-full flex-col items-start justify-end space-y-8"
+            : "grid items-center justify-center gap-12"
+        )}
+        style={{
+          gridTemplateColumns:
+            variant === "grid" ? "repeat(auto-fit, minmax(300px, 1fr))" : "",
+        }}
+      >
         {loading ? (
           <>
             <div className="flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4">
@@ -40,18 +64,21 @@ const Challenges = (): JSX.Element => {
           </>
         ) : data && data.challenges.length > 0 ? (
           data.challenges.map(challenge => (
-            <div
+            <Link
               key={challenge.id}
-              className="flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4"
+              passHref
+              href={`/dashboard/${challenge.id}`}
             >
-              <p className="text-lg font-semibold">
-                <span className="mr-1 bg-gradient-to-br from-pink-400 to-blue-400 bg-clip-text text-transparent">
-                  {challenge.days}
-                </span>
-                DaysOf<span>{challenge.topic}</span>
-              </p>
-              {challenge.isPublic ? <Tag>Public</Tag> : <Tag>Private</Tag>}
-            </div>
+              <a className="flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4">
+                <p className="text-lg font-semibold">
+                  <span className="mr-1 bg-gradient-to-br from-pink-400 to-blue-400 bg-clip-text text-transparent">
+                    {challenge.days}
+                  </span>
+                  DaysOf<span>{challenge.topic}</span>
+                </p>
+                {challenge.isPublic ? <Tag>Public</Tag> : <Tag>Private</Tag>}
+              </a>
+            </Link>
           ))
         ) : (
           <p className="text-semibold text-center text-lg">No Challenges yet</p>
