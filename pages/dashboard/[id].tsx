@@ -35,7 +35,7 @@ const DashboardPage: NextPage = () => {
   return (
     <DashboardLayout>
       <Challenges variant="list" />
-      <div className="flex w-full flex-col">
+      <div className="mx-8 flex w-full flex-col md:mx-12 lg:mx-16">
         {!data ? (
           <div className="mx-4 mb-16 flex space-x-2">
             <div className="h-8 w-64 animate-pulse rounded-lg bg-gray-500" />
@@ -57,7 +57,7 @@ const DashboardPage: NextPage = () => {
           </div>
         )}
         <WeekBar />
-        <Editor content={content} onChange={setContent} />
+        <Editor content={content} onChange={setContent} className="mt-16" />
       </div>
     </DashboardLayout>
   );

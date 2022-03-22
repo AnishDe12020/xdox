@@ -11,13 +11,15 @@ import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import CustomBubbleMenu from "./CustomBubbleMenu";
 import Typography from "@tiptap/extension-typography";
+import classNames from "classnames";
 
 interface IEditorProps {
   content?: Content;
   onChange: (content: Content) => void;
+  className?: string;
 }
 
-const Editor = ({ content, onChange }: IEditorProps) => {
+const Editor = ({ content, onChange, className }: IEditorProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -26,7 +28,7 @@ const Editor = ({ content, onChange }: IEditorProps) => {
       TaskItem.configure({ nested: true }),
       Link,
       Image,
-      Typography
+      Typography,
     ],
     editorProps: {
       attributes: {
@@ -43,7 +45,7 @@ const Editor = ({ content, onChange }: IEditorProps) => {
   console.log(content);
 
   return (
-    <div  className="mx-8 mt-4">
+  <div className={classNames("flex flex-col justify-center", className)}>
       {editor && <MenuBar editor={editor} />}
       {editor && <CustomBubbleMenu editor={editor} />}
       <EditorContent editor={editor} />
