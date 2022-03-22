@@ -9,9 +9,20 @@ const GET_CHALLENGES = gql`
       isPublic
       topic
       updated_at
-      user_id
     }
   }
 `;
 
-export { GET_CHALLENGES };
+const GET_CHALLENGE = gql`
+  query getChallenge($id: String!) {
+    challenges_by_pk(id: $id) {
+      days
+      created_at
+      isPublic
+      topic
+      updated_at
+    }
+  }
+`;
+
+export { GET_CHALLENGES, GET_CHALLENGE };

@@ -1,11 +1,10 @@
 interface Challenge {
   created_at: string;
   days: number;
-  id: string;
+  id?: string;
   isPublic: boolean;
   topic: string;
   updated_at: string;
-  user_id: string;
   __typename: string;
 }
 
