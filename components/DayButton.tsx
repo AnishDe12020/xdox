@@ -15,7 +15,7 @@ function DayButton({ active, date, onClick }: IDayButtonProps): JSX.Element {
   return (
     <Button
       className={classNames(
-        "group inline-flex flex-col bg-transparent text-accent hover:opacity-100"
+        "md:text-md group inline-flex flex-col bg-transparent text-sm text-accent hover:opacity-100"
       )}
       onClick={() => {
         onClick(date);
@@ -31,7 +31,7 @@ function DayButton({ active, date, onClick }: IDayButtonProps): JSX.Element {
       </span>
       <span
         className={classNames(
-          "inline-flex h-12 w-12 cursor-pointer items-center justify-center self-center rounded-full text-center transition duration-200 group-hover:bg-secondary/40",
+          "inline-flex h-10 w-10 cursor-pointer items-center justify-center self-center rounded-full text-center transition duration-200 group-hover:bg-secondary/40 md:h-12 md:w-12",
           active && "border-4 border-blue-500"
         )}
       >
