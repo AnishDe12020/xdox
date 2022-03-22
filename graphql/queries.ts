@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 const GET_CHALLENGES = gql`
-  query MyQuery {
+  query getChallenges {
     challenges {
       created_at
       days
