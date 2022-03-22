@@ -137,7 +137,7 @@ const MenuBar = ({ editor }: IMenuBarProps): JSX.Element => {
     },
   ];
   return (
-    <div className="mx-4 flex items-center space-x-2 rounded-lg bg-secondary px-4 py-2">
+    <div className="flex items-center space-x-2 rounded-t-lg bg-secondary px-4 py-2">
       {items.map(({ icon, title, action, isActive, type, modal }, index) =>
         type === "separator" ? (
           <div

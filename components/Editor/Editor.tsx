@@ -31,7 +31,7 @@ const Editor = ({ content, onChange }: IEditorProps) => {
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm sm:prose lg:prose-lg px-4 py-2 focus:outline-none text-accent prose-default bg-secondary rounded-lg m-6",
+          "prose prose-sm sm:prose lg:prose-lg px-6 pt-4 py-6 focus:outline-none text-accent prose-default bg-secondary rounded-b-lg w-full !max-w-full",
       },
     },
     content: content,
@@ -43,11 +43,11 @@ const Editor = ({ content, onChange }: IEditorProps) => {
   console.log(content);
 
   return (
-    <>
+    <div  className="mx-8 mt-4">
       {editor && <MenuBar editor={editor} />}
       {editor && <CustomBubbleMenu editor={editor} />}
       <EditorContent editor={editor} />
-    </>
+    </div>
   );
 };
 
