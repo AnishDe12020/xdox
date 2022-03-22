@@ -15,7 +15,12 @@ const Challenges = ({ variant }: IChallengesProps): JSX.Element => {
     variant = "list";
   }
 
-  const { data, error, loading } = useQuery<ChallengeData>(GET_CHALLENGES);
+  let { data, error, previousData, loading } =
+    useQuery<ChallengeData>(GET_CHALLENGES);
+
+  if (loading) {
+    data = previousData;
+  }
 
   if (error) {
     toast.error("Error loading challenges");
@@ -39,7 +44,7 @@ const Challenges = ({ variant }: IChallengesProps): JSX.Element => {
             variant === "grid" ? "repeat(auto-fit, minmax(300px, 1fr))" : "",
         }}
       >
-        {loading ? (
+        {!data ? (
           <>
             <div className="flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4">
               <div className="h-8 w-32 animate-pulse rounded-lg bg-gray-500" />
