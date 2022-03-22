@@ -37,13 +37,13 @@ const DashboardPage: NextPage = () => {
       <Challenges variant="list" />
       <div className="flex w-full flex-col">
         {!data ? (
-          <div className="flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4">
-            <div className="h-8 w-32 animate-pulse rounded-lg bg-gray-500" />
+          <div className="mx-4 mb-16 flex space-x-2">
+            <div className="h-8 w-64 animate-pulse rounded-lg bg-gray-500" />
             <div className="h-6 w-16 animate-pulse rounded-lg bg-gray-500" />
           </div>
         ) : (
-          <div className="mx-4 mb-16 flex space-x-2">
-            <p className="text-xl font-semibold md:text-2xl lg:text-3xl">
+          <div className="mx-4 mb-16 flex items-center justify-center space-x-2">
+            <p className="items-center text-xl font-semibold md:text-2xl lg:text-3xl">
               <span className="mr-1 bg-gradient-to-br from-pink-400 to-blue-400 bg-clip-text text-transparent">
                 {data.challenges_by_pk.days}
               </span>
