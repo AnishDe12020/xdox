@@ -9,8 +9,9 @@ import Tag from "./Tag";
 
 interface IChallengesProps {
   variant?: "grid" | "list";
+  className?: string;
 }
-const Challenges = ({ variant }: IChallengesProps): JSX.Element => {
+const Challenges = ({ variant, className }: IChallengesProps): JSX.Element => {
   if (!variant) {
     variant = "list";
   }
@@ -29,7 +30,8 @@ const Challenges = ({ variant }: IChallengesProps): JSX.Element => {
     <div
       className={classNames(
         "flex flex-col space-y-8",
-        variant === "list" ? "w-80 items-start justify-end" : "w-full"
+        variant === "list" ? "w-80 items-start justify-end" : "w-full",
+        className
       )}
     >
       <CreateChallenge className={variant === "grid" ? "w-fit self-end" : ""} />

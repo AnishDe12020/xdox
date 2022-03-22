@@ -34,7 +34,7 @@ const DashboardPage: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <Challenges variant="list" />
+      <Challenges variant="list" className="hidden md:flex" />
       <div className="mx-8 flex w-full flex-col md:mx-12 lg:mx-16">
         {!data ? (
           <div className="mx-4 mb-16 flex space-x-2">
