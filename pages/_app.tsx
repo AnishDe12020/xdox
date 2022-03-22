@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </ApolloProviderWrapper>
           </SignedIn>
           <SignedOut>
-            <RedirectToSignIn />
+            <RedirectToSignIn redirectUrl={pathname} />
           </SignedOut>
         </>
       )}
