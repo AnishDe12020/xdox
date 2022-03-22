@@ -7,7 +7,7 @@ const WeekBar = (): JSX.Element => {
   const { getCurrentWeek, date, setDate, formatDate, setDayTo } = useDate();
 
   return (
-    <div className="flex flex-col justify-center space-y-4">
+    <div className="flex flex-col justify-center space-y-4 overflow-x-auto">
       <div className="flex items-center space-x-2">
         <Button
           className="bg-transparent px-1 py-1 text-accent"
