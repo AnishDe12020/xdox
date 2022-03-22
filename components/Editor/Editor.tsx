@@ -1,4 +1,4 @@
-import { useEditor, EditorContent, Content, BubbleMenu } from "@tiptap/react";
+import { useEditor, EditorContent, Content } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 
