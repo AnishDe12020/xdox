@@ -8,8 +8,12 @@ interface Challenge {
   __typename: string;
 }
 
-interface ChallengeData {
+interface ChallengesData {
   challenges: Challenge[];
+}
+
+interface ChallengeData {
+  challenges_by_pk: Challenge;
 }
 
 interface CreateChallengeInput {
@@ -18,4 +22,4 @@ interface CreateChallengeInput {
   topic: string;
 }
 
-export type { Challenge, ChallengeData, CreateChallengeInput };
+export type { Challenge, ChallengeData, CreateChallengeInput, ChallengesData };

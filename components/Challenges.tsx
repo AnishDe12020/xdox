@@ -3,7 +3,7 @@ import classNames from "classnames";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { GET_CHALLENGES } from "../graphql/queries";
-import { ChallengeData } from "../types/Challenges";
+import { ChallengesData } from "../types/Challenges";
 import CreateChallenge from "./CreateChallenge";
 import Tag from "./Tag";
 
@@ -16,7 +16,7 @@ const Challenges = ({ variant }: IChallengesProps): JSX.Element => {
   }
 
   let { data, error, previousData, loading } =
-    useQuery<ChallengeData>(GET_CHALLENGES);
+    useQuery<ChallengesData>(GET_CHALLENGES);
 
   if (loading) {
     data = previousData;
