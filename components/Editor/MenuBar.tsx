@@ -137,7 +137,7 @@ const MenuBar = ({ editor }: IMenuBarProps): JSX.Element => {
     },
   ];
   return (
-    <div className="flex items-center space-x-2 rounded-t-lg bg-secondary px-4 py-2">
+    <div className="flex items-center space-x-2 overflow-x-auto rounded-t-lg bg-secondary px-4 py-2">
       {items.map(({ icon, title, action, isActive, type, modal }, index) =>
         type === "separator" ? (
           <div
@@ -157,7 +157,10 @@ const MenuBar = ({ editor }: IMenuBarProps): JSX.Element => {
             aria-label={title}
             title={title}
           >
-            {icon && cloneElement(icon, { className: "h-4 w-4 text-accent" })}
+            {icon &&
+              cloneElement(icon, {
+                className: "h-4 w-4 lg:h-4 lg:w-4 text-accent",
+              })}
           </Button>
         )
       )}
