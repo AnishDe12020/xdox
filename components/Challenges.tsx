@@ -1,18 +1,22 @@
 import { useQuery } from "@apollo/client";
 import classNames from "classnames";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { GET_CHALLENGES } from "../graphql/queries";
-import { ChallengesData } from "../types/Challenges";
+import useChallenge from "../hooks/useChallenge";
+import { Challenge, ChallengesData } from "../types/Challenges";
 import CreateChallenge from "./CreateChallenge";
 import Tag from "./Tag";
 
 interface IChallengesProps {
   variant?: "grid" | "list";
   className?: string;
-  activeId?: string;
 }
-const Challenges = ({ variant, className, activeId }: IChallengesProps): JSX.Element => {
+
+const Challenges = ({ variant, className }: IChallengesProps): JSX.Element => {
+  const router = useRouter();
+  const { setChallenge, challenge: activeChallenge } = useChallenge();
+
   if (!variant) {
     variant = "list";
   }
@@ -27,6 +31,12 @@ const Challenges = ({ variant, className, activeId }: IChallengesProps): JSX.Ele
   if (error) {
     toast.error("Error loading challenges");
   }
+
+  const handleChallengeClick = (challenge: Challenge) => {
+    router.push(`/dashboard/${challenge.id}`);
+    setChallenge(challenge);
+  };
+
   return (
     <div
       className={classNames(
@@ -72,21 +82,23 @@ const Challenges = ({ variant, className, activeId }: IChallengesProps): JSX.Ele
           </>
         ) : data && data.challenges.length > 0 ? (
           data.challenges.map(challenge => (
-            <Link
+            <button
+              className={classNames(
+                "flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4 hover:opacity-60 transition duration-200",
+                activeChallenge?.id === challenge.id &&
+                  "border-4 border-blue-500"
+              )}
               key={challenge.id}
-              passHref
-              href={`/dashboard/${challenge.id}`}
+              onClick={() => handleChallengeClick(challenge)}
             >
-            <a className={classNames("flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4 hover:opacity-60 transition duration-200", activeId === challenge.id && "border-4 border-blue-500" )}>
-                <p className="text-lg font-semibold">
-                  <span className="mr-1 bg-gradient-to-br from-pink-400 to-blue-400 bg-clip-text text-transparent">
-                    {challenge.days}
-                  </span>
-                  DaysOf<span>{challenge.topic}</span>
-                </p>
-                {challenge.isPublic ? <Tag>Public</Tag> : <Tag>Private</Tag>}
-              </a>
-            </Link>
+              <p className="text-lg font-semibold">
+                <span className="mr-1 bg-gradient-to-br from-pink-400 to-blue-400 bg-clip-text text-transparent">
+                  {challenge.days}
+                </span>
+                DaysOf<span>{challenge.topic}</span>
+              </p>
+              {challenge.isPublic ? <Tag>Public</Tag> : <Tag>Private</Tag>}
+            </button>
           ))
         ) : (
           <p className="text-semibold text-center text-lg">No Challenges yet</p>
