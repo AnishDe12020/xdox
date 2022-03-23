@@ -1,6 +1,9 @@
 import create from "@kodingdotninja/use-tailwind-breakpoint";
 import resolveConfig from "tailwindcss/resolveConfig";
-import { TailwindConfig, TailwindThemeValue } from "tailwindcss/tailwind-config";
+import {
+  TailwindConfig,
+  TailwindThemeValue,
+} from "tailwindcss/tailwind-config";
 
 import tailwindConfig from "../tailwind.config";
 

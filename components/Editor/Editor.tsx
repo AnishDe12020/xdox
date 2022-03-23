@@ -45,7 +45,7 @@ const Editor = ({ content, onChange, className }: IEditorProps) => {
   console.log(content);
 
   return (
-  <div className={classNames("flex flex-col justify-center", className)}>
+    <div className={classNames("flex flex-col justify-center", className)}>
       {editor && <MenuBar editor={editor} />}
       {editor && <CustomBubbleMenu editor={editor} />}
       <EditorContent editor={editor} />
