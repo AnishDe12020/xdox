@@ -25,4 +25,23 @@ const GET_CHALLENGE = gql`
   }
 `;
 
-export { GET_CHALLENGES, GET_CHALLENGE };
+const GET_PROGRESS = gql`
+  query getProgress($user_id: String!, $challenge_id: String!) {
+    progress(
+      where: {
+        _and: {
+          user_id: { _eq: $user_id }
+          challenge_id: { _eq: $challenge_id }
+        }
+      }
+    ) {
+      id
+      content
+      isSkipDay
+      created_at
+      updated_at
+    }
+  }
+`;
+
+export { GET_CHALLENGES, GET_CHALLENGE, GET_PROGRESS };
