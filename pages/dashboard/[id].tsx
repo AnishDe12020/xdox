@@ -1,15 +1,12 @@
 import { useQuery } from "@apollo/client";
 import { useUser } from "@clerk/nextjs";
-import { Content } from "@tiptap/react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useController, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Button from "../../components/Button";
 import ChallengeHeader from "../../components/ChallengeHeader";
 import Challenges from "../../components/Challenges";
-import Editor from "../../components/Editor";
 import EditorFormComponent from "../../components/Editor/EditorFormComponent";
 import FormGroup from "../../components/FormGroup";
 import WeekBar from "../../components/WeekBar";

@@ -6,6 +6,7 @@ interface Progress {
   updated_at: string;
   content: Content;
   isSkipDay: boolean;
+  date: string;
   __typename: string;
 }
 

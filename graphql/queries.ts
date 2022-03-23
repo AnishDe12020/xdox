@@ -40,6 +40,7 @@ const GET_PROGRESS = gql`
       isSkipDay
       created_at
       updated_at
+      date
     }
   }
 `;
