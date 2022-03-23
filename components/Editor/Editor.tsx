@@ -1,4 +1,4 @@
-import { useEditor, EditorContent, Content } from "@tiptap/react";
+import { useEditor, EditorContent, Content, PureEditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 
@@ -12,14 +12,16 @@ import Image from "@tiptap/extension-image";
 import CustomBubbleMenu from "./CustomBubbleMenu";
 import Typography from "@tiptap/extension-typography";
 import classNames from "classnames";
+import { forwardRef, Ref } from "react";
 
 interface IEditorProps {
   content?: Content;
   onChange: (content: Content) => void;
   className?: string;
+  ref: Ref<PureEditorContent>;
 }
 
-const Editor = ({ content, onChange, className }: IEditorProps) => {
+const Editor = forwardRef<PureEditorContent, IEditorProps>(({ content, onChange, className }: IEditorProps, ref) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -48,9 +50,11 @@ const Editor = ({ content, onChange, className }: IEditorProps) => {
     <div className={classNames("flex flex-col justify-center", className)}>
       {editor && <MenuBar editor={editor} />}
       {editor && <CustomBubbleMenu editor={editor} />}
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor} ref={ref} />
     </div>
   );
-};
+})
+
+Editor.displayName = "Editor";
 
 export default Editor;

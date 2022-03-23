@@ -4,7 +4,9 @@ import { Content } from "@tiptap/react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useController, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import Button from "../../components/Button";
 import ChallengeHeader from "../../components/ChallengeHeader";
 import Challenges from "../../components/Challenges";
 import Editor from "../../components/Editor";
@@ -14,7 +16,6 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import { ProgressData } from "../../types/Progress";
 
 const DashboardPage: NextPage = () => {
-  const [content, setContent] = useState<Content>();
   const router = useRouter();
 
   const challengeId = router.query.id;
@@ -29,15 +30,30 @@ const DashboardPage: NextPage = () => {
   );
 
   if (loading) {
-  data = previousData
+    data = previousData;
   }
 
   if (error) {
-  console.error(error)
-  toast.error("Something went wrong!")
+    console.error(error);
+    toast.error("Something went wrong!");
   }
 
-  console.log(data)
+  const { control, handleSubmit } = useForm();
+
+  const {
+    field: { onChange, value, ref },
+  } = useController({
+    name: "content",
+    control,
+    rules: { required: true },
+    defaultValue: data?.progress[0]?.content,
+  });
+
+  console.log(data);
+
+  const handleAddProgressSubmit = handleSubmit(async data => {
+    console.log(data);
+  });
 
   return (
     <DashboardLayout>
@@ -45,7 +61,17 @@ const DashboardPage: NextPage = () => {
       <div className="flex w-full flex-col md:mx-12 lg:mx-16">
         <ChallengeHeader id={challengeId as string} />
         <WeekBar />
-        <Editor content={content} onChange={setContent} className="mt-16" />
+        <form onSubmit={handleAddProgressSubmit}>
+          <Editor
+            content={value}
+            onChange={onChange}
+            className="mt-16"
+            ref={ref}
+          />
+          <Button type="submit" className="mt-4">
+            Add Progress
+          </Button>
+        </form>
       </div>
     </DashboardLayout>
   );
