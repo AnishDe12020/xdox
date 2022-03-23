@@ -76,7 +76,7 @@ const Challenges = ({ variant, className }: IChallengesProps): JSX.Element => {
               passHref
               href={`/dashboard/${challenge.id}`}
             >
-              <a className="flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4">
+              <a className="flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4 hover:opacity-60 transition duration-200">
                 <p className="text-lg font-semibold">
                   <span className="mr-1 bg-gradient-to-br from-pink-400 to-blue-400 bg-clip-text text-transparent">
                     {challenge.days}
