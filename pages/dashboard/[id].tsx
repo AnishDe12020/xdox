@@ -10,6 +10,8 @@ import Button from "../../components/Button";
 import ChallengeHeader from "../../components/ChallengeHeader";
 import Challenges from "../../components/Challenges";
 import Editor from "../../components/Editor";
+import EditorFormComponent from "../../components/Editor/EditorFormComponent";
+import FormGroup from "../../components/FormGroup";
 import WeekBar from "../../components/WeekBar";
 import { GET_PROGRESS } from "../../graphql/queries";
 import DashboardLayout from "../../layouts/DashboardLayout";
@@ -38,15 +40,16 @@ const DashboardPage: NextPage = () => {
     toast.error("Something went wrong!");
   }
 
-  const { control, handleSubmit } = useForm();
-
   const {
-    field: { onChange, value, ref },
-  } = useController({
-    name: "content",
     control,
-    rules: { required: true },
-    defaultValue: data?.progress[0]?.content,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      isSkipDay: data?.progress[0]?.isSkipDay,
+      content: data?.progress[0]?.content,
+    },
   });
 
   console.log(data);
@@ -61,14 +64,23 @@ const DashboardPage: NextPage = () => {
       <div className="flex w-full flex-col md:mx-12 lg:mx-16">
         <ChallengeHeader id={challengeId as string} />
         <WeekBar />
-        <form onSubmit={handleAddProgressSubmit}>
-          <Editor
-            content={value}
-            onChange={onChange}
-            className="mt-16"
-            ref={ref}
+        <form
+          onSubmit={handleAddProgressSubmit}
+          className="flex flex-col space-y-4"
+        >
+          <EditorFormComponent
+            control={control}
+            defaultContent={data?.progress[0]?.content}
           />
-          <Button type="submit" className="mt-4">
+          <FormGroup
+            register={register}
+            errors={errors}
+            name="isSkipDay"
+            isSwitch
+            control={control}
+            label="Skip Day?"
+          />
+          <Button type="submit" className="w-fit">
             Add Progress
           </Button>
         </form>

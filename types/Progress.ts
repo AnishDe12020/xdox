@@ -1,10 +1,10 @@
-import { EditorContentState } from "@tiptap/react";
+import { Content } from "@tiptap/react";
 
 interface Progress {
   created_at: string;
   id?: string;
   updated_at: string;
-  content: EditorContentState;
+  content: Content;
   isSkipDay: boolean;
   __typename: string;
 }
