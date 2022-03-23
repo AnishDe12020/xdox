@@ -22,4 +22,15 @@ interface CreateChallengeInput {
   topic: string;
 }
 
-export type { Challenge, ChallengeData, CreateChallengeInput, ChallengesData };
+interface ChallengeState {
+  challenge?: Challenge;
+  setChallenge: (challenge: Challenge) => void;
+}
+
+export type {
+  Challenge,
+  ChallengeData,
+  CreateChallengeInput,
+  ChallengesData,
+  ChallengeState,
+};
