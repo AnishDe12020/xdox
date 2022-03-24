@@ -14,4 +14,16 @@ const CREATE_CHALLENGE = gql`
   }
 `;
 
-export { CREATE_CHALLENGE };
+const ADD_PROGRESS = gql`
+mutation ($progress: progress_insert_input!) {
+  insert_progress_one(object: $progress) {
+    updated_at
+    isSkipDay
+    created_at
+    content
+    date
+  }
+}
+`
+
+export { CREATE_CHALLENGE, ADD_PROGRESS };

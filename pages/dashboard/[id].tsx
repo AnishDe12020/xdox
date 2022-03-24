@@ -1,5 +1,6 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useUser } from "@clerk/nextjs";
+import { Content } from "@tiptap/react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -10,9 +11,15 @@ import Challenges from "../../components/Challenges";
 import EditorFormComponent from "../../components/Editor/EditorFormComponent";
 import FormGroup from "../../components/FormGroup";
 import WeekBar from "../../components/WeekBar";
+import { ADD_PROGRESS } from "../../graphql/mutations";
 import { GET_PROGRESS } from "../../graphql/queries";
+import useDate from "../../hooks/useDate";
 import DashboardLayout from "../../layouts/DashboardLayout";
-import { ProgressData } from "../../types/Progress";
+import type {
+  AddProgressInput,
+  Progress,
+  ProgressData,
+} from "../../types/Progress";
 
 const DashboardPage: NextPage = () => {
   const router = useRouter();
@@ -20,6 +27,8 @@ const DashboardPage: NextPage = () => {
   const challengeId = router.query.id;
 
   const user = useUser();
+
+  const { date } = useDate();
 
   let { data, error, loading, previousData } = useQuery<ProgressData>(
     GET_PROGRESS,
@@ -37,6 +46,11 @@ const DashboardPage: NextPage = () => {
     toast.error("Something went wrong!");
   }
 
+  const [addProgress, { data: addProgressData, error: addProgressError }] =
+    useMutation<{ addProgress: Progress }, { progress: AddProgressInput }>(
+      ADD_PROGRESS
+    );
+
   const {
     control,
     handleSubmit,
@@ -51,9 +65,32 @@ const DashboardPage: NextPage = () => {
 
   console.log(data);
 
-  const handleAddProgressSubmit = handleSubmit(async data => {
-    console.log(data);
-  });
+  const handleAddProgressSubmit = handleSubmit(
+    async data => {
+      console.log(data);
+      await addProgress({
+        variables: {
+          progress: {
+            content: data.content as Content,
+            isSkipDay: data.isSkipDay ?? false,
+            challenge_id: challengeId as string,
+            date: date,
+          },
+        },
+      });
+
+      if (addProgressError) {
+        console.log(addProgressError);
+        throw new Error(addProgressError.message);
+      } else if (addProgressData) {
+        toast.success("Progress added!");
+      }
+    },
+    () => {
+      console.error(addProgressError);
+      toast.error("Something went wrong!");
+    }
+  );
 
   return (
     <DashboardLayout>

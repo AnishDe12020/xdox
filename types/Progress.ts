@@ -14,4 +14,12 @@ interface ProgressData {
   progress: Progress[];
 }
 
-export type { Progress, ProgressData };
+interface AddProgressInput {
+  content: Content;
+  isSkipDay: boolean;
+  date: string;
+  challenge_id: string;
+  user_id: string;
+}
+
+export type { Progress, ProgressData, AddProgressInput };
