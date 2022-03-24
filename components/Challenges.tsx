@@ -11,11 +11,15 @@ import Tag from "./Tag";
 interface IChallengesProps {
   variant?: "grid" | "list";
   className?: string;
+  activeChallengeId?: string;
 }
 
-const Challenges = ({ variant, className }: IChallengesProps): JSX.Element => {
+const Challenges = ({
+  variant,
+  className,
+  activeChallengeId,
+}: IChallengesProps): JSX.Element => {
   const router = useRouter();
-  const { setChallenge, challenge: activeChallenge } = useChallenge();
 
   if (!variant) {
     variant = "list";
@@ -34,7 +38,6 @@ const Challenges = ({ variant, className }: IChallengesProps): JSX.Element => {
 
   const handleChallengeClick = (challenge: Challenge) => {
     router.push(`/dashboard/${challenge.id}`);
-    setChallenge(challenge);
   };
 
   return (
@@ -84,9 +87,8 @@ const Challenges = ({ variant, className }: IChallengesProps): JSX.Element => {
           data.challenges.map(challenge => (
             <button
               className={classNames(
-                "flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4 hover:opacity-60 transition duration-200",
-                activeChallenge?.id === challenge.id &&
-                  "border-4 border-blue-500"
+                "flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4 transition duration-200 hover:opacity-60",
+                activeChallengeId === challenge.id && "border-4 border-blue-500"
               )}
               key={challenge.id}
               onClick={() => handleChallengeClick(challenge)}

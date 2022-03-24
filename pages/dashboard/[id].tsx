@@ -32,7 +32,9 @@ import type {
 const DashboardPage: NextPage = () => {
   const router = useRouter();
 
-  const challengeId = router.query.id;
+  const challengeId = router.query.id as string;
+
+  console.log(challengeId);
 
   const user = useUser();
 
@@ -141,7 +143,11 @@ const DashboardPage: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <Challenges variant="list" className="hidden md:flex" />
+      <Challenges
+        variant="list"
+        className="hidden md:flex"
+        activeChallengeId={challengeId}
+      />
       <div className="flex w-full flex-col md:mx-12 lg:mx-16">
         <ChallengeHeader id={challengeId as string} />
         <WeekBar />
