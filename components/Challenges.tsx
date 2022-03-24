@@ -43,7 +43,7 @@ const Challenges = ({
   return (
     <div
       className={classNames(
-        "flex flex-col space-y-8",
+        "flex flex-col",
         variant === "list" ? "w-80 items-start justify-end" : "w-full",
         className
       )}
@@ -53,7 +53,8 @@ const Challenges = ({
         className={classNames(
           variant === "list"
             ? "flex w-full flex-col items-start justify-end space-y-8"
-            : "grid items-center justify-center gap-12"
+            : "grid items-center justify-center gap-12",
+          "mt-8"
         )}
         style={{
           gridTemplateColumns:
