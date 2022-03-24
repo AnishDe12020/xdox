@@ -89,7 +89,7 @@ const DashboardPage: NextPage = () => {
       if (addProgressError) {
         console.log(addProgressError);
         throw new Error(addProgressError.message);
-      } else if (addProgressData) {
+      } else {
         console.log("eee");
         toast.success("Progress added!");
       }
