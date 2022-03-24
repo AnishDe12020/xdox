@@ -70,7 +70,8 @@ const Editor = forwardRef<PureEditorContent, IEditorProps>(
           ],
         }
       );
-    }, [content, editor?.commands]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [content]);
 
     return (
       <div className={classNames("flex flex-col justify-center", className)}>
