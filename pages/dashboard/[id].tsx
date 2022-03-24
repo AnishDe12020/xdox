@@ -108,30 +108,33 @@ const DashboardPage: NextPage = () => {
       <div className="flex w-full flex-col md:mx-12 lg:mx-16">
         <ChallengeHeader id={challengeId as string} />
         <WeekBar />
-        <form
-          onSubmit={handleAddProgressSubmit}
-          className="flex flex-col space-y-4"
-        >
-          {data?.progress ? (
+        {data?.progress ? (
+          <form
+            onSubmit={handleAddProgressSubmit}
+            className="flex flex-col space-y-4"
+          >
             <EditorFormComponent
               control={control}
               defaultContent={data?.progress[0]?.content}
             />
-          ) : (
-            <div className="h-48 w-full animate-pulse bg-secondary rounded-lg" />
-          )}
-          <FormGroup
-            register={register}
-            errors={errors}
-            name="isSkipDay"
-            isSwitch
-            control={control}
-            label="Skip Day?"
-          />
-          <Button type="submit" className="w-fit">
-            Add Progress
-          </Button>
-        </form>
+            <FormGroup
+              register={register}
+              errors={errors}
+              name="isSkipDay"
+              isSwitch
+              control={control}
+              label="Skip Day?"
+            />
+            <Button type="submit" className="w-fit">
+              {data?.progress?.length > 0 ? "Update Progress" : "Add Progress"}
+            </Button>
+          </form>
+        ) : (
+          <div className="flex flex-col space-y-4">
+            <div className="mt-16 h-32 w-full animate-pulse rounded-lg bg-secondary" />
+            <div className="h-8 w-12 animate-pulse rounded-full bg-secondary" />
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );
