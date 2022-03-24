@@ -17,7 +17,7 @@ import Image from "@tiptap/extension-image";
 import CustomBubbleMenu from "./CustomBubbleMenu";
 import Typography from "@tiptap/extension-typography";
 import classNames from "classnames";
-import { forwardRef, Ref } from "react";
+import { forwardRef, Ref, useEffect } from "react";
 
 interface IEditorProps {
   content?: Content;
@@ -47,17 +47,36 @@ const Editor = forwardRef<PureEditorContent, IEditorProps>(
             "prose prose-sm sm:prose lg:prose-lg px-6 pt-4 py-6 focus:outline-none text-accent prose-default bg-secondary rounded-b-lg w-full !max-w-full",
         },
       },
-      content: content,
       onUpdate: ({ editor }) => {
         onChange(editor.getJSON());
       },
     });
 
+    useEffect(() => {
+      console.log("content", content);
+      editor?.commands.setContent(
+        content || {
+          type: "doc",
+          content: [
+            {
+              type: "paragraph",
+              content: [
+                {
+                  text: "",
+                  type: "text",
+                },
+              ],
+            },
+          ],
+        }
+      );
+    }, [content, editor?.commands]);
+
     return (
       <div className={classNames("flex flex-col justify-center", className)}>
         {editor && <MenuBar editor={editor} />}
         {editor && <CustomBubbleMenu editor={editor} />}
-        <EditorContent editor={editor} ref={ref} />
+        <EditorContent content="test" editor={editor} ref={ref} />
       </div>
     );
   }

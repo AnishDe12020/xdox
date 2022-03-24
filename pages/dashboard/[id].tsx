@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import Button from "../../components/Button";
 import ChallengeHeader from "../../components/ChallengeHeader";
 import Challenges from "../../components/Challenges";
+import Editor from "../../components/Editor";
 import EditorFormComponent from "../../components/Editor/EditorFormComponent";
 import FormGroup from "../../components/FormGroup";
 import WeekBar from "../../components/WeekBar";
@@ -38,13 +39,16 @@ const DashboardPage: NextPage = () => {
   const { date } = useDate();
 
   const [toUpdate, setToUpdate] = useState<boolean>(false);
+  const [content, setContent] = useState<Content>();
 
-  let { data: progressData, error, loading, previousData } = useQuery<ProgressData>(
-    GET_PROGRESS,
-    {
-      variables: { challenge_id: challengeId, user_id: user.id, date: date },
-    }
-  );
+  let {
+    data: progressData,
+    error,
+    loading,
+    previousData,
+  } = useQuery<ProgressData>(GET_PROGRESS, {
+    variables: { challenge_id: challengeId, user_id: user.id, date: date },
+  });
 
   if (loading) {
     progressData = previousData;
@@ -60,19 +64,18 @@ const DashboardPage: NextPage = () => {
       return;
     }
     setToUpdate(progressData?.progress?.length > 0);
+    setContent(progressData?.progress?.[0]?.content);
   }, [progressData]);
 
-  const [addProgress, { error: addProgressError }] =
-    useMutation<{ addProgress: Progress }, { progress: AddProgressInput }>(
-      ADD_PROGRESS
-    );
+  const [addProgress, { error: addProgressError }] = useMutation<
+    { addProgress: Progress },
+    { progress: AddProgressInput }
+  >(ADD_PROGRESS);
 
-  const [
-    updateProgress,
-    { error: updateProgressError },
-  ] = useMutation<{ addProgress: Progress }, { progress: UpdateProgressInput, id: string }>(
-    UPDATE_PROGRESS
-  );
+  const [updateProgress, { error: updateProgressError }] = useMutation<
+    { addProgress: Progress },
+    { progress: UpdateProgressInput; id: string }
+  >(UPDATE_PROGRESS);
 
   const {
     control,
@@ -97,7 +100,7 @@ const DashboardPage: NextPage = () => {
               content: data.content as Content,
               isSkipDay: data.isSkipDay ?? false,
             },
-            id: progressData?.progress[0]?.id as string
+            id: progressData?.progress[0]?.id as string,
           },
         });
 
@@ -147,10 +150,7 @@ const DashboardPage: NextPage = () => {
             onSubmit={handleAddProgressSubmit}
             className="flex flex-col space-y-4"
           >
-            <EditorFormComponent
-              control={control}
-              defaultContent={progressData?.progress[0]?.content}
-            />
+            <Editor content={content} onChange={setContent} />
             <FormGroup
               register={register}
               errors={errors}
