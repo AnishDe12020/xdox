@@ -1,4 +1,9 @@
-import { useMutation, useQuery } from "@apollo/client";
+import {
+  ApolloCache,
+  OperationVariables,
+  useMutation,
+  useQuery,
+} from "@apollo/client";
 import { useUser } from "@clerk/nextjs";
 import { Content } from "@tiptap/react";
 import { NextPage } from "next";
@@ -79,10 +84,13 @@ const DashboardPage: NextPage = () => {
         },
       });
 
+      console.log("ee")
+
       if (addProgressError) {
         console.log(addProgressError);
         throw new Error(addProgressError.message);
       } else if (addProgressData) {
+      console.log("eee")
         toast.success("Progress added!");
       }
     },
@@ -91,6 +99,8 @@ const DashboardPage: NextPage = () => {
       toast.error("Something went wrong!");
     }
   );
+
+  console.log("e", addProgressData);
 
   return (
     <DashboardLayout>
