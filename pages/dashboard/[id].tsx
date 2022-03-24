@@ -112,10 +112,14 @@ const DashboardPage: NextPage = () => {
           onSubmit={handleAddProgressSubmit}
           className="flex flex-col space-y-4"
         >
-          <EditorFormComponent
-            control={control}
-            defaultContent={data?.progress[0]?.content}
-          />
+          {data?.progress ? (
+            <EditorFormComponent
+              control={control}
+              defaultContent={data?.progress[0]?.content}
+            />
+          ) : (
+            <div className="h-48 w-full animate-pulse bg-secondary rounded-lg" />
+          )}
           <FormGroup
             register={register}
             errors={errors}
