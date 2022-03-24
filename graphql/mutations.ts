@@ -22,6 +22,7 @@ const ADD_PROGRESS = gql`
       created_at
       content
       date
+      id
     }
   }
 `;
@@ -34,6 +35,7 @@ const UPDATE_PROGRESS = gql`
       created_at
       content
       date
+      id
     }
   }
 `;

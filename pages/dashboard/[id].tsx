@@ -69,15 +69,41 @@ const DashboardPage: NextPage = () => {
     setContent(progressData?.progress?.[0]?.content);
   }, [progressData]);
 
+  const addProgressUpdateCache = (
+    cache: ApolloCache<any>,
+    { data }: OperationVariables
+  ) => {
+    const newProgress = data.insert_progress_one;
+
+    cache.writeQuery({
+      query: GET_PROGRESS,
+      variables: { challenge_id: challengeId, user_id: user.id, date: date },
+      data: { progress: [newProgress] },
+    });
+  };
+
+  const updateProgressUpdateCache = (
+    cache: ApolloCache<any>,
+    { data }: OperationVariables
+  ) => {
+    const newProgress = data.update_progress_by_pk;
+
+    cache.writeQuery({
+      query: GET_PROGRESS,
+      variables: { challenge_id: challengeId, user_id: user.id, date: date },
+      data: { progress: [newProgress] },
+    });
+  };
+
   const [addProgress, { error: addProgressError }] = useMutation<
     { addProgress: Progress },
     { progress: AddProgressInput }
-  >(ADD_PROGRESS);
+  >(ADD_PROGRESS, { update: addProgressUpdateCache });
 
   const [updateProgress, { error: updateProgressError }] = useMutation<
     { addProgress: Progress },
     { progress: UpdateProgressInput; id: string }
-  >(UPDATE_PROGRESS);
+  >(UPDATE_PROGRESS, { update: updateProgressUpdateCache });
 
   const {
     control,
@@ -99,7 +125,7 @@ const DashboardPage: NextPage = () => {
         await updateProgress({
           variables: {
             progress: {
-              content: data.content as Content,
+              content: content,
               isSkipDay: data.isSkipDay ?? false,
             },
             id: progressData?.progress[0]?.id as string,
@@ -116,7 +142,7 @@ const DashboardPage: NextPage = () => {
         await addProgress({
           variables: {
             progress: {
-              content: data.content as Content,
+              content: content as Content,
               isSkipDay: data.isSkipDay ?? false,
               challenge_id: challengeId as string,
               date: date,
