@@ -8,6 +8,7 @@ import { useUser } from "@clerk/nextjs";
 import { Content } from "@tiptap/react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Button from "../../components/Button";
@@ -16,7 +17,7 @@ import Challenges from "../../components/Challenges";
 import EditorFormComponent from "../../components/Editor/EditorFormComponent";
 import FormGroup from "../../components/FormGroup";
 import WeekBar from "../../components/WeekBar";
-import { ADD_PROGRESS } from "../../graphql/mutations";
+import { ADD_PROGRESS, UPDATE_PROGRESS } from "../../graphql/mutations";
 import { GET_PROGRESS } from "../../graphql/queries";
 import useDate from "../../hooks/useDate";
 import DashboardLayout from "../../layouts/DashboardLayout";
@@ -24,6 +25,7 @@ import type {
   AddProgressInput,
   Progress,
   ProgressData,
+  UpdateProgressInput,
 } from "../../types/Progress";
 
 const DashboardPage: NextPage = () => {
@@ -35,7 +37,9 @@ const DashboardPage: NextPage = () => {
 
   const { date } = useDate();
 
-  let { data, error, loading, previousData } = useQuery<ProgressData>(
+  const [toUpdate, setToUpdate] = useState<boolean>(false);
+
+  let { data: progressData, error, loading, previousData } = useQuery<ProgressData>(
     GET_PROGRESS,
     {
       variables: { challenge_id: challengeId, user_id: user.id, date: date },
@@ -43,7 +47,7 @@ const DashboardPage: NextPage = () => {
   );
 
   if (loading) {
-    data = previousData;
+    progressData = previousData;
   }
 
   if (error) {
@@ -51,10 +55,24 @@ const DashboardPage: NextPage = () => {
     toast.error("Something went wrong!");
   }
 
-  const [addProgress, { data: addProgressData, error: addProgressError }] =
+  useEffect(() => {
+    if (!progressData) {
+      return;
+    }
+    setToUpdate(progressData?.progress?.length > 0);
+  }, [progressData]);
+
+  const [addProgress, { error: addProgressError }] =
     useMutation<{ addProgress: Progress }, { progress: AddProgressInput }>(
       ADD_PROGRESS
     );
+
+  const [
+    updateProgress,
+    { error: updateProgressError },
+  ] = useMutation<{ addProgress: Progress }, { progress: UpdateProgressInput, id: string }>(
+    UPDATE_PROGRESS
+  );
 
   const {
     control,
@@ -63,35 +81,53 @@ const DashboardPage: NextPage = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      isSkipDay: data?.progress[0]?.isSkipDay,
-      content: data?.progress[0]?.content,
+      isSkipDay: progressData?.progress[0]?.isSkipDay,
+      content: progressData?.progress[0]?.content,
     },
   });
 
-  console.log(data);
+  console.log(progressData);
 
   const handleAddProgressSubmit = handleSubmit(
     async data => {
-      console.log(data);
-      await addProgress({
-        variables: {
-          progress: {
-            content: data.content as Content,
-            isSkipDay: data.isSkipDay ?? false,
-            challenge_id: challengeId as string,
-            date: date,
+      if (toUpdate) {
+        await updateProgress({
+          variables: {
+            progress: {
+              content: data.content as Content,
+              isSkipDay: data.isSkipDay ?? false,
+            },
+            id: progressData?.progress[0]?.id as string
           },
-        },
-      });
+        });
 
-      console.log("ee");
-
-      if (addProgressError) {
-        console.log(addProgressError);
-        throw new Error(addProgressError.message);
+        if (updateProgressError) {
+          console.error(updateProgressError);
+          throw new Error(updateProgressError.message);
+        } else {
+          toast.success("Progress updated!");
+        }
       } else {
-        console.log("eee");
-        toast.success("Progress added!");
+        await addProgress({
+          variables: {
+            progress: {
+              content: data.content as Content,
+              isSkipDay: data.isSkipDay ?? false,
+              challenge_id: challengeId as string,
+              date: date,
+            },
+          },
+        });
+
+        console.log("ee");
+
+        if (addProgressError) {
+          console.log(addProgressError);
+          throw new Error(addProgressError.message);
+        } else {
+          console.log("eee");
+          toast.success("Progress added!");
+        }
       }
     },
     () => {
@@ -100,22 +136,20 @@ const DashboardPage: NextPage = () => {
     }
   );
 
-  console.log("e", addProgressData);
-
   return (
     <DashboardLayout>
       <Challenges variant="list" className="hidden md:flex" />
       <div className="flex w-full flex-col md:mx-12 lg:mx-16">
         <ChallengeHeader id={challengeId as string} />
         <WeekBar />
-        {data?.progress ? (
+        {progressData?.progress ? (
           <form
             onSubmit={handleAddProgressSubmit}
             className="flex flex-col space-y-4"
           >
             <EditorFormComponent
               control={control}
-              defaultContent={data?.progress[0]?.content}
+              defaultContent={progressData?.progress[0]?.content}
             />
             <FormGroup
               register={register}
@@ -124,10 +158,10 @@ const DashboardPage: NextPage = () => {
               isSwitch
               control={control}
               label="Skip Day?"
-              checked={data?.progress[0]?.isSkipDay}
+              checked={progressData?.progress[0]?.isSkipDay}
             />
             <Button type="submit" className="w-fit">
-              {data?.progress?.length > 0 ? "Update Progress" : "Add Progress"}
+              {toUpdate ? "Update Progress" : "Add Progress"}
             </Button>
           </form>
         ) : (

@@ -9,7 +9,7 @@ interface IEditorFormComponentProps {
 
 const EditorFormComponent = ({
   control,
-  defaultContent
+  defaultContent,
 }: IEditorFormComponentProps): JSX.Element => {
   const {
     field: { onChange, value, ref },
@@ -22,7 +22,7 @@ const EditorFormComponent = ({
 
   return (
     <Editor content={value} onChange={onChange} className="mt-16" ref={ref} />
-  ) 
+  );
 };
 
 export default EditorFormComponent;

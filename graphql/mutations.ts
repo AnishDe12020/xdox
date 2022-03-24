@@ -15,15 +15,27 @@ const CREATE_CHALLENGE = gql`
 `;
 
 const ADD_PROGRESS = gql`
-mutation ($progress: progress_insert_input!) {
-  insert_progress_one(object: $progress) {
-    updated_at
-    isSkipDay
-    created_at
-    content
-    date
+  mutation ($progress: progress_insert_input!) {
+    insert_progress_one(object: $progress) {
+      updated_at
+      isSkipDay
+      created_at
+      content
+      date
+    }
   }
-}
-`
+`;
 
-export { CREATE_CHALLENGE, ADD_PROGRESS };
+const UPDATE_PROGRESS = gql`
+  mutation ($id: String!, $progress: progress_set_input!) {
+    update_progress_by_pk(pk_columns: { id: $id }, _set: $progress) {
+      updated_at
+      isSkipDay
+      created_at
+      content
+      date
+    }
+  }
+`;
+
+export { CREATE_CHALLENGE, ADD_PROGRESS, UPDATE_PROGRESS };

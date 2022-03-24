@@ -21,4 +21,8 @@ interface AddProgressInput {
   challenge_id: string;
 }
 
-export type { Progress, ProgressData, AddProgressInput };
+type UpdateProgressInput = Partial<Pick<AddProgressInput, "content" | "isSkipDay">>
+  
+
+
+export type { Progress, ProgressData, AddProgressInput, UpdateProgressInput };
