@@ -124,13 +124,14 @@ const DashboardPage: NextPage = () => {
               isSwitch
               control={control}
               label="Skip Day?"
+              checked={data?.progress[0]?.isSkipDay}
             />
             <Button type="submit" className="w-fit">
               {data?.progress?.length > 0 ? "Update Progress" : "Add Progress"}
             </Button>
           </form>
         ) : (
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-8">
             <div className="mt-16 h-32 w-full animate-pulse rounded-lg bg-secondary" />
             <div className="h-8 w-12 animate-pulse rounded-full bg-secondary" />
           </div>
