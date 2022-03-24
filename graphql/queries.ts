@@ -26,12 +26,13 @@ const GET_CHALLENGE = gql`
 `;
 
 const GET_PROGRESS = gql`
-  query getProgress($user_id: String!, $challenge_id: String!) {
+  query getProgress($user_id: String!, $challenge_id: String!, $date: String!) {
     progress(
       where: {
         _and: {
           user_id: { _eq: $user_id }
           challenge_id: { _eq: $challenge_id }
+          date: { _eq: $date }
         }
       }
     ) {

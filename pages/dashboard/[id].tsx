@@ -38,7 +38,7 @@ const DashboardPage: NextPage = () => {
   let { data, error, loading, previousData } = useQuery<ProgressData>(
     GET_PROGRESS,
     {
-      variables: { challenge_id: challengeId, user_id: user.id },
+      variables: { challenge_id: challengeId, user_id: user.id, date: date },
     }
   );
 
@@ -84,13 +84,13 @@ const DashboardPage: NextPage = () => {
         },
       });
 
-      console.log("ee")
+      console.log("ee");
 
       if (addProgressError) {
         console.log(addProgressError);
         throw new Error(addProgressError.message);
       } else if (addProgressData) {
-      console.log("eee")
+        console.log("eee");
         toast.success("Progress added!");
       }
     },
