@@ -29,7 +29,7 @@ import type {
   UpdateProgressInput,
 } from "../../types/Progress";
 
-const DashboardPage: NextPage = () => {
+const ChallengeDashboardPage: NextPage = () => {
   const router = useRouter();
 
   const challengeId = router.query.id as string;
@@ -207,4 +207,4 @@ const DashboardPage: NextPage = () => {
   );
 };
 
-export default DashboardPage;
+export default ChallengeDashboardPage;
