@@ -151,8 +151,8 @@ const MenuBar = ({ editor }: IMenuBarProps): JSX.Element => {
             key={index}
             onClick={action}
             className={classNames(
-              "transition-100 rounded-md bg-secondary px-2 py-2 text-accent hover:bg-primary hover:opacity-100",
-              isActive && "bg-primary"
+              "transition-100 rounded-md !bg-secondary px-2 py-2 text-accent hover:!bg-primary hover:opacity-100",
+              isActive && "!bg-primary"
             )}
             aria-label={title}
             title={title}

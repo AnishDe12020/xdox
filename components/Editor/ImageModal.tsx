@@ -40,7 +40,7 @@ const ImageModal = ({ editor }: IImageModalProps): JSX.Element => {
       trigger={
         <Button
           className={classNames(
-            "transition-100 rounded-md bg-secondary px-2 py-2 text-accent hover:bg-primary hover:opacity-100"
+            "transition-100 rounded-md !bg-secondary px-2 py-2 text-accent hover:!bg-primary hover:opacity-100"
           )}
           aria-label="Add Image"
           title="Add Image"
