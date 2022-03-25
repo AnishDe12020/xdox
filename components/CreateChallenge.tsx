@@ -65,14 +65,16 @@ const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
   const onSubmit = handleSubmit(
     async data => {
       console.log(data);
-      console.log(DateTime.fromJSDate(new Date(data.start_date)).toISO());
+      console.log(DateTime.fromJSDate(new Date(data.start_date)).toISODate());
       await createChallenge({
         variables: {
           challenge: {
             days: data.days,
             topic: data.topic,
             isPublic: data.isPublic,
-            start_date: DateTime.fromJSDate(new Date(data.start_date)).toISO(),
+            start_date: DateTime.fromJSDate(
+              new Date(data.start_date)
+            ).toISODate(),
             days_skipped: 0,
           },
         },

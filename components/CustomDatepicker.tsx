@@ -14,7 +14,11 @@ const CustomDatepicker = ({
 }: ICustomDatepickerProps): JSX.Element => {
   const {
     field: { onChange, name: rhfName, value, ref },
-  } = useController({ control, name });
+  } = useController({
+    control,
+    name,
+    defaultValue: new Date(),
+  });
 
   return (
     <div className="relative">
