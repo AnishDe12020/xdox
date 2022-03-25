@@ -168,9 +168,16 @@ const ChallengeDashboardPage: NextPage = () => {
         {progressData?.progress ? (
           <div className="mt-16 flex flex-col space-y-4">
             <Editor content={content} onChange={setContent} />
+            <label
+              htmlFor="isSkipDay"
+              className="relative w-fit pr-4 text-sm font-semibold"
+            >
+              Skipping this day?
+            </label>
             <Switch
               checked={isSkipDay}
               onChange={() => setIsSkipDay(!isSkipDay)}
+              id="isSkipDay"
             />
             <Button
               type="submit"

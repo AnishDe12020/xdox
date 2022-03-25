@@ -1,14 +1,14 @@
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 import classNames from "classnames";
-import { FormEventHandler } from "react";
 
 interface ISwitchProps {
   checked: boolean;
   onChange: () => void;
+  id?: string;
+  name?: string;
 }
 
-const Switch = ({ checked, onChange }: ISwitchProps): JSX.Element => {
-
+const Switch = ({ checked, onChange, id, name }: ISwitchProps): JSX.Element => {
   return (
     <SwitchPrimitive.Root
       className={classNames(
@@ -20,6 +20,8 @@ const Switch = ({ checked, onChange }: ISwitchProps): JSX.Element => {
       )}
       checked={checked}
       onClick={onChange}
+      id={id}
+      name={name}
     >
       <SwitchPrimitive.Thumb
         className={classNames(
