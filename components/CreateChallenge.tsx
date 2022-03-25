@@ -10,6 +10,7 @@ import { GET_CHALLENGES } from "../graphql/queries";
 import type { Challenge, CreateChallengeInput } from "../types/Challenges";
 import Button from "./Button";
 import classNames from "classnames";
+import { DateTime } from "luxon";
 
 const CreateChallengeSchema = yup.object({
   days: yup.number().required(),
@@ -70,6 +71,8 @@ const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
             days: data.days,
             topic: data.topic,
             isPublic: data.isPublic,
+            start_date: DateTime.now().toISO(),
+            days_skipped: 0,
           },
         },
       });
