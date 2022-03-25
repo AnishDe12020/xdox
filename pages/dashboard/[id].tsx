@@ -41,8 +41,8 @@ const ChallengeDashboardPage: NextPage = () => {
 
   const [toUpdate, setToUpdate] = useState<boolean>(false);
   const [content, setContent] = useState<Content>();
-    const [isSkipDay, setIsSkipDay] = useState<boolean>(false);
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isSkipDay, setIsSkipDay] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   let {
     data: progressData,
@@ -107,53 +107,51 @@ const ChallengeDashboardPage: NextPage = () => {
     { progress: UpdateProgressInput; id: string }
   >(UPDATE_PROGRESS, { update: updateProgressUpdateCache });
 
-
   console.log(progressData);
 
-  const handleAddProgressSubmit = async (e: SubmitEvent) => {
-  e.preventDefault();
+  const handleAddProgressSubmit = async () => {
     setIsSubmitting(true);
-      if (toUpdate) {
-        await updateProgress({
-          variables: {
-            progress: {
-              content: content,
-              isSkipDay: isSkipDay ?? false,
-            },
-            id: progressData?.progress[0]?.id as string,
+    if (toUpdate) {
+      await updateProgress({
+        variables: {
+          progress: {
+            content: content,
+            isSkipDay: isSkipDay ?? false,
           },
-        });
+          id: progressData?.progress[0]?.id as string,
+        },
+      });
 
-        if (updateProgressError) {
-          console.error(updateProgressError);
-          throw new Error(updateProgressError.message);
-        } else {
-          toast.success("Progress updated!");
-        }
+      if (updateProgressError) {
+        console.error(updateProgressError);
+        throw new Error(updateProgressError.message);
       } else {
-        await addProgress({
-          variables: {
-            progress: {
-              content: content as Content,
-              isSkipDay: isSkipDay ?? false,
-              challenge_id: challengeId as string,
-              date: date,
-            },
-          },
-        });
-
-        console.log("ee");
-
-        if (addProgressError) {
-          console.log(addProgressError);
-          throw new Error(addProgressError.message);
-        } else {
-          console.log("eee");
-          toast.success("Progress added!");
-        }
+        toast.success("Progress updated!");
       }
-      setIsSubmitting(false);
+    } else {
+      await addProgress({
+        variables: {
+          progress: {
+            content: content as Content,
+            isSkipDay: isSkipDay ?? false,
+            challenge_id: challengeId as string,
+            date: date,
+          },
+        },
+      });
+
+      console.log("ee");
+
+      if (addProgressError) {
+        console.log(addProgressError);
+        throw new Error(addProgressError.message);
+      } else {
+        console.log("eee");
+        toast.success("Progress added!");
+      }
     }
+    setIsSubmitting(false);
+  };
 
   console.log("g", progressData?.progress[0]?.isSkipDay ?? false);
 
@@ -168,16 +166,21 @@ const ChallengeDashboardPage: NextPage = () => {
         <ChallengeHeader id={challengeId as string} />
         <WeekBar />
         {progressData?.progress ? (
-          <form
-            onSubmit={handleAddProgressSubmit}
-            className="flex flex-col space-y-4"
-          >
+          <div className="flex flex-col space-y-4">
             <Editor content={content} onChange={setContent} />
-            <Switch checked={isSkipDay} onChange={() => setIsSkipDay(!isSkipDay)} />
-            <Button type="submit" className="w-fit" loading={isSubmitting}>
+            <Switch
+              checked={isSkipDay}
+              onChange={() => setIsSkipDay(!isSkipDay)}
+            />
+            <Button
+              type="submit"
+              className="w-fit"
+              loading={isSubmitting}
+              onClick={handleAddProgressSubmit}
+            >
               {toUpdate ? "Update Progress" : "Add Progress"}
             </Button>
-          </form>
+          </div>
         ) : (
           <div className="flex flex-col space-y-8">
             <div className="mt-16 h-32 w-full animate-pulse rounded-lg bg-secondary" />
