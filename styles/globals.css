@@ -61,7 +61,7 @@ a {
 }
 
 .react-datepicker-popper {
-  @apply z-40 w-72 rounded-lg bg-secondary px-3 py-2 text-sm shadow;
+  @apply z-40 h-64 w-72 rounded-lg bg-secondary px-3 py-2 text-sm shadow;
 }
 
 .react-datepicker-left {
@@ -121,5 +121,5 @@ a {
 }
 
 .react-datepicker__day--selected {
-  @apply bg-blue-500 text-white;
+  @apply bg-blue-600 text-accent;
 }
