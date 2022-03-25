@@ -65,13 +65,14 @@ const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
   const onSubmit = handleSubmit(
     async data => {
       console.log(data);
+      console.log(DateTime.fromJSDate(new Date(data.start_date)).toISO());
       await createChallenge({
         variables: {
           challenge: {
             days: data.days,
             topic: data.topic,
             isPublic: data.isPublic,
-            start_date: DateTime.now().toISO(),
+            start_date: DateTime.fromJSDate(new Date(data.start_date)).toISO(),
             days_skipped: 0,
           },
         },
@@ -118,6 +119,15 @@ const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
           required
           label="Topic"
           placeholder="Code"
+        />
+
+        <FormGroup
+          register={register}
+          errors={errors}
+          name="start_date"
+          label="Start Date"
+          control={control}
+          isDatePicker
         />
 
         <p className="text-lg md:text-xl">
