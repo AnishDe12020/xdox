@@ -1,7 +1,7 @@
 import { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import { HTMLInputTypeAttribute } from "react";
-import Switch from "./Switch";
 import CustomDatepicker from "./CustomDatepicker";
+import SwitchFormElement from "./SwitchFormElement";
 
 interface IFormGroupProps {
   register: UseFormRegister<any>;
@@ -59,7 +59,7 @@ const FormGroup = ({
             required={required}
           />
         ) : isSwitch ? (
-          <Switch
+          <SwitchFormElement
             name={name}
             checked={checked as boolean}
             control={control as Control}

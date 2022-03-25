@@ -15,7 +15,6 @@ import Button from "../../components/Button";
 import ChallengeHeader from "../../components/ChallengeHeader";
 import Challenges from "../../components/Challenges";
 import Editor from "../../components/Editor";
-import FormGroup from "../../components/FormGroup";
 import WeekBar from "../../components/WeekBar";
 import { ADD_PROGRESS, UPDATE_PROGRESS } from "../../graphql/mutations";
 import { GET_PROGRESS } from "../../graphql/queries";
@@ -27,6 +26,7 @@ import type {
   ProgressData,
   UpdateProgressInput,
 } from "../../types/Progress";
+import Switch from "../../components/Switch";
 
 const ChallengeDashboardPage: NextPage = () => {
   const router = useRouter();
@@ -41,6 +41,8 @@ const ChallengeDashboardPage: NextPage = () => {
 
   const [toUpdate, setToUpdate] = useState<boolean>(false);
   const [content, setContent] = useState<Content>();
+    const [isSkipDay, setIsSkipDay] = useState<boolean>(false);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   let {
     data: progressData,
@@ -66,6 +68,7 @@ const ChallengeDashboardPage: NextPage = () => {
     }
     setToUpdate(progressData?.progress?.length > 0);
     setContent(progressData?.progress?.[0]?.content);
+    setIsSkipDay(progressData?.progress?.[0]?.isSkipDay);
   }, [progressData]);
 
   const addProgressUpdateCache = (
@@ -104,28 +107,18 @@ const ChallengeDashboardPage: NextPage = () => {
     { progress: UpdateProgressInput; id: string }
   >(UPDATE_PROGRESS, { update: updateProgressUpdateCache });
 
-  const {
-    control,
-    handleSubmit,
-    register,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    defaultValues: {
-      isSkipDay: progressData?.progress[0]?.isSkipDay,
-      content: progressData?.progress[0]?.content,
-    },
-  });
 
   console.log(progressData);
 
-  const handleAddProgressSubmit = handleSubmit(
-    async data => {
+  const handleAddProgressSubmit = async (e: SubmitEvent) => {
+  e.preventDefault();
+    setIsSubmitting(true);
       if (toUpdate) {
         await updateProgress({
           variables: {
             progress: {
               content: content,
-              isSkipDay: data.isSkipDay ?? false,
+              isSkipDay: isSkipDay ?? false,
             },
             id: progressData?.progress[0]?.id as string,
           },
@@ -142,7 +135,7 @@ const ChallengeDashboardPage: NextPage = () => {
           variables: {
             progress: {
               content: content as Content,
-              isSkipDay: data.isSkipDay ?? false,
+              isSkipDay: isSkipDay ?? false,
               challenge_id: challengeId as string,
               date: date,
             },
@@ -159,12 +152,10 @@ const ChallengeDashboardPage: NextPage = () => {
           toast.success("Progress added!");
         }
       }
-    },
-    () => {
-      console.error(addProgressError);
-      toast.error("Something went wrong!");
+      setIsSubmitting(false);
     }
-  );
+
+  console.log("g", progressData?.progress[0]?.isSkipDay ?? false);
 
   return (
     <DashboardLayout>
@@ -182,15 +173,7 @@ const ChallengeDashboardPage: NextPage = () => {
             className="flex flex-col space-y-4"
           >
             <Editor content={content} onChange={setContent} />
-            <FormGroup
-              register={register}
-              errors={errors}
-              name="isSkipDay"
-              isSwitch
-              control={control}
-              label="Skip Day?"
-              checked={progressData?.progress[0]?.isSkipDay}
-            />
+            <Switch checked={isSkipDay} onChange={() => setIsSkipDay(!isSkipDay)} />
             <Button type="submit" className="w-fit" loading={isSubmitting}>
               {toUpdate ? "Update Progress" : "Add Progress"}
             </Button>

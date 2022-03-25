@@ -1,13 +1,17 @@
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 import classNames from "classnames";
-import { FormEventHandler } from "react";
+import { Control, useController } from "react-hook-form";
 
 interface ISwitchProps {
+  name: string;
+  control: Control;
   checked: boolean;
-  onChange: () => void;
 }
 
-const Switch = ({ checked, onChange }: ISwitchProps): JSX.Element => {
+const SwitchFormElement = ({ name, control, checked }: ISwitchProps): JSX.Element => {
+  const {
+    field: { onChange, name: rhfName, value, ref },
+  } = useController({ control, name, defaultValue: checked });
 
   return (
     <SwitchPrimitive.Root
@@ -18,8 +22,11 @@ const Switch = ({ checked, onChange }: ISwitchProps): JSX.Element => {
         "transition duration-200 ease-in-out",
         "focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 focus-visible:ring-opacity-60"
       )}
-      checked={checked}
-      onClick={onChange}
+      name={rhfName}
+      defaultChecked={checked}
+      onCheckedChange={onChange}
+      value={value}
+      ref={ref}
     >
       <SwitchPrimitive.Thumb
         className={classNames(
@@ -31,4 +38,5 @@ const Switch = ({ checked, onChange }: ISwitchProps): JSX.Element => {
   );
 };
 
-export default Switch;
+export default SwitchFormElement;
+
