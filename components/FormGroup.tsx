@@ -33,7 +33,7 @@ const FormGroup = ({
   type,
   required,
   control,
-  isDatePicker
+  isDatePicker,
 }: IFormGroupProps): JSX.Element => {
   return (
     <>
@@ -65,9 +65,9 @@ const FormGroup = ({
             checked={checked as boolean}
             control={control as Control}
           />
-          ) : isDatePicker ? (
+        ) : isDatePicker ? (
           <CustomDatepicker control={control as Control} name={name} />
-          ) :  (
+        ) : (
           <input
             {...register(name)}
             id={id || name}
