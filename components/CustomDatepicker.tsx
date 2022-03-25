@@ -48,7 +48,7 @@ const CustomDatepicker = ({
                                               prevMonthButtonDisabled &&
                                               "cursor-not-allowed opacity-50"
                                             }
-                                            inline-flex rounded-md bg-secondary p-1 text-sm font-medium text-gray-300 shadow-sm hover:bg-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-opacity-60
+                                            inline-flex rounded-lg bg-secondary p-1 text-sm font-medium text-gray-300 shadow-sm hover:bg-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-opacity-60
                                         `}
               >
                 <ChevronLeftIcon className="h-5 w-5 text-gray-300" />
@@ -63,7 +63,7 @@ const CustomDatepicker = ({
                                               nextMonthButtonDisabled &&
                                               "cursor-not-allowed opacity-50"
                                             }
-                                                                                        inline-flex rounded-md bg-secondary p-1 text-sm font-medium text-gray-300 shadow-sm hover:bg-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-opacity-60
+                                                                                        inline-flex rounded-lg bg-secondary p-1 text-sm font-medium text-gray-300 shadow-sm hover:bg-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-opacity-60
 
                                         `}
               >

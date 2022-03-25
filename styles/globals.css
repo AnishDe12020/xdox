@@ -109,7 +109,7 @@ a {
 }
 
 .react-datepicker__day {
-  @apply mb-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded py-1 text-sm leading-loose text-gray-300 transition hover:bg-primary;
+  @apply mb-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg py-1 text-sm leading-loose text-gray-300 transition hover:bg-primary;
 }
 
 .react-datepicker__day--disabled {
