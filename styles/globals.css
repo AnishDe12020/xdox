@@ -61,7 +61,7 @@ a {
 }
 
 .react-datepicker-popper {
-  @apply z-40 h-64 w-72 rounded-lg bg-secondary px-3 py-2 text-sm shadow;
+  @apply z-40 h-fit w-72 rounded-lg bg-secondary px-3 py-2 text-sm shadow;
 }
 
 .react-datepicker-left {
