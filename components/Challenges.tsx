@@ -3,7 +3,6 @@ import classNames from "classnames";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { GET_CHALLENGES } from "../graphql/queries";
-import useChallenge from "../hooks/useChallenge";
 import { Challenge, ChallengesData } from "../types/Challenges";
 import CreateChallenge from "./CreateChallenge";
 import Tag from "./Tag";

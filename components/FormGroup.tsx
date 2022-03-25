@@ -1,7 +1,6 @@
 import { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import { HTMLInputTypeAttribute } from "react";
 import Switch from "./Switch";
-import ReactDatePicker from "react-datepicker";
 import CustomDatepicker from "./CustomDatepicker";
 
 interface IFormGroupProps {

@@ -15,7 +15,6 @@ import Button from "../../components/Button";
 import ChallengeHeader from "../../components/ChallengeHeader";
 import Challenges from "../../components/Challenges";
 import Editor from "../../components/Editor";
-import EditorFormComponent from "../../components/Editor/EditorFormComponent";
 import FormGroup from "../../components/FormGroup";
 import WeekBar from "../../components/WeekBar";
 import { ADD_PROGRESS, UPDATE_PROGRESS } from "../../graphql/mutations";
