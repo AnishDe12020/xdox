@@ -74,7 +74,7 @@ const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
             isPublic: data.isPublic,
             start_date: DateTime.fromJSDate(
               new Date(data.start_date)
-            ).toISODate(),
+            ).toISODate() || DateTime.now().toISODate(),
             days_skipped: 0,
           },
         },
@@ -103,6 +103,7 @@ const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
       onDone={onSubmit}
       isSubmitting={isSubmitting}
       doneText="Submit"
+      errors={errors}
     >
       <form onSubmit={onSubmit} className="flex flex-col space-y-8">
         <FormGroup

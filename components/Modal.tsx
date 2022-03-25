@@ -8,6 +8,7 @@ import useBreakpoint from "../utils/useBreakpoint";
 import Button from "./Button";
 
 import "react-spring-bottom-sheet/dist/style.css";
+import { FieldErrors } from "react-hook-form";
 
 interface IModalProps {
   title?: string;
@@ -17,6 +18,7 @@ interface IModalProps {
   onDone?: () => void;
   isSubmitting?: boolean;
   doneText?: string;
+  errors: FieldErrors<any>;
 }
 
 const Modal = ({
@@ -27,6 +29,7 @@ const Modal = ({
   onDone,
   isSubmitting,
   doneText,
+  errors
 }: IModalProps) => {
   useEffect(() => {
     window.dispatchEvent(new Event("resize"));
@@ -39,8 +42,13 @@ const Modal = ({
   const handleDone = async () => {
     if (onDone) {
       await onDone();
-    }
+      if (!errors) {
+      setOpen(false);
+      }
+      } else {
+
     setOpen(false);
+      }
   };
 
   return isDesktop ? (
