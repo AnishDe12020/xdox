@@ -43,8 +43,10 @@ const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
     { data }: OperationVariables
   ) => {
     const existingChallenges: any = cache.readQuery({ query: GET_CHALLENGES });
+    console.log("exisitng challenges", existingChallenges);
 
     const newChallenge = data.insert_challenges_one;
+    console.log("new challenge", newChallenge);
 
     cache.writeQuery({
       query: GET_CHALLENGES,
@@ -72,9 +74,9 @@ const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
             days: data.days,
             topic: data.topic,
             isPublic: data.isPublic,
-            start_date: DateTime.fromJSDate(
-              new Date(data.start_date)
-            ).toISODate() || DateTime.now().toISODate(),
+            start_date:
+              DateTime.fromJSDate(new Date(data.start_date)).toISODate() ||
+              DateTime.now().toISODate(),
             days_skipped: 0,
           },
         },

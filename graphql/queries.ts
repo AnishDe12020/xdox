@@ -23,6 +23,8 @@ const GET_CHALLENGE = gql`
       isPublic
       topic
       updated_at
+      start_date
+      days_skipped
     }
   }
 `;
