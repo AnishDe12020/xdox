@@ -29,7 +29,7 @@ const Modal = ({
   onDone,
   isSubmitting,
   doneText,
-  errors
+  errors,
 }: IModalProps) => {
   useEffect(() => {
     window.dispatchEvent(new Event("resize"));
@@ -43,12 +43,11 @@ const Modal = ({
     if (onDone) {
       await onDone();
       if (!errors) {
+        setOpen(false);
+      }
+    } else {
       setOpen(false);
-      }
-      } else {
-
-    setOpen(false);
-      }
+    }
   };
 
   return isDesktop ? (
