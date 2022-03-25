@@ -109,7 +109,7 @@ const ChallengeDashboardPage: NextPage = () => {
     control,
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
       isSkipDay: progressData?.progress[0]?.isSkipDay,
@@ -192,7 +192,7 @@ const ChallengeDashboardPage: NextPage = () => {
               label="Skip Day?"
               checked={progressData?.progress[0]?.isSkipDay}
             />
-            <Button type="submit" className="w-fit">
+            <Button type="submit" className="w-fit" loading={isSubmitting}>
               {toUpdate ? "Update Progress" : "Add Progress"}
             </Button>
           </form>
