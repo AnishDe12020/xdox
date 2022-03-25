@@ -166,7 +166,7 @@ const ChallengeDashboardPage: NextPage = () => {
         <ChallengeHeader id={challengeId as string} />
         <WeekBar />
         {progressData?.progress ? (
-          <div className="flex flex-col space-y-4">
+          <div className="mt-16 flex flex-col space-y-4">
             <Editor content={content} onChange={setContent} />
             <Switch
               checked={isSkipDay}
