@@ -18,7 +18,7 @@ interface IModalProps {
   onDone?: () => void;
   isSubmitting?: boolean;
   doneText?: string;
-  errors: FieldErrors<any>;
+  errors?: FieldErrors<any>;
 }
 
 const Modal = ({
