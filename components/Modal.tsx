@@ -41,11 +41,11 @@ const Modal = ({
 
   const handleDone = async () => {
     if (onDone) {
-      await onDone();
-      if (!errors) {
+      if (!(Object.keys(errors).length > 0)) {
+        await onDone();
         setOpen(false);
       } else {
-        setOpen(false);
+        setOpen(true);
       }
     }
   };
