@@ -9,7 +9,6 @@ import { Content } from "@tiptap/react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Button from "../../components/Button";
 import ChallengeHeader from "../../components/ChallengeHeader";
