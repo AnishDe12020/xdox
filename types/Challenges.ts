@@ -6,7 +6,6 @@ interface Challenge {
   topic: string;
   updated_at: string;
   start_date: string;
-  days_skipped: number;
   __typename: string;
 }
 
@@ -23,7 +22,6 @@ interface CreateChallengeInput {
   isPublic: boolean;
   topic: string;
   start_date: string;
-  days_skipped: number;
 }
 
 interface ChallengeState {

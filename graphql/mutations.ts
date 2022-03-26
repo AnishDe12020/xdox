@@ -10,7 +10,6 @@ const CREATE_CHALLENGE = gql`
       topic
       updated_at
       user_id
-      days_skipped
       start_date
     }
   }

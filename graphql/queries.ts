@@ -10,7 +10,6 @@ const GET_CHALLENGES = gql`
       topic
       updated_at
       start_date
-      days_skipped
     }
   }
 `;
@@ -24,7 +23,6 @@ const GET_CHALLENGE = gql`
       topic
       updated_at
       start_date
-      days_skipped
     }
   }
 `;

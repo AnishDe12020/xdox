@@ -77,7 +77,6 @@ const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
             start_date:
               DateTime.fromJSDate(new Date(data.start_date)).toISODate() ||
               DateTime.now().toISODate(),
-            days_skipped: 0,
           },
         },
       });
