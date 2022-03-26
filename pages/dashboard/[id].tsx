@@ -109,7 +109,12 @@ const ChallengeDashboardPage: NextPage = () => {
   console.log(progressData);
 
   const handleAddProgressSubmit = async () => {
+    if (!content) {
+      toast.error("Please add some content");
+      return;
+    }
     setIsSubmitting(true);
+
     if (toUpdate) {
       await updateProgress({
         variables: {
