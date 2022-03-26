@@ -1,9 +1,12 @@
-import { UserButton } from "@clerk/nextjs";
+import { SignedIn } from "@clerk/nextjs";
+import UserPopover from "./UserPopover";
 
 const Header = (): JSX.Element => {
   return (
     <nav className="mx-8 flex justify-end md:mx-16 lg:mx-24">
-      <UserButton />
+      <SignedIn>
+        <UserPopover />
+      </SignedIn>
       <style global jsx>
         {`
           .cl-accounts-manager-button:hover {
