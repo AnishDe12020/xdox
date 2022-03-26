@@ -1,4 +1,5 @@
-import { SignedIn } from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
+import Link from "next/link";
 import UserPopover from "./UserPopover";
 
 const Header = (): JSX.Element => {
@@ -7,17 +8,18 @@ const Header = (): JSX.Element => {
       <SignedIn>
         <UserPopover />
       </SignedIn>
-      <style global jsx>
-        {`
-          .cl-accounts-manager-button:hover {
-            background-color: #111827 !important;
-          }
-
-          .cl-component {
-            box-shadow: 0px 12px 48px 4px rgba(12, 6, 28, 0.8) !important;
-          }
-        `}
-      </style>
+      <SignedOut>
+        <Link href="/sign-up" passHref>
+          <a className="rounded-lg bg-blue-600 px-4 py-2 transition duration-200 hover:opacity-60">
+            Sign Up
+          </a>
+        </Link>
+        <Link href="/sign-in" passHref>
+          <a className="px-4 py-2 transition duration-200 hover:opacity-60">
+            Sign In
+          </a>
+        </Link>
+      </SignedOut>
     </nav>
   );
 };
