@@ -87,6 +87,7 @@ const Modal = ({
               "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
               "focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-60"
             )}
+            forceMount
           >
             <DialogPrimitive.Title className="mb-4 text-lg font-semibold text-accent">
               {title}
