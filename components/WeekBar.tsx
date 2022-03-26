@@ -20,7 +20,7 @@ const WeekBar = (): JSX.Element => {
           <ChevronRightIcon className="h-5 w-5" onClick={() => setDayTo(7)} />
         </Button>
       </div>
-      <div className="flex space-x-2 overflow-x-auto md:space-x-2">
+      <div className="flex items-center justify-center space-x-1 overflow-x-auto md:justify-start md:space-x-2 lg:space-x-4">
         {getCurrentWeek().map(dateOfWeek => (
           <DayButton
             date={dateOfWeek}
