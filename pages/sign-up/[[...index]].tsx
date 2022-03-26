@@ -4,7 +4,7 @@ import AuthLayout from "../../layouts/AuthLayout";
 
 const SignUpPage: NextPage = () => {
   return (
-    <AuthLayout title="Sign Up">
+    <AuthLayout>
       <SignUp routing="path" path="/sign-up" />
     </AuthLayout>
   );
