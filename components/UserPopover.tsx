@@ -1,11 +1,13 @@
-import { useUser } from "@clerk/nextjs";
+import { useUser, useClerk } from "@clerk/nextjs";
 import { Transition } from "@headlessui/react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
+import Link from "next/link";
 import { Fragment, useState } from "react";
 import Button from "./Button";
 
 const UserPopover = (): JSX.Element => {
   const user = useUser();
+  const { signOut } = useClerk();
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
@@ -30,7 +32,7 @@ const UserPopover = (): JSX.Element => {
           leaveTo="opacity-80 scale-80 -translate-y-4"
         >
           <PopoverPrimitive.Content
-            className="my-8 flex flex-col items-center justify-center rounded-lg bg-secondary p-4 shadow-lg"
+            className="my-8 flex flex-col items-center justify-center space-y-4 rounded-lg border-2 border-gray-700 bg-primary p-4 shadow-md shadow-secondary"
             forceMount
           >
             <img
@@ -38,7 +40,21 @@ const UserPopover = (): JSX.Element => {
               className="h-16 w-16 rounded-full"
               alt={user.username as string}
             />
-            <div className="text-center text-accent">{user.username}</div>
+
+            <div className="text-center text-lg font-bold text-accent">
+              {user.username}
+            </div>
+            <Link href="/proifle" passHref>
+              <a className="rounded-lg bg-secondary px-4 py-2 transition duration-200 hover:opacity-60">
+                Edit Profile
+              </a>
+            </Link>
+            <Button
+              className="w-full bg-red-600 text-accent"
+              onClick={() => signOut()}
+            >
+              Sign Out
+            </Button>
           </PopoverPrimitive.Content>
         </Transition.Child>
       </Transition.Root>
