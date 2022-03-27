@@ -19,7 +19,6 @@ const ADD_PROGRESS = gql`
   mutation ($progress: progress_insert_input!) {
     insert_progress_one(object: $progress) {
       updated_at
-      isSkipDay
       created_at
       content
       date
@@ -33,7 +32,6 @@ const UPDATE_PROGRESS = gql`
   mutation ($id: String!, $progress: progress_set_input!) {
     update_progress_by_pk(pk_columns: { id: $id }, _set: $progress) {
       updated_at
-      isSkipDay
       created_at
       content
       date

@@ -5,7 +5,6 @@ interface Progress {
   id?: string;
   updated_at: string;
   content: Content;
-  isSkipDay: boolean;
   date: string;
   forDay: number;
   __typename: string;
@@ -17,14 +16,11 @@ interface ProgressData {
 
 interface AddProgressInput {
   content: Content;
-  isSkipDay: boolean;
   date: string;
   challenge_id: string;
   forDay?: number;
 }
 
-type UpdateProgressInput = Partial<
-  Pick<AddProgressInput, "content" | "isSkipDay">
->;
+type UpdateProgressInput = Partial<Pick<AddProgressInput, "content">>;
 
 export type { Progress, ProgressData, AddProgressInput, UpdateProgressInput };

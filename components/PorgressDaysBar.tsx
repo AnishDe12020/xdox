@@ -69,11 +69,6 @@ const ProgressDaysBar = ({
         <Button
           className="bg-blue-600 text-accent"
           onClick={() => {
-            console.log(
-              "ee",
-              progressesData.progress[progressesData.progress.length - 1]
-                .forDay + 1
-            );
             router.push(
               `/dashboard/${challengeId}/${progressesData.progress.length + 1}`
             );

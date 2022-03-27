@@ -40,7 +40,6 @@ const GET_PROGRESS = gql`
     ) {
       id
       content
-      isSkipDay
       created_at
       updated_at
       date
@@ -60,7 +59,6 @@ const GET_PROGRESSES = gql`
       }
     ) {
       id
-      isSkipDay
       date
       forDay
     }

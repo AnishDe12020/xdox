@@ -42,7 +42,6 @@ const ChallengeDashboardPage: NextPage = () => {
 
   const [toUpdate, setToUpdate] = useState<boolean>(false);
   const [content, setContent] = useState<Content>();
-  const [isSkipDay, setIsSkipDay] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   let {
@@ -69,7 +68,6 @@ const ChallengeDashboardPage: NextPage = () => {
     }
     setToUpdate(progressData?.progress?.length > 0);
     setContent(progressData?.progress?.[0]?.content);
-    setIsSkipDay(progressData?.progress?.[0]?.isSkipDay);
   }, [progressData]);
 
   const addProgressUpdateCache = (
@@ -122,7 +120,6 @@ const ChallengeDashboardPage: NextPage = () => {
         variables: {
           progress: {
             content: content,
-            isSkipDay: isSkipDay ?? false,
           },
           id: progressData?.progress[0]?.id as string,
         },
@@ -139,10 +136,9 @@ const ChallengeDashboardPage: NextPage = () => {
         variables: {
           progress: {
             content: content as Content,
-            isSkipDay: isSkipDay ?? false,
             challenge_id: challengeId as string,
             date: date,
-            forDay: !isSkipDay ? day : undefined,
+            forDay: day
           },
         },
       });
@@ -160,7 +156,6 @@ const ChallengeDashboardPage: NextPage = () => {
     setIsSubmitting(false);
   };
 
-  console.log("g", progressData?.progress[0]?.isSkipDay ?? false);
 
   return (
     <DashboardLayout>
@@ -175,18 +170,8 @@ const ChallengeDashboardPage: NextPage = () => {
         {progressData?.progress ? (
           <div className="mt-16 flex flex-col space-y-4">
             <Editor content={content} onChange={setContent} />
-            <label
-              htmlFor="isSkipDay"
-              className="relative w-fit pr-4 text-sm font-semibold"
-            >
-              Skipping this day?
-            </label>
-            <Switch
-              checked={isSkipDay}
-              onChange={() => setIsSkipDay(!isSkipDay)}
-              id="isSkipDay"
-            />
-            <Button
+            
+                       <Button
               type="submit"
               className="w-fit"
               loading={isSubmitting}
