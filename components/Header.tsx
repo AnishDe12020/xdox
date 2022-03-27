@@ -11,21 +11,23 @@ const Header = (): JSX.Element => {
           <Logo className="h-16 w-16 md:ml-4" />
         </a>
       </Link>
-      <div className="flex flex-row items-center space-x-4">
+      <div className="flex flex-row items-center">
         <SignedIn>
           <UserPopover />
         </SignedIn>
         <SignedOut>
-          <Link href="/sign-in" passHref>
-            <a className="px-4 py-2 transition duration-200 hover:opacity-60">
-              Sign In
-            </a>
-          </Link>
-          <Link href="/sign-up" passHref>
-            <a className="h-fit rounded-lg bg-blue-600 px-4 py-2 transition duration-200 hover:opacity-60">
-              Sign Up
-            </a>
-          </Link>
+          <div className="flex flex-row items-center space-x-4">
+            <Link href="/sign-in" passHref>
+              <a className="px-4 py-2 transition duration-200 hover:opacity-60">
+                Sign In
+              </a>
+            </Link>
+            <Link href="/sign-up" passHref>
+              <a className="h-fit rounded-lg bg-blue-600 px-4 py-2 transition duration-200 hover:opacity-60">
+                Sign Up
+              </a>
+            </Link>
+          </div>
         </SignedOut>
       </div>
     </nav>
