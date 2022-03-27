@@ -15,7 +15,7 @@ import ChallengeHeader from "../../../components/ChallengeHeader";
 import Challenges from "../../../components/Challenges";
 import Editor from "../../../components/Editor";
 import { ADD_PROGRESS, UPDATE_PROGRESS } from "../../../graphql/mutations";
-import { GET_PROGRESS, GET_PROGRESSES } from "../../../graphql/queries";
+import { GET_PROGRESS } from "../../../graphql/queries";
 import useDate from "../../../hooks/useDate";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import type {
