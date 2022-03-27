@@ -6,10 +6,16 @@ import Button from "./Button";
 interface IDayButtonProps {
   active?: boolean;
   date: string;
+  forDay: number;
   onClick: (date: string) => void;
 }
 
-function DayButton({ active, date, onClick }: IDayButtonProps): JSX.Element {
+function DayButton({
+  active,
+  date,
+  onClick,
+  forDay,
+}: IDayButtonProps): JSX.Element {
   const { formatDate } = useDate();
 
   return (
@@ -27,7 +33,7 @@ function DayButton({ active, date, onClick }: IDayButtonProps): JSX.Element {
           active && "text-blue-500 !opacity-100"
         )}
       >
-        {formatDate(date, "EEE")}
+        {formatDate(date, "dd")} {formatDate(date, "LLL")}
       </span>
       <span
         className={classNames(
@@ -35,7 +41,7 @@ function DayButton({ active, date, onClick }: IDayButtonProps): JSX.Element {
           active && "bg-blue-700"
         )}
       >
-        {formatDate(date, "d")}
+        {forDay}
       </span>
     </Button>
   );
