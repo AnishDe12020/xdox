@@ -182,7 +182,10 @@ const ChallengeDashboardPage: NextPage = () => {
       <div className="flex w-full flex-col md:mx-12 lg:mx-16">
         <ChallengeHeader id={challengeId as string} />
         {progressesData?.progress && (
-          <ProgressDaysBar progresses={progressesData.progress} />
+          <ProgressDaysBar
+            progresses={progressesData.progress}
+            challengeId={challengeId}
+          />
         )}
         {progressData?.progress ? (
           <div className="mt-16 flex flex-col space-y-4">
