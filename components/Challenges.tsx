@@ -36,7 +36,7 @@ const Challenges = ({
   }
 
   const handleChallengeClick = (challenge: Challenge) => {
-    router.push(`/dashboard/${challenge.id}`);
+    router.push(`/dashboard/${challenge.id}/1`);
   };
 
   return (
