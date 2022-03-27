@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useUser } from "@clerk/nextjs";
+import { DateTime } from "luxon";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { GET_PROGRESSES } from "../graphql/queries";
@@ -45,13 +46,7 @@ const ProgressDaysBar = ({
             date={progress.date}
             forDay={progress.forDay}
             onClick={() =>
-              router.push(
-                `/dashboard/${challengeId}/${progress.forDay}`,
-                undefined,
-                {
-                  shallow: true,
-                }
-              )
+              router.push(`/dashboard/${challengeId}/${progress.forDay}`)
             }
           />
         ))
@@ -66,16 +61,15 @@ const ProgressDaysBar = ({
         </>
       )}
       {progressesData?.progress && (
-        <Button
-          className="bg-blue-600 text-accent"
-          onClick={() => {
+        <DayButton
+          forDay={progressesData.progress.length + 1}
+          date={DateTime.now().toISODate()}
+          onClick={() =>
             router.push(
               `/dashboard/${challengeId}/${progressesData.progress.length + 1}`
-            );
-          }}
-        >
-          Add for today
-        </Button>
+            )
+          }
+        />
       )}
     </div>
   );
