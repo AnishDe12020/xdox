@@ -1,54 +1,62 @@
+import { useQuery } from "@apollo/client";
+import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/router";
-import { Progress } from "../types/Progress";
-import Button from "./Button";
+import toast from "react-hot-toast";
+import { GET_PROGRESSES } from "../graphql/queries";
 import DayButton from "./DayButton";
 
 interface IProgressDaysBarProps {
-  progresses: Progress[];
   challengeId: string;
 }
 
 const ProgressDaysBar = ({
-  progresses,
   challengeId,
 }: IProgressDaysBarProps): JSX.Element => {
-  console.log("progresses", progresses);
   const router = useRouter();
-  progresses = progresses.filter(progress => progress.isSkipDay === false);
+  const user = useUser();
+
+  let {
+    data: progressesData,
+    error: progressesError,
+    previousData,
+    loading,
+  } = useQuery(GET_PROGRESSES, {
+    variables: {
+      challenge_id: challengeId,
+      user_id: user.id,
+    },
+  });
+
+  if (progressesError) {
+    toast.error("Something went wrong!");
+  }
+
+  if (loading) {
+    progressesData = previousData;
+  }
+
   return (
     <div className="flex items-center justify-center space-x-1 overflow-x-auto md:justify-start md:space-x-2 lg:space-x-4">
-      {progresses.map((progress, index) => (
-        <DayButton
-          key={index}
-          date={progress.date}
-          forDay={progress.forDay}
-          onClick={() =>
-            router.push(
-              `/dashboard/${challengeId}/${progress.forDay}`,
-              undefined,
-              {
-                shallow: true,
-              }
-            )
-          }
-        />
-      ))}
-      <Button
-        className="bg-blue-600 text-accent"
-        onClick={() =>
-          router.push(
-            `/dashboard/${challengeId}/${
-              progresses[progresses.length - 1].forDay + 1
-            }`,
-            undefined,
-            {
-              shallow: true,
+      {progressesData?.progress ? (
+        progressesData?.progress.map((progress, index) => (
+          <DayButton
+            key={index}
+            date={progress.date}
+            forDay={progress.forDay}
+            onClick={() =>
+              router.push(
+                `/dashboard/${challengeId}/${progress.forDay}`,
+                undefined,
+                {
+                  shallow: true,
+                }
+              )
             }
-          )
-        }
-      >
-        Add for today
-      </Button>
+          />
+        ))
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
