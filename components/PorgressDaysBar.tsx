@@ -48,6 +48,7 @@ const ProgressDaysBar = ({
             onClick={() =>
               router.push(`/dashboard/${challengeId}/${progress.forDay}`)
             }
+            active={router.query.day == progress.forDay}
           />
         ))
       ) : (
@@ -69,6 +70,8 @@ const ProgressDaysBar = ({
               `/dashboard/${challengeId}/${progressesData.progress.length + 1}`
             )
           }
+                      active={router.query.day == progressesData.progress.length + 1}
+
         />
       )}
     </div>
