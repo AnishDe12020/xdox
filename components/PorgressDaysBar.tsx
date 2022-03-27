@@ -4,7 +4,7 @@ import { DateTime } from "luxon";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { GET_PROGRESSES } from "../graphql/queries";
-import Button from "./Button";
+import { ProgressDaysBarData } from "../types/Progress";
 import DayButton from "./DayButton";
 
 interface IProgressDaysBarProps {
@@ -22,7 +22,7 @@ const ProgressDaysBar = ({
     error: progressesError,
     previousData,
     loading,
-  } = useQuery(GET_PROGRESSES, {
+  } = useQuery<ProgressDaysBarData>(GET_PROGRESSES, {
     variables: {
       challenge_id: challengeId,
       user_id: user.id,
@@ -48,7 +48,7 @@ const ProgressDaysBar = ({
             onClick={() =>
               router.push(`/dashboard/${challengeId}/${progress.forDay}`)
             }
-            active={router.query.day == progress.forDay}
+            active={(router.query.day as unknown as number) == progress.forDay}
           />
         ))
       ) : (
@@ -67,11 +67,13 @@ const ProgressDaysBar = ({
           date={DateTime.now().toISODate()}
           onClick={() =>
             router.push(
-              `/dashboard/${challengeId}/${progressesData.progress.length + 1}`
+              `/dashboard/${challengeId}/${progressesData!.progress.length + 1}`
             )
           }
-                      active={router.query.day == progressesData.progress.length + 1}
-
+          active={
+            (router.query.day as unknown as number) ==
+            progressesData.progress.length + 1
+          }
         />
       )}
     </div>

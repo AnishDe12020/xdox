@@ -21,6 +21,24 @@ interface AddProgressInput {
   forDay?: number;
 }
 
+interface ProgressDaysBarProgress {
+  id: string;
+  date: string;
+  forDay: number;
+  __typename: string;
+}
+
+interface ProgressDaysBarData {
+  progress: ProgressDaysBarProgress[];
+}
+
 type UpdateProgressInput = Partial<Pick<AddProgressInput, "content">>;
 
-export type { Progress, ProgressData, AddProgressInput, UpdateProgressInput };
+export type {
+  Progress,
+  ProgressData,
+  AddProgressInput,
+  UpdateProgressInput,
+  ProgressDaysBarProgress,
+  ProgressDaysBarData,
+};

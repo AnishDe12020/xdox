@@ -14,7 +14,6 @@ import Button from "../../../components/Button";
 import ChallengeHeader from "../../../components/ChallengeHeader";
 import Challenges from "../../../components/Challenges";
 import Editor from "../../../components/Editor";
-import WeekBar from "../../../components/WeekBar";
 import { ADD_PROGRESS, UPDATE_PROGRESS } from "../../../graphql/mutations";
 import { GET_PROGRESS, GET_PROGRESSES } from "../../../graphql/queries";
 import useDate from "../../../hooks/useDate";
@@ -25,7 +24,6 @@ import type {
   ProgressData,
   UpdateProgressInput,
 } from "../../../types/Progress";
-import Switch from "../../../components/Switch";
 import ProgressDaysBar from "../../../components/PorgressDaysBar";
 
 const ChallengeDashboardPage: NextPage = () => {
@@ -138,7 +136,7 @@ const ChallengeDashboardPage: NextPage = () => {
             content: content as Content,
             challenge_id: challengeId as string,
             date: date,
-            forDay: day
+            forDay: day,
           },
         },
       });
@@ -156,7 +154,6 @@ const ChallengeDashboardPage: NextPage = () => {
     setIsSubmitting(false);
   };
 
-
   return (
     <DashboardLayout>
       <Challenges
@@ -170,8 +167,8 @@ const ChallengeDashboardPage: NextPage = () => {
         {progressData?.progress ? (
           <div className="mt-16 flex flex-col space-y-4">
             <Editor content={content} onChange={setContent} />
-            
-                       <Button
+
+            <Button
               type="submit"
               className="w-fit"
               loading={isSubmitting}
