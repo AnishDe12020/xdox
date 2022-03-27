@@ -152,7 +152,7 @@ const ChallengeDashboardPage: NextPage = () => {
             isSkipDay: isSkipDay ?? false,
             challenge_id: challengeId as string,
             date: date,
-            forDay: day,
+            forDay: !isSkipDay ? day : undefined,
           },
         },
       });

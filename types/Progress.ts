@@ -20,7 +20,7 @@ interface AddProgressInput {
   isSkipDay: boolean;
   date: string;
   challenge_id: string;
-  forDay: number;
+  forDay?: number;
 }
 
 type UpdateProgressInput = Partial<
