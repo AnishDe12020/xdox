@@ -23,10 +23,32 @@ const ProgressDaysBar = ({
           date={progress.date}
           forDay={progress.forDay}
           onClick={() =>
-            router.push(`/dashboard/${challengeId}/${progress.forDay}`)
+            router.push(
+              `/dashboard/${challengeId}/${progress.forDay}`,
+              undefined,
+              {
+                shallow: true,
+              }
+            )
           }
         />
       ))}
+      <Button
+        className="bg-blue-600 text-accent"
+        onClick={() =>
+          router.push(
+            `/dashboard/${challengeId}/${
+              progresses[progresses.length - 1].forDay + 1
+            }`,
+            undefined,
+            {
+              shallow: true,
+            }
+          )
+        }
+      >
+        Add for today
+      </Button>
     </div>
   );
 };
