@@ -1,10 +1,12 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
+import { Logo } from "./Icons";
 import UserPopover from "./UserPopover";
 
 const Header = (): JSX.Element => {
   return (
-    <nav className="flex justify-end px-8 py-6 md:px-16 lg:px-24">
+    <nav className="flex justify-between px-8 py-6 md:px-16 lg:px-24">
+      <Logo className="h-16 w-16 md:ml-4" />
       <SignedIn>
         <UserPopover />
       </SignedIn>
