@@ -65,4 +65,25 @@ const GET_PROGRESSES = gql`
   }
 `;
 
-export { GET_CHALLENGES, GET_CHALLENGE, GET_PROGRESS, GET_PROGRESSES };
+const GET_USER_DATA = gql`
+  query GetUserData($username: String!) {
+    users(where: { username: { _eq: $username } }) {
+      bio
+      first_name
+      github_username
+      last_name
+      profile_image_url
+      twitter_username
+      username
+      website_url
+    }
+  }
+`;
+
+export {
+  GET_CHALLENGES,
+  GET_CHALLENGE,
+  GET_PROGRESS,
+  GET_PROGRESSES,
+  GET_USER_DATA,
+};
