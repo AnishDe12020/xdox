@@ -3,6 +3,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { GET_PROGRESSES } from "../graphql/queries";
+import Button from "./Button";
 import DayButton from "./DayButton";
 
 interface IProgressDaysBarProps {
@@ -55,7 +56,31 @@ const ProgressDaysBar = ({
           />
         ))
       ) : (
-        <p>Loading...</p>
+        <>
+          <div className="h-10 w-10 animate-pulse rounded-full bg-secondary" />
+          <div className="h-10 w-10 animate-pulse rounded-full bg-secondary" />
+          <div className="h-10 w-10 animate-pulse rounded-full bg-secondary" />
+          <div className="h-10 w-10 animate-pulse rounded-full bg-secondary" />
+          <div className="h-10 w-10 animate-pulse rounded-full bg-secondary" />
+          <div className="h-12 w-32 animate-pulse rounded-lg bg-secondary" />
+        </>
+      )}
+      {progressesData?.progress && (
+        <Button
+          className="bg-blue-600 text-accent"
+          onClick={() => {
+            console.log(
+              "ee",
+              progressesData.progress[progressesData.progress.length - 1]
+                .forDay + 1
+            );
+            router.push(
+              `/dashboard/${challengeId}/${progressesData.progress.length + 1}`
+            );
+          }}
+        >
+          Add for today
+        </Button>
       )}
     </div>
   );
