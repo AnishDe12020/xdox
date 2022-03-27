@@ -6,7 +6,11 @@ import UserPopover from "./UserPopover";
 const Header = (): JSX.Element => {
   return (
     <nav className="flex justify-between px-8 py-6 md:px-16 lg:px-24">
-      <Logo className="h-16 w-16 md:ml-4" />
+      <Link href="/" passHref>
+        <a className="transition duration-200 hover:opacity-60">
+          <Logo className="h-16 w-16 md:ml-4" />
+        </a>
+      </Link>
       <SignedIn>
         <UserPopover />
       </SignedIn>
