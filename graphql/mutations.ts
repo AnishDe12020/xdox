@@ -24,6 +24,7 @@ const ADD_PROGRESS = gql`
       content
       date
       id
+      forDay
     }
   }
 `;
@@ -37,6 +38,7 @@ const UPDATE_PROGRESS = gql`
       content
       date
       id
+      forDay
     }
   }
 `;

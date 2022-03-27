@@ -28,13 +28,13 @@ const GET_CHALLENGE = gql`
 `;
 
 const GET_PROGRESS = gql`
-  query getProgress($user_id: String!, $challenge_id: String!, $date: String!) {
+  query getProgress($user_id: String!, $challenge_id: String!, $forDay: Int!) {
     progress(
       where: {
         _and: {
           user_id: { _eq: $user_id }
           challenge_id: { _eq: $challenge_id }
-          date: { _eq: $date }
+          forDay: { _eq: $forDay }
         }
       }
     ) {
@@ -44,8 +44,27 @@ const GET_PROGRESS = gql`
       created_at
       updated_at
       date
+      forDay
     }
   }
 `;
 
-export { GET_CHALLENGES, GET_CHALLENGE, GET_PROGRESS };
+const GET_PROGRESSES = gql`
+  query getProgresses($user_id: String!, $challenge_id: String!) {
+    progress(
+      where: {
+        _and: {
+          user_id: { _eq: $user_id }
+          challenge_id: { _eq: $challenge_id }
+        }
+      }
+    ) {
+      id
+      isSkipDay
+      date
+      forDay
+    }
+  }
+`;
+
+export { GET_CHALLENGES, GET_CHALLENGE, GET_PROGRESS, GET_PROGRESSES };

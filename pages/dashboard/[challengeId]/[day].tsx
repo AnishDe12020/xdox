@@ -10,27 +10,29 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Button from "../../components/Button";
-import ChallengeHeader from "../../components/ChallengeHeader";
-import Challenges from "../../components/Challenges";
-import Editor from "../../components/Editor";
-import WeekBar from "../../components/WeekBar";
-import { ADD_PROGRESS, UPDATE_PROGRESS } from "../../graphql/mutations";
-import { GET_PROGRESS } from "../../graphql/queries";
-import useDate from "../../hooks/useDate";
-import DashboardLayout from "../../layouts/DashboardLayout";
+import Button from "../../../components/Button";
+import ChallengeHeader from "../../../components/ChallengeHeader";
+import Challenges from "../../../components/Challenges";
+import Editor from "../../../components/Editor";
+import WeekBar from "../../../components/WeekBar";
+import { ADD_PROGRESS, UPDATE_PROGRESS } from "../../../graphql/mutations";
+import { GET_PROGRESS, GET_PROGRESSES } from "../../../graphql/queries";
+import useDate from "../../../hooks/useDate";
+import DashboardLayout from "../../../layouts/DashboardLayout";
 import type {
   AddProgressInput,
   Progress,
   ProgressData,
   UpdateProgressInput,
-} from "../../types/Progress";
-import Switch from "../../components/Switch";
+} from "../../../types/Progress";
+import Switch from "../../../components/Switch";
+import ProgressDaysBar from "../../../components/PorgressDaysBar";
 
 const ChallengeDashboardPage: NextPage = () => {
   const router = useRouter();
 
-  const challengeId = router.query.id as string;
+  const challengeId = router.query.challengeId as string;
+  const day = router.query.day as unknown as number;
 
   console.log(challengeId);
 
@@ -49,7 +51,7 @@ const ChallengeDashboardPage: NextPage = () => {
     loading,
     previousData,
   } = useQuery<ProgressData>(GET_PROGRESS, {
-    variables: { challenge_id: challengeId, user_id: user.id, date: date },
+    variables: { challenge_id: challengeId, user_id: user.id, forDay: day },
   });
 
   if (loading) {
@@ -60,6 +62,16 @@ const ChallengeDashboardPage: NextPage = () => {
     console.error(error);
     toast.error("Something went wrong!");
   }
+
+  const { data: progressesData, error: progressesError } = useQuery(
+    GET_PROGRESSES,
+    {
+      variables: {
+        challenge_id: challengeId,
+        user_id: user.id,
+      },
+    }
+  );
 
   useEffect(() => {
     if (!progressData) {
@@ -140,6 +152,7 @@ const ChallengeDashboardPage: NextPage = () => {
             isSkipDay: isSkipDay ?? false,
             challenge_id: challengeId as string,
             date: date,
+            forDay: day,
           },
         },
       });
@@ -168,7 +181,9 @@ const ChallengeDashboardPage: NextPage = () => {
       />
       <div className="flex w-full flex-col md:mx-12 lg:mx-16">
         <ChallengeHeader id={challengeId as string} />
-        <WeekBar />
+        {progressesData?.progress && (
+          <ProgressDaysBar progresses={progressesData.progress} />
+        )}
         {progressData?.progress ? (
           <div className="mt-16 flex flex-col space-y-4">
             <Editor content={content} onChange={setContent} />

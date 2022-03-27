@@ -7,6 +7,7 @@ interface Progress {
   content: Content;
   isSkipDay: boolean;
   date: string;
+  forDay: number;
   __typename: string;
 }
 
@@ -19,6 +20,7 @@ interface AddProgressInput {
   isSkipDay: boolean;
   date: string;
   challenge_id: string;
+  forDay: number;
 }
 
 type UpdateProgressInput = Partial<
