@@ -74,6 +74,15 @@ export const getServerSideProps: GetServerSideProps = async context => {
     }
   );
 
+  if (!userData || userData?.data?.users?.length <= 0) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/404",
+      },
+    };
+  }
+
   return {
     props: {
       userData: userData.data.users[0],
