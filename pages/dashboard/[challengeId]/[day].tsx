@@ -67,7 +67,7 @@ const ChallengeDashboardPage: NextPage = () => {
 
     cache.writeQuery({
       query: GET_PROGRESS,
-      variables: { challenge_id: challengeId, user_id: user.id, date: date },
+      variables: { challenge_id: challengeId, user_id: user.id, forDay: day },
       data: { progress: [newProgress] },
     });
   };
@@ -80,7 +80,7 @@ const ChallengeDashboardPage: NextPage = () => {
 
     cache.writeQuery({
       query: GET_PROGRESS,
-      variables: { challenge_id: challengeId, user_id: user.id, date: date },
+      variables: { challenge_id: challengeId, user_id: user.id, forDay: day },
       data: { progress: [newProgress] },
     });
   };
