@@ -28,13 +28,15 @@ interface IUserPageProps {
 const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
   console.log(userData);
 
-  let { data: challengesData, error: challengesError, loading: challegesLoading, previousData: challengesPreviousData } = useQuery(
-    GET_CHALLENGES,
-    { variables: { userId: userData.id } }
-  );
+  let {
+    data: challengesData,
+    error: challengesError,
+    loading: challegesLoading,
+    previousData: challengesPreviousData,
+  } = useQuery(GET_CHALLENGES, { variables: { userId: userData.id } });
 
   if (challegesLoading) {
-  challengesData = challengesPreviousData
+    challengesData = challengesPreviousData;
   }
 
   if (challengesError) {
@@ -50,18 +52,9 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
 
   const [content, setContent] = useState<Content>();
 
-  let {
-    data: progressData,
-    error,
-    loading,
-    previousData,
-  } = useQuery<ProgressData>(GET_PROGRESS, {
+  const { data: progressData, error } = useQuery<ProgressData>(GET_PROGRESS, {
     variables: { challenge_id: challengeId, user_id: userData.id, forDay: day },
   });
-
-  if (loading) {
-    progressData = previousData;
-  }
 
   if (error) {
     console.error(error);
@@ -92,13 +85,21 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
         />
         <div className="flex w-full flex-col md:mx-12">
           <ChallengeHeader id={challengeId as string} />
-          <ProgressDaysBar challengeId={challengeId} username={router.query.username as string} readOnly />
+          <ProgressDaysBar
+            challengeId={challengeId}
+            username={router.query.username as string}
+            readOnly
+          />
           {progressData?.progress ? (
-            <Editor className="mt-16" content={content} onChange={setContent} />
+            <Editor
+              className="mt-16"
+              content={content}
+              onChange={setContent}
+              readOnly
+            />
           ) : (
             <div className="flex flex-col space-y-8">
               <div className="mt-16 h-32 w-full animate-pulse rounded-lg bg-secondary" />
-              <div className="h-8 w-12 animate-pulse rounded-full bg-secondary" />
             </div>
           )}
         </div>

@@ -16,7 +16,7 @@ interface IProgressDaysBarProps {
 const ProgressDaysBar = ({
   challengeId,
   username,
-  readOnly
+  readOnly,
 }: IProgressDaysBarProps): JSX.Element => {
   const router = useRouter();
   const user = useUser();
@@ -50,7 +50,11 @@ const ProgressDaysBar = ({
             date={progress.date}
             forDay={progress.forDay}
             onClick={() =>
-          router.push(`/${username ?? "dashboard"}/${challengeId}/${progress.forDay}`, undefined, {shallow: true})
+              router.push(
+                `/${username ?? "dashboard"}/${challengeId}/${progress.forDay}`,
+                undefined,
+                { shallow: true }
+              )
             }
             active={(router.query.day as unknown as number) == progress.forDay}
           />
@@ -62,7 +66,6 @@ const ProgressDaysBar = ({
           <div className="h-10 w-10 animate-pulse rounded-full bg-secondary" />
           <div className="h-10 w-10 animate-pulse rounded-full bg-secondary" />
           <div className="h-10 w-10 animate-pulse rounded-full bg-secondary" />
-          <div className="h-12 w-32 animate-pulse rounded-lg bg-secondary" />
         </>
       )}
       {!readOnly && progressesData?.progress && (

@@ -24,10 +24,11 @@ interface IEditorProps {
   onChange: (content: Content) => void;
   className?: string;
   ref: Ref<PureEditorContent>;
+  readOnly?: boolean;
 }
 
 const Editor = forwardRef<PureEditorContent, IEditorProps>(
-  ({ content, onChange, className }: IEditorProps, ref) => {
+  ({ content, onChange, className, readOnly }: IEditorProps, ref) => {
     const editor = useEditor({
       extensions: [
         StarterKit,
@@ -43,8 +44,9 @@ const Editor = forwardRef<PureEditorContent, IEditorProps>(
       ],
       editorProps: {
         attributes: {
-          class:
-            "prose prose-sm sm:prose lg:prose-lg px-6 pt-4 py-6 focus:outline-none text-accent prose-default bg-secondary rounded-b-lg w-full !max-w-full",
+          class: `prose prose-sm sm:prose lg:prose-lg px-6 pt-4 py-6 focus:outline-none text-accent prose-default bg-secondary ${
+            readOnly ? "rounded-lg" : "rounded-b-lg"
+          } w-full !max-w-full`,
         },
       },
       onUpdate: ({ editor }) => {
@@ -75,9 +77,14 @@ const Editor = forwardRef<PureEditorContent, IEditorProps>(
 
     return (
       <div className={classNames("flex flex-col justify-center", className)}>
-        {editor && <MenuBar editor={editor} />}
-        {editor && <CustomBubbleMenu editor={editor} />}
-        <EditorContent content="test" editor={editor} ref={ref} />
+        {!readOnly && editor && <MenuBar editor={editor} />}
+        {!readOnly && editor && <CustomBubbleMenu editor={editor} />}
+        <EditorContent
+          content="test"
+          editor={editor}
+          ref={ref}
+          readOnly={readOnly}
+        />
       </div>
     );
   }
