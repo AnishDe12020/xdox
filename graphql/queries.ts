@@ -65,7 +65,7 @@ const GET_PROGRESSES = gql`
   }
 `;
 
-const GET_USER_DATA = gql`
+const GET_USER_DATA = `
   query GetUserData($username: String!) {
     users(where: { username: { _eq: $username } }) {
       bio

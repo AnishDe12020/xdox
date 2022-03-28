@@ -1,59 +1,41 @@
 import { useQuery } from "@apollo/client";
 import { GlobeIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
-import { NextPage } from "next";
+import axios from "axios";
+import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import Challenges from "../components/Challenges";
 import GitHubLogo from "../components/Icons/GitHub";
 import TwitterLogo from "../components/Icons/Twitter";
 import { GET_USER_DATA } from "../graphql/queries";
 
-const UserPage: NextPage = () => {
+const HASURA_GRAPHQL_API = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_API;
+
+const UserPage: NextPage = ({ userData }) => {
   const router = useRouter();
   const username = (router.query.username as string)
     .replace("@", "")
     .toLowerCase();
 
-  let {
-    data: userData,
-    error: userDataError,
-    loading: userDataLoading,
-    previousData: userPreviousData,
-  } = useQuery(GET_USER_DATA, {
-    variables: {
-      username,
-    },
-  });
-
-  if (userDataLoading) {
-    userData = userPreviousData;
-  }
-
-  if (userDataError) {
-    console.error(userDataError);
-    toast.error("Something went wrong!");
-  }
-
   console.log(userData);
 
   return (
     <div className="mx-8 flex flex-col items-center space-y-4 md:mx-16 lg:mx-32">
-      {userData?.users ? (
+      {userData ? (
         <>
           <img
-            src={userData.users[0].profile_image_url}
+            src={userData.profile_image_url}
             className="h-32 w-32 rounded-full"
-            alt={userData.users[0].username}
+            alt={userData.username}
           />
           <p className="text-xl font-semibold md:text-2xl lg:text-3xl">
-            {userData.users[0].first_name} {userData.users[0].last_name}
+            {userData.first_name} {userData.last_name}
           </p>
-          <p className="text-md md:text-lg lg:text-xl">
-            @{userData.users[0].username}
-          </p>
-          <p>{userData.users[0].bio}</p>
+          <p className="text-md md:text-lg lg:text-xl">@{userData.username}</p>
+          <p>{userData.bio}</p>
           <div className="mt-4 flex flex-row space-x-4">
             <a
-              href={`https://twitter.com/${userData.users[0].twitter_username}`}
+              href={`https://twitter.com/${userData.twitter_username}`}
               className="transition duration-200 hover:opacity-60"
               target="_blank"
               rel="noopener noreferrer"
@@ -61,7 +43,7 @@ const UserPage: NextPage = () => {
               <TwitterLogo className="h-8 w-8" />
             </a>
             <a
-              href={`https://github.com/${userData.users[0].github_username}`}
+              href={`https://github.com/${userData.github_username}`}
               className="transition duration-200 hover:opacity-60"
               target="_blank"
               rel="noopener noreferrer"
@@ -69,7 +51,7 @@ const UserPage: NextPage = () => {
               <GitHubLogo className="h-8 w-8" />
             </a>
             <a
-              href={userData.users[0].website_url}
+              href={userData.website_url}
               className="transition duration-200 hover:opacity-60"
               target="_blank"
               rel="noopener noreferrer"
@@ -93,6 +75,32 @@ const UserPage: NextPage = () => {
       )}
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const username = (context.query.username as string)
+    .replace("@", "")
+    .toLowerCase();
+
+  const { data: userData } = await axios.post(
+    HASURA_GRAPHQL_API as string,
+    JSON.stringify({
+      query: GET_USER_DATA,
+      variables: { username },
+    }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "x-hasura-admin-secret": process.env.HASURA_ADMIN_SECRET as string,
+      },
+    }
+  );
+
+  return {
+    props: {
+      userData: userData.data.users[0],
+    },
+  };
 };
 
 export default UserPage;
