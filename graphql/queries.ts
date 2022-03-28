@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const GET_CHALLENGES = gql`
-  query getChallenges {
-    challenges {
+  query getChallenges($userId: String!) {
+    challenges(where: { user_id: { _eq: $userId } }) {
       created_at
       days
       id
