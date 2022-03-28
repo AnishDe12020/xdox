@@ -1,22 +1,18 @@
-import { useQuery } from "@apollo/client";
-import { GlobeIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
+import { GlobeIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { GetServerSideProps, NextPage } from "next";
-import { useRouter } from "next/router";
-import toast from "react-hot-toast";
-import Challenges from "../components/Challenges";
 import GitHubLogo from "../components/Icons/GitHub";
 import TwitterLogo from "../components/Icons/Twitter";
 import { GET_USER_DATA } from "../graphql/queries";
+import { UserData } from "../types/User";
 
 const HASURA_GRAPHQL_API = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_API;
 
-const UserPage: NextPage = ({ userData }) => {
-  const router = useRouter();
-  const username = (router.query.username as string)
-    .replace("@", "")
-    .toLowerCase();
+interface IUserPageProps {
+  userData: UserData;
+}
 
+const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
   console.log(userData);
 
   return (
