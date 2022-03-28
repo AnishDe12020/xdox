@@ -42,18 +42,9 @@ const ChallengeDashboardPage: NextPage = () => {
   const [content, setContent] = useState<Content>();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  let {
-    data: progressData,
-    error,
-    loading,
-    previousData,
-  } = useQuery<ProgressData>(GET_PROGRESS, {
+  const { data: progressData, error } = useQuery<ProgressData>(GET_PROGRESS, {
     variables: { challenge_id: challengeId, user_id: user.id, forDay: day },
   });
-
-  if (loading) {
-    progressData = previousData;
-  }
 
   if (error) {
     console.error(error);
