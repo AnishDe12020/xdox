@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ChallengeData, ChallengesData } from "../types/Challenges";
+import type { ChallengesData } from "../types/Challenges";
 import CreateChallenge from "./CreateChallenge";
 import Tag from "./Tag";
 
