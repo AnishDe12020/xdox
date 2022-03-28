@@ -44,6 +44,11 @@ const UserPopover = (): JSX.Element => {
             <div className="text-center text-lg font-bold text-accent">
               {user.username}
             </div>
+            <Link href={`/@${user.username}`} passHref>
+              <a className="rounded-lg bg-secondary px-4 py-2 transition duration-200 hover:opacity-60">
+                Profile Page
+              </a>
+            </Link>
             <Link href="/profile" passHref>
               <a className="rounded-lg bg-secondary px-4 py-2 transition duration-200 hover:opacity-60">
                 Edit Profile
