@@ -3,12 +3,12 @@ import { GlobeIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { GetServerSideProps, NextPage } from "next";
 import toast from "react-hot-toast";
-import ChallengeData from "../components/ChallengeData";
-import GitHubLogo from "../components/Icons/GitHub";
-import TwitterLogo from "../components/Icons/Twitter";
-import { GET_CHALLENGES, GET_USER_DATA } from "../graphql/queries";
-import { UnauthenticatedApolloProviderWrapper } from "../lib/apolloClientUnauthenticated";
-import { UserData } from "../types/User";
+import ChallengeData from "../../components/ChallengeData";
+import GitHubLogo from "../../components/Icons/GitHub";
+import TwitterLogo from "../../components/Icons/Twitter";
+import { GET_CHALLENGES, GET_USER_DATA } from "../../graphql/queries";
+import { UnauthenticatedApolloProviderWrapper } from "../../lib/apolloClientUnauthenticated";
+import { UserData } from "../../types/User";
 
 const HASURA_GRAPHQL_API = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_API;
 
