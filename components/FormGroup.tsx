@@ -1,7 +1,7 @@
 import { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import { HTMLInputTypeAttribute } from "react";
-import CustomDatepicker from "./CustomDatepicker";
 import SwitchFormElement from "./SwitchFormElement";
+import CustomDatepickerFormElement from "./CustomDatePickerFormElement";
 
 interface IFormGroupProps {
   register: UseFormRegister<any>;
@@ -65,7 +65,10 @@ const FormGroup = ({
             control={control as Control}
           />
         ) : isDatePicker ? (
-          <CustomDatepicker control={control as Control} name={name} />
+          <CustomDatepickerFormElement
+            control={control as Control}
+            name={name}
+          />
         ) : (
           <input
             {...register(name)}

@@ -1,35 +1,31 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { DateTime } from "luxon";
-import ReactDatePicker from "react-datepicker";
-import { Control, useController } from "react-hook-form";
+import { createRef, forwardRef, Ref } from "react";
+import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
 
-interface ICustomDatepickerProps {
-  name: string;
-  control: Control;
+interface ICustomDatepickerProps extends ReactDatePickerProps {
+  ref: Ref<HTMLInputElement>;
 }
 
-const CustomDatepicker = ({
-  name,
-  control,
-}: ICustomDatepickerProps): JSX.Element => {
-  const {
-    field: { onChange, name: rhfName, value, ref },
-  } = useController({
-    control,
-    name,
-    defaultValue: new Date(),
-  });
+const CustomInput = forwardRef<HTMLInputElement>((props, ref) => (
+  <input
+    {...props}
+    ref={ref}
+    className="rounded-lg border-4 border-gray-900 bg-secondary px-4 py-2 transition duration-200 hover:border-opacity-60 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-60"
+  />
+));
 
+CustomInput.displayName = "CustomInput";
+
+const CustomDatepicker = ({ ref, ...otherProps }: ICustomDatepickerProps) => {
   return (
     <div className="relative">
       <ReactDatePicker
         nextMonthButtonLabel=">"
         previousMonthButtonLabel="<"
         popperClassName="react-datepicker-left transition duration-200"
-        name={rhfName}
-        selected={value}
-        onChange={onChange}
-        ref={ref}
+        {...otherProps}
+        customInput={<CustomInput ref={ref} />}
         renderCustomHeader={({
           date,
           decreaseMonth,
@@ -80,5 +76,7 @@ const CustomDatepicker = ({
     </div>
   );
 };
+
+CustomDatepicker.displayName = "CustomDatepicker";
 
 export default CustomDatepicker;
