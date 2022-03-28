@@ -16,15 +16,17 @@ interface IUserPageProps {
 }
 
 const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
-const router = useRouter();
+  const router = useRouter();
 
-  let { data: challengesData, error: challengesError, loading: challegesLoading, previousData: challengesPreviousData } = useQuery(
-    GET_CHALLENGES,
-    { variables: { userId: userData.id } }
-  );
+  let {
+    data: challengesData,
+    error: challengesError,
+    loading: challegesLoading,
+    previousData: challengesPreviousData,
+  } = useQuery(GET_CHALLENGES, { variables: { userId: userData.id } });
 
   if (challegesLoading) {
-  challengesData = challengesPreviousData
+    challengesData = challengesPreviousData;
   }
 
   if (challengesError) {
@@ -34,7 +36,7 @@ const router = useRouter();
   console.log(challengesData);
 
   const handleChallengeClick = (challengeId: string) => {
-  router.push(`/${router.query.username}/${challengeId}/1`);
+    router.push(`/${router.query.username}/${challengeId}/1`);
   };
 
   return (

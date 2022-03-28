@@ -24,7 +24,7 @@ const ChallengeHeader = ({ id }: IChallengeHeaderProps): JSX.Element => {
   }
 
   return !data ? (
-    <div className="mx-4 mb-16 flex space-x-2 items-center justify-center">
+    <div className="mx-4 mb-16 flex items-center justify-center space-x-2">
       <div className="h-8 w-64 animate-pulse rounded-lg bg-gray-500" />
       <div className="h-6 w-16 animate-pulse rounded-lg bg-gray-500" />
     </div>

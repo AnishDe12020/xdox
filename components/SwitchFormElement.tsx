@@ -8,7 +8,11 @@ interface ISwitchProps {
   checked: boolean;
 }
 
-const SwitchFormElement = ({ name, control, checked }: ISwitchProps): JSX.Element => {
+const SwitchFormElement = ({
+  name,
+  control,
+  checked,
+}: ISwitchProps): JSX.Element => {
   const {
     field: { onChange, name: rhfName, value, ref },
   } = useController({ control, name, defaultValue: checked });
@@ -39,4 +43,3 @@ const SwitchFormElement = ({ name, control, checked }: ISwitchProps): JSX.Elemen
 };
 
 export default SwitchFormElement;
-
