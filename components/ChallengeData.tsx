@@ -63,10 +63,6 @@ const ChallengeData = ({
               <div className="h-8 w-32 animate-pulse rounded-lg bg-gray-500" />
               <div className="h-6 w-16 animate-pulse rounded-lg bg-gray-500" />
             </div>
-            <div className="flex h-32 w-full flex-col space-y-2 rounded-lg bg-secondary p-4">
-              <div className="h-8 w-32 animate-pulse rounded-lg bg-gray-500" />
-              <div className="h-6 w-16 animate-pulse rounded-lg bg-gray-500" />
-            </div>
           </>
         ) : challengeData.challenges.length > 0 ? (
           challengeData.challenges.map(challenge => (
