@@ -1,11 +1,9 @@
 import { useQuery } from "@apollo/client";
-import { GlobeIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { GetServerSideProps, NextPage } from "next";
+import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import ChallengeData from "../../components/ChallengeData";
-import GitHubLogo from "../../components/Icons/GitHub";
-import TwitterLogo from "../../components/Icons/Twitter";
 import UserDataComponent from "../../components/UserData";
 import { GET_CHALLENGES, GET_USER_DATA } from "../../graphql/queries";
 import { UnauthenticatedApolloProviderWrapper } from "../../lib/apolloClientUnauthenticated";
@@ -18,8 +16,7 @@ interface IUserPageProps {
 }
 
 const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
-  console.log(userData);
-
+const router = useRouter();
   const { data: challengesData, error: challengesError } = useQuery(
     GET_CHALLENGES,
     { variables: { userId: userData.id } }
@@ -31,6 +28,10 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
 
   console.log(challengesData);
 
+  const handleChallengeClick = (challengeId: string) => {
+  router.push(`/${router.query.username}/${challengeId}/1`);
+  };
+
   return (
     <UnauthenticatedApolloProviderWrapper>
       <div className="mx-8 flex flex-col items-center space-y-4 md:mx-16 lg:mx-32">
@@ -39,7 +40,7 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
         <ChallengeData
           variant="grid"
           challengeData={challengesData}
-          handleChallengeClick={() => console.log("e")}
+          handleChallengeClick={handleChallengeClick}
           readonly
         />
       </div>
