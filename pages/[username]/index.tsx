@@ -17,10 +17,15 @@ interface IUserPageProps {
 
 const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
 const router = useRouter();
-  const { data: challengesData, error: challengesError } = useQuery(
+
+  let { data: challengesData, error: challengesError, loading: challegesLoading, previousData: challengesPreviousData } = useQuery(
     GET_CHALLENGES,
     { variables: { userId: userData.id } }
   );
+
+  if (challegesLoading) {
+  challengesData = challengesPreviousData
+  }
 
   if (challengesError) {
     toast.error("Something went wrong!");
