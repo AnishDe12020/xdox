@@ -10,8 +10,14 @@ import { useRouter } from "next/router";
 import Header from "../components/Header";
 import { ApolloProviderWrapper } from "../lib/apolloClient";
 import { Toaster } from "react-hot-toast";
+import { UnauthenticatedApolloProviderWrapper } from "../lib/apolloClientUnauthenticated";
 
-const publicPages = ["/", "/sign-in/[[...index]]", "/sign-up/[[...index]]"];
+const publicPages = [
+  "/",
+  "/sign-in/[[...index]]",
+  "/sign-up/[[...index]]",
+  "/[username]",
+];
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
@@ -32,7 +38,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <Header />
       {isPublicPage ? (
-        <Component {...pageProps} />
+        <UnauthenticatedApolloProviderWrapper>
+          <Component {...pageProps} />
+        </UnauthenticatedApolloProviderWrapper>
       ) : (
         <>
           <SignedIn>

@@ -7,6 +7,7 @@ interface UserData {
   bio: string;
   username: string;
   profile_image_url: string;
+  id: string;
 }
 
 export type { UserData };
