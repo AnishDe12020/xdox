@@ -9,10 +9,14 @@ import DayButton from "./DayButton";
 
 interface IProgressDaysBarProps {
   challengeId: string;
+  username?: string;
+  readOnly?: boolean;
 }
 
 const ProgressDaysBar = ({
   challengeId,
+  username,
+  readOnly
 }: IProgressDaysBarProps): JSX.Element => {
   const router = useRouter();
   const user = useUser();
@@ -46,7 +50,7 @@ const ProgressDaysBar = ({
             date={progress.date}
             forDay={progress.forDay}
             onClick={() =>
-              router.push(`/dashboard/${challengeId}/${progress.forDay}`)
+          router.push(`/${username ?? "dashboard"}/${challengeId}/${progress.forDay}`, undefined, {shallow: true})
             }
             active={(router.query.day as unknown as number) == progress.forDay}
           />
@@ -61,7 +65,7 @@ const ProgressDaysBar = ({
           <div className="h-12 w-32 animate-pulse rounded-lg bg-secondary" />
         </>
       )}
-      {progressesData?.progress && (
+      {!readOnly && progressesData?.progress && (
         <DayButton
           forDay={progressesData.progress.length + 1}
           date={DateTime.now().toISODate()}

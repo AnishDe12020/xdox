@@ -88,7 +88,7 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
         />
         <div className="flex w-full flex-col md:mx-12">
           <ChallengeHeader id={challengeId as string} />
-          <ProgressDaysBar challengeId={challengeId} />
+          <ProgressDaysBar challengeId={challengeId} username={router.query.username as string} readOnly />
           {progressData?.progress ? (
             <Editor className="mt-16" content={content} onChange={setContent} />
           ) : (
