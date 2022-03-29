@@ -13,8 +13,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className="text-xl lg:text-2xl xl:text-3xl">Secret lol</h1>
+      <main className="flex flex-col justify-center items-center">
+        <h1 className="lg:text-5xl md:text-4xl text-3xl font-bold">A <span className="from-teal-500 to-blue-500 text-clip text-transparent bg-clip-text bg-gradient-to-tr animate-gradient-text">better</span> way to keep track of your challenges</h1>
       </main>
     </div>
   );
