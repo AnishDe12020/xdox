@@ -16,19 +16,19 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="mt-16 flex flex-col items-center justify-center mx-8 flex md:mx-16 lg:mx-32">
-        <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl">
+      <main className="mt-16 flex-col items-center justify-center mx-8 flex md:mx-16 lg:mx-32">
+        <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl text-center">
           A{" "}
           <span className="bg-gradient-to-tr from-teal-500 to-blue-500 bg-clip-text text-transparent">
             better
           </span>{" "}
           way to keep track of your challenges
         </h1>
-        <h2 className="mt-8 font-semibold text-xl md:text-2xl lg:text-3xl">
+        <h2 className="mt-8 font-semibold text-xl md:text-2xl lg:text-3xl text-center">
           XdoX provides you a way to start challenges and log your progress
           everyday. 
         </h2>
-        <h3 className="text-lg md:text-xl lg:text-2xl text-normal mt-4">You even get a{" "}
+        <h3 className="text-lg md:text-xl lg:text-2xl text-normal mt-4 text-center">You even get a{" "}
           <span className="bg-gradient-to-br from-lime-500 to-green-500 bg-clip-text text-transparent font-bold">
             unique profile page
           </span>{" "}
