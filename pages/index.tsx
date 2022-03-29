@@ -2,6 +2,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import FAQ from "../components/FAQ";
 
 const Home: NextPage = () => {
   return (
@@ -34,25 +35,13 @@ const Home: NextPage = () => {
           🤩</h3>
         <Link href="/sign-up" passHref><a className="bg-accent text-black rounded-lg px-4 py-2 transition duration-200 hover:opacity-60 mt-4 flex flex-row space-x-2 group justify-center items-center"><span>Sounds good, sign me up</span><ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition duration-200" /></a></Link>
 
-        <section>
+        <section className="flex flex-col space-y-4">
           <h2>FAQ</h2>
-          <h3>What is XdoX?</h3>
-          <p>
-            XdoX is a web application that allows you to start challenges and
-            log your progress.
-            </p>
-          <h3>Is it free?</h3>
-          <p>
-            Yes, it is free.
-            </p>
-          <h3>How do I use it?</h3>
-          <p>
-            You can sign up for an account and start challenges. Then you can log your progress from the dashboard.
-            </p>
-            <h3>Do I need to log my progress everyday?</h3>
-            <p>
-              It is completely up to you. Ideally you would log your progress every day as these challenges are a specific days of a specific challenge. However, it is completely fine if you skip a day.
-              </p>
+          <FAQ title="What is XdoX?" content="XdoX is a web application that allows you to start challenges and
+            log your progress." />
+          <FAQ title="Is it free?" content="Yes, it is free." />
+          <FAQ title="How do I use it?" content="You can sign up for an account and start challenges. Then you can log your progress from the dashboard." />
+          <FAQ title="Do I need to log my progress everyday?" content="It is completely up to you. Ideally you would log your progress every day as these challenges are a specific days of a specific challenge. However, it is completely fine if you skip a day." />
         </section>
       </main>
     </div>
