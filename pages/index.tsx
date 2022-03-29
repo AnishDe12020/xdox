@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="mt-16 flex flex-col items-center justify-center">
+      <main className="mt-16 flex flex-col items-center justify-center mx-8 flex md:mx-16 lg:mx-32">
         <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl">
           A{" "}
           <span className="bg-gradient-to-tr from-teal-500 to-blue-500 bg-clip-text text-transparent">
@@ -35,8 +35,8 @@ const Home: NextPage = () => {
           🤩</h3>
         <Link href="/sign-up" passHref><a className="bg-accent text-black rounded-lg px-4 py-2 transition duration-200 hover:opacity-60 mt-4 flex flex-row space-x-2 group justify-center items-center"><span>Sounds good, sign me up</span><ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition duration-200" /></a></Link>
 
-        <section className="flex flex-col space-y-4">
-          <h2>FAQ</h2>
+        <section className="flex flex-col space-y-4 mt-64 self-start">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold">FAQ</h2>
           <FAQ title="What is XdoX?" content="XdoX is a web application that allows you to start challenges and
             log your progress." />
           <FAQ title="Is it free?" content="Yes, it is free." />
