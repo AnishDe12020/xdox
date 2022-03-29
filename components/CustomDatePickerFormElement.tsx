@@ -1,6 +1,3 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { DateTime } from "luxon";
-import ReactDatePicker from "react-datepicker";
 import { Control, useController } from "react-hook-form";
 import CustomDatepicker from "./CustomDatepicker";
 
