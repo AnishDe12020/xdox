@@ -59,7 +59,8 @@ const ChallengeDashboardPage: NextPage = () => {
     }
     setToUpdate(progressData?.progress?.length > 0);
     setContent(progressData?.progress?.[0]?.content);
-  }, [progressData]);
+    setDate(progressData?.progress?.[0]?.date || DateTime.now().toISODate());
+  }, [progressData, setDate]);
 
   const addProgressUpdateCache = (
     cache: ApolloCache<any>,
@@ -111,7 +112,7 @@ const ChallengeDashboardPage: NextPage = () => {
         variables: {
           progress: {
             content: content,
-            date: date
+            date: date,
           },
           id: progressData?.progress[0]?.id as string,
         },
