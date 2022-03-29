@@ -11,6 +11,7 @@ import Header from "../components/Header";
 import { ApolloProviderWrapper } from "../lib/apolloClient";
 import { Toaster } from "react-hot-toast";
 import { UnauthenticatedApolloProviderWrapper } from "../lib/apolloClientUnauthenticated";
+import NextNProgress from "nextjs-progressbar";
 
 const publicPages = [
   "/",
@@ -37,6 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
       <Header />
+        <NextNProgress color="#2563eb" options={{showSpinner: false}} />
       {isPublicPage ? (
         <UnauthenticatedApolloProviderWrapper>
           <Component {...pageProps} />
