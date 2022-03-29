@@ -33,6 +33,27 @@ const Home: NextPage = () => {
           </span>{" "}
           🤩</h3>
         <Link href="/sign-up" passHref><a className="bg-accent text-black rounded-lg px-4 py-2 transition duration-200 hover:opacity-60 mt-4 flex flex-row space-x-2 group justify-center items-center"><span>Sounds good, sign me up</span><ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition duration-200" /></a></Link>
+
+        <section>
+          <h2>FAQ</h2>
+          <h3>What is XdoX?</h3>
+          <p>
+            XdoX is a web application that allows you to start challenges and
+            log your progress.
+            </p>
+          <h3>Is it free?</h3>
+          <p>
+            Yes, it is free.
+            </p>
+          <h3>How do I use it?</h3>
+          <p>
+            You can sign up for an account and start challenges. Then you can log your progress from the dashboard.
+            </p>
+            <h3>Do I need to log my progress everyday?</h3>
+            <p>
+              It is completely up to you. Ideally you would log your progress every day as these challenges are a specific days of a specific challenge. However, it is completely fine if you skip a day.
+              </p>
+        </section>
       </main>
     </div>
   );
