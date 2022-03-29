@@ -32,7 +32,7 @@ interface ProgressDaysBarData {
   progress: ProgressDaysBarProgress[];
 }
 
-type UpdateProgressInput = Partial<Pick<AddProgressInput, "content">>;
+type UpdateProgressInput = Partial<Pick<AddProgressInput, "content" | "date">>;
 
 export type {
   Progress,

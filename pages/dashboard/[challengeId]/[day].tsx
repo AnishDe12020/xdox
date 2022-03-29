@@ -25,6 +25,8 @@ import type {
   UpdateProgressInput,
 } from "../../../types/Progress";
 import ProgressDaysBar from "../../../components/PorgressDaysBar";
+import CustomDatepicker from "../../../components/CustomDatepicker";
+import { DateTime } from "luxon";
 
 const ChallengeDashboardPage: NextPage = () => {
   const router = useRouter();
@@ -36,7 +38,7 @@ const ChallengeDashboardPage: NextPage = () => {
 
   const user = useUser();
 
-  const { date } = useDate();
+  const { date, setDate } = useDate();
 
   const [toUpdate, setToUpdate] = useState<boolean>(false);
   const [content, setContent] = useState<Content>();
@@ -109,6 +111,7 @@ const ChallengeDashboardPage: NextPage = () => {
         variables: {
           progress: {
             content: content,
+            date: date
           },
           id: progressData?.progress[0]?.id as string,
         },
@@ -121,6 +124,7 @@ const ChallengeDashboardPage: NextPage = () => {
         toast.success("Progress updated!");
       }
     } else {
+      console.log(date);
       await addProgress({
         variables: {
           progress: {
@@ -145,6 +149,8 @@ const ChallengeDashboardPage: NextPage = () => {
     setIsSubmitting(false);
   };
 
+  console.log(date);
+
   return (
     <DashboardLayout>
       <Challenges
@@ -158,7 +164,12 @@ const ChallengeDashboardPage: NextPage = () => {
         {progressData?.progress ? (
           <div className="mt-16 flex flex-col space-y-4">
             <Editor content={content} onChange={setContent} />
-
+            <CustomDatepicker
+              value={date}
+              onChange={date =>
+                setDate(DateTime.fromJSDate(date as Date).toISODate())
+              }
+            />
             <Button
               type="submit"
               className="w-fit"

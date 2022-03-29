@@ -1,10 +1,10 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { DateTime } from "luxon";
-import { createRef, forwardRef, Ref } from "react";
+import { forwardRef, Ref } from "react";
 import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
 
 interface ICustomDatepickerProps extends ReactDatePickerProps {
-  ref: Ref<HTMLInputElement>;
+  ref?: Ref<HTMLInputElement>;
 }
 
 const CustomInput = forwardRef<HTMLInputElement>((props, ref) => (
