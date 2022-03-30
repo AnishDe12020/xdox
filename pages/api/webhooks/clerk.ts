@@ -86,10 +86,10 @@ const handler = async (
         last_name: event.data.last_name,
         username: event.data.username,
         profile_image_url: event.data.profile_image_url,
-        twitter_username: event.data.unsafe_metadata.twitter_username,
-        github_username: event.data.unsafe_metadata.github_username,
-        website_url: event.data.unsafe_metadata.website_url,
-        bio: event.data.unsafe_metadata.bio,
+        twitter_username: event.data.unsafe_metadata.twitter_username || null,
+        github_username: event.data.unsafe_metadata.github_username || null,
+        website_url: event.data.unsafe_metadata.website_url || null,
+        bio: event.data.unsafe_metadata.bio || null,
       };
       console.log(userObject);
     }
