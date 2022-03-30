@@ -50,7 +50,12 @@ const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
 
     cache.writeQuery({
       query: GET_CHALLENGES,
-      data: { challenges: [newChallenge, ...existingChallenges.challenges] },
+      data: {
+        challenges:
+          existingChallenges && existingChallenges.challenges
+            ? [...existingChallenges.challenges, newChallenge]
+            : [newChallenge],
+      },
     });
   };
 
