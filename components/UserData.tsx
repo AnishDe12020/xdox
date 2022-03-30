@@ -15,37 +15,51 @@ const UserDataComponent = ({ userData }: IUserDataProps): JSX.Element => {
         className="h-32 w-32 rounded-full"
         alt={userData.username}
       />
-      <p className="text-xl font-semibold md:text-2xl lg:text-3xl">
-        {userData.first_name} {userData.last_name}
-      </p>
-      <p className="text-md md:text-lg lg:text-xl">@{userData.username}</p>
-      <p>{userData.bio}</p>
-      <div className="mt-4 flex flex-row space-x-4">
-        <a
-          href={`https://twitter.com/${userData.twitter_username}`}
-          className="transition duration-200 hover:opacity-60"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <TwitterLogo className="h-8 w-8" />
-        </a>
-        <a
-          href={`https://github.com/${userData.github_username}`}
-          className="transition duration-200 hover:opacity-60"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <GitHubLogo className="h-8 w-8" />
-        </a>
-        <a
-          href={userData.website_url}
-          className="transition duration-200 hover:opacity-60"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <GlobeIcon className="h-8 w-8" />
-        </a>
-      </div>
+      {userData.first_name && userData.last_name && (
+        <p className="text-xl font-semibold md:text-2xl lg:text-3xl">
+          {userData.first_name} {userData.last_name}
+        </p>
+      )}
+      {userData.username && (
+        <p className="text-md md:text-lg lg:text-xl">@{userData.username}</p>
+      )}
+      {userData.bio && <p>{userData.bio}</p>}
+      {userData.twitter_username ||
+        userData.github_username ||
+        (userData.website_url && (
+          <div className="mt-4 flex flex-row space-x-4">
+            {userData.twitter_username && (
+              <a
+                href={`https://twitter.com/${userData.twitter_username}`}
+                className="transition duration-200 hover:opacity-60"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <TwitterLogo className="h-8 w-8" />
+              </a>
+            )}
+            {userData.github_username && (
+              <a
+                href={`https://github.com/${userData.github_username}`}
+                className="transition duration-200 hover:opacity-60"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GitHubLogo className="h-8 w-8" />
+              </a>
+            )}
+            {userData.website_url && (
+              <a
+                href={userData.website_url}
+                className="transition duration-200 hover:opacity-60"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GlobeIcon className="h-8 w-8" />
+              </a>
+            )}
+          </div>
+        ))}
     </>
   ) : (
     <>
