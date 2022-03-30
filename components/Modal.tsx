@@ -53,7 +53,7 @@ const Modal = ({
   return isDesktop ? (
     <DialogPrimitive.Root open={isOpen} onOpenChange={setOpen}>
       <DialogPrimitive.Trigger asChild>
-        {typeof trigger === "string" ? <Button>{trigger}</Button> : trigger}
+        {typeof trigger === "string" ? <Button className="w-fit">{trigger}</Button> : trigger}
       </DialogPrimitive.Trigger>
 
       <Transition.Root show={isOpen}>

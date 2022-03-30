@@ -8,8 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
 import { GET_CHALLENGES } from "../graphql/queries";
 import type { Challenge, CreateChallengeInput } from "../types/Challenges";
-import Button from "./Button";
-import classNames from "classnames";
 import { DateTime } from "luxon";
 
 const CreateChallengeSchema = yup.object({
@@ -18,11 +16,7 @@ const CreateChallengeSchema = yup.object({
   isPublic: yup.boolean().required(),
 });
 
-interface ICreateChallengeProps {
-  className?: string;
-}
-
-const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
+const CreateChallenge = (): JSX.Element => {
   const {
     register,
     handleSubmit,
@@ -101,11 +95,7 @@ const CreateChallenge = ({ className }: ICreateChallengeProps): JSX.Element => {
     <Modal
       title="Create Challenge"
       closable
-      trigger={
-        <Button className={classNames("w-full", className)}>
-          Create Challenge
-        </Button>
-      }
+      trigger="Create Challenge"
       onDone={onSubmit}
       isSubmitting={isSubmitting}
       doneText="Submit"

@@ -29,9 +29,9 @@ const ChallengeData = ({
       )}
     >
       {!readonly && (
-        <CreateChallenge
-          className={variant === "grid" ? "w-fit self-end" : ""}
-        />
+        <div className={variant === "grid" ? "self-end" : ""}>
+          <CreateChallenge />
+        </div>
       )}
       <div
         className={classNames(
