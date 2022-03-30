@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="mt-16 flex-col items-center justify-center mx-8 flex md:mx-16 lg:mx-32">
+      <main className="mt-16 flex-col items-center justify-center mx-8 flex md:mx-16 lg:mx-32 mb-16">
         <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl text-center">
           A{" "}
           <span className="bg-gradient-to-tr from-teal-500 to-blue-500 bg-clip-text text-transparent">
