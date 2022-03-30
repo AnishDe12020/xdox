@@ -46,6 +46,10 @@ a {
   --clerk-border-radius: 0.5rem;
 }
 
+.cl-verification-page-identifier {
+  @apply text-center !text-accent;
+}
+
 :root {
   --rsbs-backdrop-bg: rgba(0, 0, 0, 0.6);
   --rsbs-bg: #111827;
