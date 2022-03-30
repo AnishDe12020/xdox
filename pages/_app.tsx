@@ -18,6 +18,8 @@ const publicPages = [
   "/sign-in/[[...index]]",
   "/sign-up/[[...index]]",
   "/[username]",
+  "/[username]/[challengeId]",
+  "/[username]/[challengeId]/[day]",
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
