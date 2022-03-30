@@ -2,9 +2,13 @@ import { useQuery } from "@apollo/client";
 import { useUser } from "@clerk/nextjs";
 import { DateTime } from "luxon";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { GET_PROGRESSES } from "../graphql/queries";
-import { ProgressDaysBarData } from "../types/Progress";
+import {
+  ProgressDaysBarData,
+  ProgressDaysBarProgress,
+} from "../types/Progress";
 import DayButton from "./DayButton";
 
 interface IProgressDaysBarProps {
@@ -20,6 +24,9 @@ const ProgressDaysBar = ({
 }: IProgressDaysBarProps): JSX.Element => {
   const router = useRouter();
   const user = useUser();
+  const [progresses, setProgresses] = useState<
+    ProgressDaysBarProgress[] | undefined
+  >([]);
 
   let {
     data: progressesData,
@@ -33,6 +40,13 @@ const ProgressDaysBar = ({
     },
   });
 
+  useEffect(() => {
+    const progresses = progressesData?.progress.slice().sort((a, b) => {
+      return a.forDay - b.forDay;
+    });
+    setProgresses(progresses);
+  }, [progressesData]);
+
   if (progressesError) {
     toast.error("Something went wrong!");
   }
@@ -43,8 +57,8 @@ const ProgressDaysBar = ({
 
   return (
     <div className="flex items-center justify-center space-x-1 overflow-x-auto md:justify-start md:space-x-2 lg:space-x-4">
-      {progressesData?.progress ? (
-        progressesData?.progress.map((progress, index) => (
+      {progresses ? (
+        progresses.map((progress, index) => (
           <DayButton
             key={index}
             date={progress.date}
