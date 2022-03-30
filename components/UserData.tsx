@@ -24,9 +24,6 @@ const UserDataComponent = ({ userData }: IUserDataProps): JSX.Element => {
         <p className="text-md md:text-lg lg:text-xl">@{userData.username}</p>
       )}
       {userData.bio && <p>{userData.bio}</p>}
-      {userData.twitter_username ||
-        userData.github_username ||
-        (userData.website_url && (
           <div className="mt-4 flex flex-row space-x-4">
             {userData.twitter_username && (
               <a
@@ -59,7 +56,6 @@ const UserDataComponent = ({ userData }: IUserDataProps): JSX.Element => {
               </a>
             )}
           </div>
-        ))}
     </>
   ) : (
     <>
