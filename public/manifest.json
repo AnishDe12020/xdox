@@ -1,5 +1,6 @@
 {
- "name": "App",
+ "name": "XdoX",
+ "short_name": "XdoX",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
@@ -37,5 +38,9 @@
    "type": "image\/png",
    "density": "4.0"
   }
- ]
+ ],
+ "theme_color": "#111827",
+  "background_color": "#111827",
+  "start_url": "/",
+  "display": "standalone"
 }
