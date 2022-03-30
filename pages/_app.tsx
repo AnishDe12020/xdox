@@ -12,6 +12,8 @@ import { ApolloProviderWrapper } from "../lib/apolloClient";
 import { Toaster } from "react-hot-toast";
 import { UnauthenticatedApolloProviderWrapper } from "../lib/apolloClientUnauthenticated";
 import NextNProgress from "nextjs-progressbar";
+import DefaultSEO from "../next-seo.config";
+import { DefaultSeo } from "next-seo";
 
 const publicPages = [
   "/",
@@ -39,6 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           position: "top-right",
         }}
       />
+      <DefaultSeo {...DefaultSEO} />
       <Header />
       <NextNProgress color="#2563eb" options={{ showSpinner: false }} />
       {isPublicPage ? (
