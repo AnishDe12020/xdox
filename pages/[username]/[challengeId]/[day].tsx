@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import UserDataComponent from "../../../components/UserData";
 import ChallengeData from "../../../components/ChallengeData";
 import {
-  GET_CHALLENGES,
   GET_CHALLENGES_FOR_USER,
   GET_PROGRESS,
   GET_USER_DATA,
@@ -19,6 +18,7 @@ import { ProgressData } from "../../../types/Progress";
 import Editor from "../../../components/Editor";
 import ProgressDaysBar from "../../../components/PorgressDaysBar";
 import ChallengeHeader from "../../../components/ChallengeHeader";
+import { NextSeo } from "next-seo";
 
 const HASURA_GRAPHQL_API = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_API;
 
@@ -73,6 +73,8 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
 
   return (
     <UnauthenticatedApolloProviderWrapper>
+      <NextSeo title={`XdoX | ${userData.username || "User Page"}`} />
+
       <div className="mx-8 flex flex-col items-center space-y-4 md:mx-16 lg:mx-32">
         <UserDataComponent userData={userData} />
       </div>

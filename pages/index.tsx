@@ -1,21 +1,11 @@
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import type { NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
 import FAQ from "../components/FAQ";
 
 const Home: NextPage = () => {
   return (
     <div>
-      <Head>
-        <title>X Days of X</title>
-        <meta
-          name="description"
-          content="An application for keeping track of your x days of x stuff progress"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className="mx-8 mt-16 mb-16 flex flex-col items-center justify-center md:mx-16 lg:mx-32">
         <h1 className="text-center text-3xl font-bold md:text-4xl lg:text-5xl">
           A{" "}

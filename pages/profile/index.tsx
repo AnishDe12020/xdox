@@ -10,6 +10,7 @@ import FormGroup from "../../components/FormGroup";
 import toast from "react-hot-toast";
 import ExternalLink from "../../components/ExternalLink";
 import { UploadIcon } from "@radix-ui/react-icons";
+import { NextSeo } from "next-seo";
 
 type FormData = {
   firstName?: string | null;
@@ -94,6 +95,7 @@ const ProfilePage: NextPage = () => {
 
   return (
     <div className="mx-8 mb-8 flex flex-col items-center justify-center md:mx-16 lg:mx-32">
+      <NextSeo title="XdoX | Profile" />
       <div>
         <label
           htmlFor="update-pfp"

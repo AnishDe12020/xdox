@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import axios from "axios";
 import { GetServerSideProps, NextPage } from "next";
+import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import ChallengeData from "../../components/ChallengeData";
@@ -41,6 +42,8 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
 
   return (
     <UnauthenticatedApolloProviderWrapper>
+      <NextSeo title={`XdoX | ${userData.username || "User Page"}`} />
+
       <div className="mx-8 flex flex-col items-center space-y-4 md:mx-16 lg:mx-32">
         <UserDataComponent userData={userData} />
 

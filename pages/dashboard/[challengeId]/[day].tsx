@@ -27,6 +27,7 @@ import type {
 import ProgressDaysBar from "../../../components/PorgressDaysBar";
 import CustomDatepicker from "../../../components/CustomDatepicker";
 import { DateTime } from "luxon";
+import { NextSeo } from "next-seo";
 
 const ChallengeDashboardPage: NextPage = () => {
   const router = useRouter();
@@ -154,6 +155,7 @@ const ChallengeDashboardPage: NextPage = () => {
 
   return (
     <DashboardLayout>
+      <NextSeo title="XdoX | Dashboard" />
       <Challenges
         variant="list"
         className="hidden md:flex"
