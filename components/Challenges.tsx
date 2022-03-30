@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { GET_CHALLENGES } from "../graphql/queries";
@@ -18,16 +17,13 @@ const Challenges = ({
   activeChallengeId,
 }: IChallengesProps): JSX.Element => {
   const router = useRouter();
-  const user = useUser();
 
   if (!variant) {
     variant = "list";
   }
 
-  let { data, error, previousData, loading } = useQuery<ChallengesData>(
-    GET_CHALLENGES,
-    { variables: { userId: user.id } }
-  );
+  let { data, error, previousData, loading } =
+    useQuery<ChallengesData>(GET_CHALLENGES);
 
   if (loading) {
     data = previousData;

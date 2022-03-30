@@ -1,8 +1,22 @@
 import { gql } from "@apollo/client";
 
-const GET_CHALLENGES = gql`
-  query getChallenges($userId: String!) {
+const GET_CHALLENGES_FOR_USER = gql`
+  query getChallenges($userId: String) {
     challenges(where: { user_id: { _eq: $userId } }) {
+      created_at
+      days
+      id
+      isPublic
+      topic
+      updated_at
+      start_date
+    }
+  }
+`;
+
+const GET_CHALLENGES = gql`
+  query getChallenges {
+    challenges {
       created_at
       days
       id
@@ -87,4 +101,5 @@ export {
   GET_PROGRESS,
   GET_PROGRESSES,
   GET_USER_DATA,
+  GET_CHALLENGES_FOR_USER
 };

@@ -6,6 +6,7 @@ import UserDataComponent from "../../../components/UserData";
 import ChallengeData from "../../../components/ChallengeData";
 import {
   GET_CHALLENGES,
+  GET_CHALLENGES_FOR_USER,
   GET_PROGRESS,
   GET_USER_DATA,
 } from "../../../graphql/queries";
@@ -33,7 +34,7 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
     error: challengesError,
     loading: challegesLoading,
     previousData: challengesPreviousData,
-  } = useQuery(GET_CHALLENGES, { variables: { userId: userData.id } });
+  } = useQuery(GET_CHALLENGES_FOR_USER, { variables: { userId: userData.id } });
 
   if (challegesLoading) {
     challengesData = challengesPreviousData;
