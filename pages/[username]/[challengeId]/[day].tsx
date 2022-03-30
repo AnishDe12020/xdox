@@ -88,6 +88,7 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
           <ProgressDaysBar
             challengeId={challengeId}
             username={router.query.username as string}
+            userId={userData.id}
             readOnly
           />
           {progressData?.progress ? (

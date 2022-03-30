@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import { useUser } from "@clerk/nextjs";
 import { DateTime } from "luxon";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -15,15 +14,16 @@ interface IProgressDaysBarProps {
   challengeId: string;
   username?: string;
   readOnly?: boolean;
+  userId: string;
 }
 
 const ProgressDaysBar = ({
   challengeId,
   username,
   readOnly,
+  userId,
 }: IProgressDaysBarProps): JSX.Element => {
   const router = useRouter();
-  const user = useUser();
   const [progresses, setProgresses] = useState<
     ProgressDaysBarProgress[] | undefined
   >([]);
@@ -36,7 +36,7 @@ const ProgressDaysBar = ({
   } = useQuery<ProgressDaysBarData>(GET_PROGRESSES, {
     variables: {
       challenge_id: challengeId,
-      user_id: user.id,
+      user_id: userId,
     },
   });
 
