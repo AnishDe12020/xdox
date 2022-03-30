@@ -53,7 +53,11 @@ const Modal = ({
   return isDesktop ? (
     <DialogPrimitive.Root open={isOpen} onOpenChange={setOpen}>
       <DialogPrimitive.Trigger asChild>
-        {typeof trigger === "string" ? <Button className="w-fit">{trigger}</Button> : trigger}
+        {typeof trigger === "string" ? (
+          <Button className="w-fit">{trigger}</Button>
+        ) : (
+          trigger
+        )}
       </DialogPrimitive.Trigger>
 
       <Transition.Root show={isOpen}>
@@ -133,7 +137,7 @@ const Modal = ({
         ]}
         header={
           <h1 className="flex items-center justify-center text-xl font-bold text-accent">
-            Sticky!
+            {title}
           </h1>
         }
         footer={
