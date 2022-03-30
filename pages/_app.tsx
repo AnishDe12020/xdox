@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
       <Header />
-        <NextNProgress color="#2563eb" options={{showSpinner: false}} />
+      <NextNProgress color="#2563eb" options={{ showSpinner: false }} />
       {isPublicPage ? (
         <UnauthenticatedApolloProviderWrapper>
           <Component {...pageProps} />
