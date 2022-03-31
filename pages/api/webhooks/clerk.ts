@@ -143,7 +143,7 @@ mutation ($id: String!) {
         break;
     }
 
-    const { data } = await axios.post(
+    await axios.post(
       HASURA_GRAPHQL_API as string,
       JSON.stringify({
         query: mutation,
