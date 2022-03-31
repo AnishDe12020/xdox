@@ -10,6 +10,8 @@ const Home: NextPage = () => {
         <a
           className="group mt-4 mb-8 flex flex-row items-center justify-center space-x-2 rounded-lg bg-gray-700 px-4 py-2 text-accent transition duration-200 hover:opacity-60"
           href="https://blog.anishde.dev/introducing-xdox-start-challenges-log-your-progress-and-show-them-off-to-the-world"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <span>Read the announcement</span>
           <ArrowRightIcon className="h-4 w-4 transition duration-200 group-hover:translate-x-1" />
