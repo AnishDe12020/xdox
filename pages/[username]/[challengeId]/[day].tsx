@@ -77,7 +77,7 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
       <div className="mx-8 flex flex-col items-center space-y-4 md:mx-16 lg:mx-32">
         <UserDataComponent userData={userData} />
       </div>
-      <div className="mx-8 mt-32 flex flex-row md:mx-16 lg:mx-32">
+      <div className="mx-8 mt-32 mb-16 flex flex-row md:mx-16 lg:mx-32">
         <ChallengeData
           variant="list"
           challengeData={challengesData}

@@ -44,7 +44,7 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
     <UnauthenticatedApolloProviderWrapper>
       <NextSeo title={`XdoX | ${userData.username || "User Page"}`} />
 
-      <div className="mx-8 flex flex-col items-center space-y-4 md:mx-16 lg:mx-32">
+      <div className="mx-8 mb-16 flex flex-col items-center space-y-4 md:mx-16 lg:mx-32">
         <UserDataComponent userData={userData} />
 
         <ChallengeData
