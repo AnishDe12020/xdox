@@ -21,7 +21,7 @@ function DayButton({
   return (
     <Button
       className={classNames(
-        "md:text-md group inline-flex flex-col items-center justify-center bg-transparent px-1 text-sm text-accent hover:opacity-100 md:px-2 lg:px-3"
+        "md:text-md group inline-flex flex-col items-center justify-center bg-transparent px-1 text-sm !text-accent hover:opacity-100 md:px-2 lg:px-3"
       )}
       onClick={() => {
         onClick(date);
@@ -30,7 +30,7 @@ function DayButton({
       <span
         className={classNames(
           "opacity-60",
-          active && "text-blue-500 !opacity-100"
+          active && "!text-blue-500 !opacity-100"
         )}
       >
         {formatDate(date, "dd")} {formatDate(date, "LLL")}
