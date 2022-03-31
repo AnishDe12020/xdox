@@ -55,6 +55,11 @@ const Editor = forwardRef<PureEditorContent, IEditorProps>(
     });
 
     useEffect(() => {
+      editor?.setEditable(readOnly ? false : true);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [readOnly]);
+
+    useEffect(() => {
       editor?.commands.setContent(
         content || {
           type: "doc",
@@ -78,12 +83,7 @@ const Editor = forwardRef<PureEditorContent, IEditorProps>(
       <div className={classNames("flex flex-col justify-center", className)}>
         {!readOnly && editor && <MenuBar editor={editor} />}
         {!readOnly && editor && <CustomBubbleMenu editor={editor} />}
-        <EditorContent
-          content="test"
-          editor={editor}
-          ref={ref}
-          readOnly={readOnly}
-        />
+        <EditorContent content="test" editor={editor} ref={ref} />
       </div>
     );
   }
