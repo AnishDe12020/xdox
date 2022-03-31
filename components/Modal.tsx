@@ -49,6 +49,7 @@ const Modal = ({
           setOpen(true);
         }
       } else {
+        await onDone();
         setOpen(false);
       }
     }
