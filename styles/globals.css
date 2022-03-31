@@ -128,7 +128,6 @@ a {
   @apply bg-blue-600 text-accent;
 }
 
-
 ::-webkit-scrollbar {
   width: 7px;
 }
