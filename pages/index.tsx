@@ -7,6 +7,13 @@ const Home: NextPage = () => {
   return (
     <div>
       <main className="mx-8 mt-16 mb-16 flex flex-col items-center justify-center md:mx-16 lg:mx-32">
+        <a
+          className="group mt-4 mb-8 flex flex-row items-center justify-center space-x-2 rounded-lg bg-gray-700 px-4 py-2 text-accent transition duration-200 hover:opacity-60"
+          href="https://blog.anishde.dev/introducing-xdox-start-challenges-log-your-progress-and-show-them-off-to-the-world"
+        >
+          <span>Read the announcement</span>
+          <ArrowRightIcon className="h-4 w-4 transition duration-200 group-hover:translate-x-1" />
+        </a>
         <h1 className="text-center text-3xl font-bold md:text-4xl lg:text-5xl">
           A{" "}
           <span className="bg-gradient-to-tr from-teal-500 to-blue-500 bg-clip-text text-transparent">
