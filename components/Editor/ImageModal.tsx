@@ -30,7 +30,6 @@ const ImageModal = ({ editor }: IImageModalProps): JSX.Element => {
   );
 
   const onSubmit = handleSubmit(async data => {
-    console.log(data);
     setImage(data.url);
   });
   return (

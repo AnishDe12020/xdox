@@ -60,7 +60,6 @@ const handler = async (
   try {
     event = wh.verify(payload, headers) as Event;
   } catch (err) {
-    console.error(err);
     return res.status(500).send({ error: "Invalid signature" });
   }
 
@@ -91,7 +90,6 @@ const handler = async (
         website_url: event.data.unsafe_metadata.website_url || null,
         bio: event.data.unsafe_metadata.bio || null,
       };
-      console.log(userObject);
     }
 
     const INSERT_USER = `
@@ -158,8 +156,6 @@ mutation ($id: String!) {
         },
       }
     );
-
-    console.log(data);
   }
 
   res.status(200).send({ message: "Success" });

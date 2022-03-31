@@ -35,8 +35,6 @@ const ChallengeDashboardPage: NextPage = () => {
   const challengeId = router.query.challengeId as string;
   const day = router.query.day as unknown as number;
 
-  console.log(challengeId);
-
   const user = useUser();
 
   const { date, setDate } = useDate();
@@ -50,7 +48,6 @@ const ChallengeDashboardPage: NextPage = () => {
   });
 
   if (error) {
-    console.error(error);
     toast.error("Something went wrong!");
   }
 
@@ -99,8 +96,6 @@ const ChallengeDashboardPage: NextPage = () => {
     { progress: UpdateProgressInput; id: string }
   >(UPDATE_PROGRESS, { update: updateProgressUpdateCache });
 
-  console.log(progressData);
-
   const handleAddProgressSubmit = async () => {
     if (!content) {
       toast.error("Please add some content");
@@ -120,13 +115,11 @@ const ChallengeDashboardPage: NextPage = () => {
       });
 
       if (updateProgressError) {
-        console.error(updateProgressError);
         throw new Error(updateProgressError.message);
       } else {
         toast.success("Progress updated!");
       }
     } else {
-      console.log(date);
       await addProgress({
         variables: {
           progress: {
@@ -138,20 +131,14 @@ const ChallengeDashboardPage: NextPage = () => {
         },
       });
 
-      console.log("ee");
-
       if (addProgressError) {
-        console.log(addProgressError);
         throw new Error(addProgressError.message);
       } else {
-        console.log("eee");
         toast.success("Progress added!");
       }
     }
     setIsSubmitting(false);
   };
-
-  console.log(date);
 
   return (
     <DashboardLayout>

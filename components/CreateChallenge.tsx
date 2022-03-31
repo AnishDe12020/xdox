@@ -37,10 +37,8 @@ const CreateChallenge = (): JSX.Element => {
     { data }: OperationVariables
   ) => {
     const existingChallenges: any = cache.readQuery({ query: GET_CHALLENGES });
-    console.log("exisitng challenges", existingChallenges);
 
     const newChallenge = data.insert_challenges_one;
-    console.log("new challenge", newChallenge);
 
     cache.writeQuery({
       query: GET_CHALLENGES,
@@ -65,8 +63,6 @@ const CreateChallenge = (): JSX.Element => {
 
   const onSubmit = handleSubmit(
     async data => {
-      console.log(data);
-      console.log(DateTime.fromJSDate(new Date(data.start_date)).toISODate());
       await createChallenge({
         variables: {
           challenge: {
@@ -80,14 +76,12 @@ const CreateChallenge = (): JSX.Element => {
         },
       });
       if (apolloResponseError) {
-        console.log(apolloResponseError);
         throw new Error(apolloResponseError.message);
       } else if (apolloResponseData) {
         toast.success("Challenge created!");
       }
     },
     () => {
-      console.error(apolloResponseError);
       toast.error("Something went wrong!");
     }
   );

@@ -27,8 +27,6 @@ interface IUserPageProps {
 }
 
 const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
-  console.log(userData);
-
   let {
     data: challengesData,
     error: challengesError,
@@ -49,8 +47,6 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
   const challengeId = router.query.challengeId as string;
   const day = router.query.day as unknown as number;
 
-  console.log(challengeId);
-
   const [content, setContent] = useState<Content>();
 
   const { data: progressData, error } = useQuery<ProgressData>(GET_PROGRESS, {
@@ -58,7 +54,6 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
   });
 
   if (error) {
-    console.error(error);
     toast.error("Something went wrong!");
   }
 
@@ -68,8 +63,6 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
     }
     setContent(progressData?.progress?.[0]?.content);
   }, [progressData]);
-
-  console.log(challengesData);
 
   return (
     <UnauthenticatedApolloProviderWrapper>

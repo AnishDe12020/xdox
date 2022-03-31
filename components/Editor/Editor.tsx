@@ -55,7 +55,6 @@ const Editor = forwardRef<PureEditorContent, IEditorProps>(
     });
 
     useEffect(() => {
-      console.log("content", content);
       editor?.commands.setContent(
         content || {
           type: "doc",

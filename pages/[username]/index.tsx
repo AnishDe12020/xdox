@@ -34,8 +34,6 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
     toast.error("Something went wrong!");
   }
 
-  console.log(challengesData);
-
   const handleChallengeClick = (challengeId: string) => {
     router.push(`/${router.query.username}/${challengeId}/1`);
   };

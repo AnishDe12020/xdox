@@ -45,7 +45,6 @@ const LinkModal = ({ editor }: ILinkModalProps): JSX.Element => {
   );
 
   const onSubmit = handleSubmit(async data => {
-    console.log(data);
     setLink(data.url);
   });
   return (

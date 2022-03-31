@@ -37,8 +37,6 @@ const ProfileSchema = yup
 const ProfilePage: NextPage = () => {
   const user = useUser();
 
-  console.log(user);
-
   const {
     register,
     handleSubmit,
@@ -58,7 +56,6 @@ const ProfilePage: NextPage = () => {
 
   const onProfileUpdate = handleSubmit(
     async (data: FormData) => {
-      console.log(data);
       await user.update({
         firstName: dirtyFields.firstName
           ? (data.firstName as string | undefined)
