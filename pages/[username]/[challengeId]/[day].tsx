@@ -64,6 +64,10 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
     setContent(progressData?.progress?.[0]?.content);
   }, [progressData]);
 
+  const handleChallengeClick = (challengeId: string) => {
+    router.push(`/${router.query.username}/${challengeId}/1`);
+  };
+
   return (
     <UnauthenticatedApolloProviderWrapper>
       <NextSeo title={`XdoX | ${userData.username || "User Page"}`} />
@@ -75,7 +79,7 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
         <ChallengeData
           variant="list"
           challengeData={challengesData}
-          handleChallengeClick={() => console.log("e")}
+          handleChallengeClick={handleChallengeClick}
           readonly
           className="hidden md:flex"
         />
