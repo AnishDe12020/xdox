@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 import ChallengeData from "../../components/ChallengeData";
 import UserDataComponent from "../../components/UserData";
 import {
-  GET_CHALLENGES,
   GET_CHALLENGES_FOR_USER,
   GET_USER_DATA,
 } from "../../graphql/queries";
