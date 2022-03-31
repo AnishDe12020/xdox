@@ -56,7 +56,7 @@ const ProgressDaysBar = ({
   }
 
   return (
-    <div className="flex items-center justify-center space-x-2 md:justify-start md:space-x-2 lg:space-x-4 flex-wrap">
+    <div className="flex flex-wrap items-center justify-center space-x-2 md:justify-start md:space-x-2 lg:space-x-4">
       {progresses ? (
         progresses.map((progress, index) => (
           <DayButton

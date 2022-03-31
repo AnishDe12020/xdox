@@ -8,8 +8,14 @@ const Header = (): JSX.Element => {
     <nav className="flex items-center justify-between px-8 py-6 md:px-16 lg:px-24">
       <div className="flex flex-row items-center space-x-4">
         <Link href="/" passHref>
-          <a className="transition duration-200 hover:opacity-60" aria-label="Home">
-            <Logo className="h-8 w-8 md:h-12 md:w-12 lg:ml-4 lg:h-16 lg:w-16" aria-label="Home"/>
+          <a
+            className="transition duration-200 hover:opacity-60"
+            aria-label="Home"
+          >
+            <Logo
+              className="h-8 w-8 md:h-12 md:w-12 lg:ml-4 lg:h-16 lg:w-16"
+              aria-label="Home"
+            />
           </a>
         </Link>
         <Link href="/dashboard" passHref>
