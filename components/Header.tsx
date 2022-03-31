@@ -1,6 +1,7 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 import { Logo } from "./Icons";
+import GitHubLogo from "./Icons/GitHub";
 import UserPopover from "./UserPopover";
 
 const Header = (): JSX.Element => {
@@ -25,6 +26,14 @@ const Header = (): JSX.Element => {
         </Link>
       </div>
       <div className="flex flex-row items-center">
+        <a
+          className="mr-4 p-2 transition duration-200 hover:opacity-60"
+          href="https://github.com/AnishDe12020/xdox"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <GitHubLogo className="h-6 w-6" />
+        </a>
         <SignedIn>
           <UserPopover />
         </SignedIn>
