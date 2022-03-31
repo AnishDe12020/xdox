@@ -65,7 +65,9 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
   }, [progressData]);
 
   const handleChallengeClick = (challengeId: string) => {
-    router.push(`/${router.query.username}/${challengeId}/1`);
+    router.push(`/${router.query.username}/${challengeId}/1`, undefined, {
+      shallow: true,
+    });
   };
 
   return (
@@ -127,6 +129,15 @@ export const getServerSideProps: GetServerSideProps = async context => {
       },
     }
   );
+
+  if (!userData || userData?.data?.users?.length <= 0) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/404",
+      },
+    };
+  }
 
   return {
     props: {

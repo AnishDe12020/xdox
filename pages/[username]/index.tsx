@@ -35,7 +35,9 @@ const UserPage: NextPage<IUserPageProps> = ({ userData }: IUserPageProps) => {
   }
 
   const handleChallengeClick = (challengeId: string) => {
-    router.push(`/${router.query.username}/${challengeId}/1`);
+    router.push(`/${router.query.username}/${challengeId}/1`, undefined, {
+      shallow: true,
+    });
   };
 
   return (
