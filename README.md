@@ -1,4 +1,4 @@
-XdoX is an application that elts you start challenges, log your progress and show it off to the world through a unique profile page.
+XdoX is an application that lets you start challenges, log your progress and show it off to the world through a unique profile page.
 
 [Live Demo](https://www.xdox.me/)
 
